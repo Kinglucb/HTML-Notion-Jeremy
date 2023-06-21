@@ -1,0 +1,698 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ACL</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="71281612-833f-4af2-b56b-31d119963206" class="page sans"><header><h1 class="page-title">ACL</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="d4f89feb-e283-4a26-918d-3f951fbfbb4c" class="">ACLs (Access Control List) have multiple uses, and among one of them is a packet filter. It can filter certain packets by looking for the following:</p><ul id="fe7c06f8-6e2e-4e64-a92b-ab493fc46a49" class="bulleted-list"><li style="list-style-type:disc">Source/Destination IP Addresses</li></ul><ul id="27af7044-79b3-43ad-8bf3-1867b71741e6" class="bulleted-list"><li style="list-style-type:disc">Source/Destination Layer 4 Ports</li></ul><ul id="17f08fd4-2c17-4196-975a-48e3eeb17f8f" class="bulleted-list"><li style="list-style-type:disc">Other parameters</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="506a5e02-a9a6-4ccb-997d-d57e492c6d79"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">IMPORTANT: ACLs are configured in global config mode.</div></figure><p id="585b516c-ee57-468c-b7cb-3f4b61a6f446" class="">ACLs are an ordered sequence of ACEs (Access Control Entries). Think of them as lines of “if” and “elif” (Python) in a programming language which will be executed sequentially from top to bottom, and when it finds a match it will ignore the rest of the code.</p><figure id="1518d843-40ae-4da8-848e-89888451cb8c" class="image"><a href="ACL%2071281612833f4af2b56b31d119963206/Untitled.png"><img style="width:347px" src="ACL%2071281612833f4af2b56b31d119963206/Untitled.png"/></a></figure><p id="be2e039a-4ea5-4740-a78f-8a226a755362" class="">Also, ACLs can be applied for traffic inbound (entering the interface) or outbound (leaving the interface)</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="41f566ab-1358-40dd-a675-1c1394a6445a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">IMPORTANT: ACLs are applied to an interface.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b4b81526-4238-4f8f-92f3-475328376955"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">IMPORTANT: There can only be one ACL per-direction in an interface, totaling a maximum of 2 ACLs in an interface.
+1x ACL for inbound traffic
+1x ACL for outbound traffic</div></figure><h3 id="e7f2450c-a28c-4339-9af7-9730f7c73a52" class="">Implicit Deny</h3><p id="79e85050-86b6-4725-88c4-1f6231623f52" class="">If a packet arrives at an interface, and it has no matching ACE in the ACL, it will be denied.</p><figure id="05b57298-5fc3-4944-9a0b-82af3d4af68c" class="image"><a href="ACL%2071281612833f4af2b56b31d119963206/Untitled%201.png"><img style="width:1110px" src="ACL%2071281612833f4af2b56b31d119963206/Untitled%201.png"/></a></figure><h3 id="c0dbf9dd-3db7-4666-b9f4-481bb2f7a8f5" class="">Types of ACLs</h3><ul id="7c99842e-3296-40dc-ab93-09bfeed2340f" class="bulleted-list"><li style="list-style-type:disc"><strong>Standard ACLs: </strong>Filter only by <span style="border-bottom:0.05em solid">Source IP Address</span><ul id="bd9eec14-3032-41a8-baf2-179c933eedf5" class="bulleted-list"><li style="list-style-type:circle">Standard Numbered ACLs</li></ul><ul id="bdebaad0-c162-4065-afeb-88033928a063" class="bulleted-list"><li style="list-style-type:circle">Standard Named ACLs</li></ul></li></ul><ul id="7580ac18-2b52-4064-a0c8-511d51626ad5" class="bulleted-list"><li style="list-style-type:disc"><strong>Extended ACLs:</strong> Filter by a combination of <span style="border-bottom:0.05em solid">Source/Destination IP Address</span>, <span style="border-bottom:0.05em solid">Source/Destination port</span>, etc.<ul id="f391f8ff-6361-4370-b43b-c25423363382" class="bulleted-list"><li style="list-style-type:circle">Extended Numbered ACLs</li></ul><ul id="5142af3c-aa12-4b0d-a16f-f6ff5e0229d1" class="bulleted-list"><li style="list-style-type:circle">Extended Named ACLs</li></ul></li></ul><h2 id="f1423c3a-4b87-420b-9470-12e5ecbc3160" class="">Show ACLs</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #1 Show all ACLs with all types</summary><div class="indented"><pre id="81a76885-e712-4578-9334-39d9ba58cb8e" class="code"><code>show access-lists</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #2 Show only IP ACLs</summary><div class="indented"><pre id="f9381761-aceb-46b8-b62f-59eb97f7baa6" class="code"><code>show ip access-lists</code></pre></div></details><h1 id="9ead22b9-af8e-4427-b80b-2866ac79c18c" class="">Standard ACLs</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8e051126-4ced-44ef-993c-fd584f895565"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong><mark class="highlight-yellow_background">IMPORTANT:</mark></strong><mark class="highlight-yellow_background"> As a good practice, Standard ACLs should be applied as close as possible from the intended DESTINATION.</mark></div></figure><h2 id="e2a7ed16-1d2a-498b-babf-a106d55af35e" class="">Numbered</h2><p id="e89e4ac5-43b7-4839-a3fc-8b33f3ef203e" class="">This type of Standard ACL is identified with a number (i.e. ACL 1, ACL 2, ACL 3, etc.)</p><p id="65e6d4dd-41dd-4eb9-a2a6-f7545d02943b" class="">These number can range from <strong>1-99</strong> and <strong>1300-1999</strong>.</p><h3 id="d42147df-a720-4b50-9f72-244e2323ac77" class="">Configure Standard Numbered ACL</h3><pre id="19f1b868-0723-44da-84c9-94e2b51efe37" class="code"><code>configure terminal
+access-list {number} {deny | permit} ip-address wildcard</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="880632b0-086b-4f30-ac06-8d00a8391c8a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: For a single host (/32) you can do the following:
+<strong>access-list</strong> {<em>number</em>} {<strong>deny </strong>| <strong>permit</strong>} <em>ip-address</em>
+<strong>access-list</strong> {<em>number</em>} {<strong>deny </strong>| <strong>permit</strong>} <strong>host </strong><em>ip-address</em></div></figure><h3 id="052a7ffe-6e1d-4f3a-9e3c-614659f9c777" class="">Add an entry to an existing ACL</h3><pre id="d9543717-4ce1-4a48-b7c4-d5d65a51f56a" class="code"><code>configure terminal
+access-list {acl-number} {deny | permit} ip-address wildcard</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ae2a145-8f3d-459f-a111-abf4293e6ff0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: For any host (/0) you can do the following:
+<strong>access-list</strong> {<em>number</em>} {<strong>deny </strong>| <strong>permit</strong>} <strong>any</strong>
+<strong>access-list</strong> {<em>number</em>} {<strong>deny </strong>| <strong>permit</strong>} <strong>0.0.0.0 255.255.255.255</strong></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1bebeb07-7666-4a93-9e2d-9760176ccb9d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: If you delete an entry using a <strong>no </strong>statement with any of the entries from global config mode, the whole ACL is gonna be deleted. The best way is to enter “named ACL config mode” and delete the entry.</div></figure><h3 id="cac509c4-1073-4020-b93a-4632b29f72a3" class="">Add commentary entry to an existing ACL</h3><pre id="9afc54c0-727d-470c-ac54-b534f4390342" class="code"><code>configure terminal
+access-list {acl-number} remark {text}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="58373565-c1be-4e60-8da0-3af53327144b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: It will only appear in the running-config.</div></figure><h3 id="2bd7b838-4493-4da3-b8d0-e26a6473431d" class="">APPLY an ACL to an interface</h3><pre id="8e8b4f80-aaef-4509-9a5b-5e7d0fa836e9" class="code"><code>configure terminal
+interface g0/0     // Here the interface Gigabit 0/0 is an example
+ip access-group {acl-number} {in | out}</code></pre><h2 id="6323eb2e-0420-4c1e-972c-7cec0e1082d8" class="">Named</h2><p id="dd24e938-e6b2-4e94-894f-e0594c4d150f" class="">This type of Standard ACL is identified by a name (i.e. BLOCK_BOB)</p><p id="9844805a-9a10-4c21-9093-6fda8f8dc2ed" class="">And differently from numbered, you first have to enter in “standard named ACL mode”</p><h3 id="301f0726-a515-45e2-aa60-96817502bd16" class="">Enter Standard Named ACL Mode</h3><pre id="b6e5bc95-d8b6-4116-8cd8-60febf50ee80" class="code"><code>configure terminal
+ip access-list standard {acl-name}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="888b3d88-f85c-44ee-9d18-a201035b1862"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><mark class="highlight-yellow_background"><strong>IMPORTANT:</strong></mark><mark class="highlight-yellow_background"> In modern IOSs, you can use the same command for numbered ACLs, just use a </mark><em><mark class="highlight-yellow_background">acl-number</mark></em><mark class="highlight-yellow_background"> instead of </mark><em><mark class="highlight-yellow_background">acl-name</mark></em><mark class="highlight-yellow_background">.</mark></div></figure><h3 id="f3ed549f-409b-4c0f-a1a6-a4ff38f19293" class="">Add an ACE (entry) to the ACL</h3><pre id="647839d8-327a-477e-8521-64a78098b572" class="code"><code>[entry-number] {deny | permit} ip-address wildcard</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="025b7a7a-bce3-4d72-9534-f37f71dba944"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Differently from numbered ACLs where the order you enter the commands must be the exact order of the ACL. But with named ACLs you can specify the order (or not) before the <strong>permit </strong>or <strong>deny </strong>statements.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b26978d6-d104-4586-bf21-4aa9f4f68894"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: You can insert a new entry in the middle of an ACL, just specify a number in between entries.</div></figure><h3 id="0cec2674-81a4-425b-b28b-13a8d7b16418" class="">Resequencing an existing Access List</h3><p id="ac561ebb-7eb3-4260-9945-9806b3758f43" class="">This is a useful feature if you want to inset values in between entries but they have no space for it (i.e. 1,2,3,4,5…). So you could you use this command to make the OS use different number of each entry maintaining the sequence.</p><pre id="fbd74f47-c561-4d7a-8394-db4b2b6fadab" class="code"><code>configure terminal
+ip access-list resequence {acl-name | acl-number} {starting-number} {increment}</code></pre><figure id="a2d022b3-2722-416e-acb1-1d5cffa81444" class="image"><a href="ACL%2071281612833f4af2b56b31d119963206/Untitled%202.png"><img style="width:1003px" src="ACL%2071281612833f4af2b56b31d119963206/Untitled%202.png"/></a></figure><h3 id="67a3d477-5251-490e-97c7-ac094ea99a40" class="">Remove an ACE (entry) on an ACL</h3><pre id="9e78bba2-c8f4-45a0-ab0a-69e773caa3dc" class="code"><code>configure terminal
+interface g0/0
+ip access-list standard {acl-name}
+no {entry-number}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6ad53e7e-71cd-4cdb-b17b-e57c49567c73"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: If you don`t remember the entry number, just do a show access-lists and discover it.</div></figure><h3 id="ed170f44-3eb3-46fb-990d-790294c88901" class="">APPLY an Standard Named ACL to an interface</h3><pre id="e3e9ebef-7f56-46bf-9f0b-056f90b6e60f" class="code"><code>configure terminal
+interface g0/0 // Here this an interface being used as example
+access-group {acl-name} {in | out}</code></pre><h1 id="3eb6cdab-16b1-41f4-9f82-7b74cf2ff3fd" class="">Extended ACLs</h1><p id="91aac0f0-1f58-4a94-b9ff-c483a8c09f22" class="">They work with the same principle as standard ACL, but they use more parameters to narrow the content filtering, thus being more precise and complex.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="06602279-e8ec-4ee1-960e-f154b6cd5a32"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><mark class="highlight-yellow_background"><strong>IMPORTANT:</strong></mark><mark class="highlight-yellow_background"> Differently from Standard ACLs, Extended ACLs should be placed as close as possible from the SOURCE.</mark></div></figure><h2 id="ae4471ef-73a0-4d41-a6f9-5a364118dd5e" class="">Numbered ACLs</h2><pre id="051030f8-8b85-45d4-831e-3dd310231aae" class="code"><code>configure terminal
+access-list {number} [permit | deny} {protocol} {source-ip} {wildcard} {destination-ip} {wildcard}</code></pre><h2 id="820ccf88-73bd-4a16-9f61-066a891b84b4" class="">Named ACLs</h2><pre id="7d3ce825-a660-4828-9b36-d6dca3e53afb" class="code"><code>configure terminal
+ip access-list extended {acl-name | acl-number}
+[entry-number] {permit | deny} {protocol} {source-ip} {wildcard} {destination-ip} {wildcard}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3202410b-0e04-4acc-9d96-e55ba376a71f"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><mark class="highlight-yellow_background"><strong>IMPORTANT:</strong></mark><mark class="highlight-yellow_background"> If you don`t care about which protocol it will permit or deny (good for any statements) use </mark><mark class="highlight-yellow_background"><strong>ip </strong></mark><mark class="highlight-yellow_background">in the </mark><mark class="highlight-yellow_background"><em>protocol </em></mark><mark class="highlight-yellow_background">field (i.e. </mark><mark class="highlight-yellow_background"><strong>permit ip any any</strong></mark><mark class="highlight-yellow_background">}</mark></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f8410298-8637-4444-830c-6cd359e50803"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><strong>IMPORTANT:</strong> If you want to specify a /32 address (host address), you must use the <strong>host </strong>statement or a wildcard of <strong>0.0.0.0</strong></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="19dab467-4388-4a33-a9f7-2971e92a622a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: If you use the any statement, you don`t need a wildcard mask.</div></figure><h3 id="6c174c03-7a93-4894-b721-0f805865f448" class="">Filter by port number</h3><p id="2efa0ef6-64e4-406d-b186-de1c2540dc7a" class="">If you block a port number, you are blocking a specific service (a layer 7 protocol), like SSH, FTP and etc.</p><pre id="e31aecaf-0988-458f-9393-365a409e06ad" class="code"><code>[entry-number] {permit | deny} {source-ip} {wildcard} [{eq|gt|lt|neq|range} {port-number}] {destination-ip} {wildcard} [{eq|gt|lt|neq|range} {port-number}] </code></pre><ul id="27c60d48-5bf5-4bd6-97e4-7c046288f953" class="bulleted-list"><li style="list-style-type:disc"><strong>eq</strong> → “Equal to” (=)</li></ul><ul id="8e229854-1f75-421a-b816-6e4be02a5b1b" class="bulleted-list"><li style="list-style-type:disc"><strong>gt </strong>→ “Greater than” (&gt;)</li></ul><ul id="d50aa3ae-890c-4740-bf18-945ed29da460" class="bulleted-list"><li style="list-style-type:disc"><strong>lt </strong>→ “Less than” (&lt;)</li></ul><ul id="e794e91d-9136-480e-83f1-1168a278daa1" class="bulleted-list"><li style="list-style-type:disc"><strong>neq </strong>→ “Not equal to” (≠)</li></ul><ul id="7829f8a8-00d6-4f4a-911b-fb20df68ea62" class="bulleted-list"><li style="list-style-type:disc"><strong>range </strong>→ Consecutive number (i.e. 80-90)</li></ul><p id="35f588dc-40c8-4a6e-b512-954e6c40d16c" class="">
+</p></div></article></body></html>

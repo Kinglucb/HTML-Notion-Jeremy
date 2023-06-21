@@ -1,0 +1,690 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>STP (Spanning Tree Protocol)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f0f380fa-fb42-404e-ac29-892016c3dcd4" class="page sans"><header><h1 class="page-title">STP (Spanning Tree Protocol)</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="d3da61fb-9471-466b-be18-a80525b266ea" class="">Spanning Tree Protocol is a Layer 2 Protocol that makes redundancy possible.</p><h3 id="dff956c9-f10f-405f-bcfc-e35fb3879938" class="">Broadcast Storm</h3><p id="38d8ca9a-c307-45e0-a20b-ee1107745240" class="">It happens when a looping of broadcasts occur, resulting in the congestion of the network</p><h3 id="ebb581e8-4104-4110-8235-b93926db7d37" class="">MAC Address Flapping</h3><p id="f1bd4e50-d814-4625-a6bb-51c85770ef5e" class="">This one occurs when due to a problem, a switch keeps updating a MAC address`s interface in the MAC address table, in this topic due to a broadcast storm.</p><h1 id="11423257-ae38-492f-b8ce-ebef232b7f87" class="">Classic STP (Spanning Tree Protocol)</h1><ul id="12c6004c-423f-46ea-8a46-7a0c94a0613e" class="bulleted-list"><li style="list-style-type:disc">It is defined in the IEEE 802.1D</li></ul><ul id="62003ac0-975c-4af1-885a-cd1a63b69011" class="bulleted-list"><li style="list-style-type:disc">It runs by default in many vendor`s switches</li></ul><ul id="841b37b2-335f-4a55-9007-71f53e91c6cc" class="bulleted-list"><li style="list-style-type:disc">It works by placing redundant ports in a blocking state. In this state the port will not forward frames, only sending and receiving BPDUs (Bridge Protocol Data Units). These ports act as backup, turning into a forwarding state in case the previous established ones fail.</li></ul><ul id="afa2ca22-4c2d-4cd3-a08d-9022cb9de9d3" class="bulleted-list"><li style="list-style-type:disc">Other ports will work in a forwarding state, behaving normally.</li></ul><p id="6ce39e88-f29f-47a0-a66a-b5060b2d17aa" class="">STP-enabled switches will send/receive Hello BPDUs out of all interfaces every 2 seconds, advertising they are a switch.</p><p id="9a82fd04-4677-4f76-8c44-35b6a1febd66" class="">In this Hello BPDU there is a field called Bridge ID, which by itself is subdivided in:</p><ul id="1a64fc70-3d8b-48b6-8f11-9fe93220cbf1" class="bulleted-list"><li style="list-style-type:disc">Bridge Priority (16 Bits)<ul id="9bce2a95-38ff-4dbc-9538-7905ada6ddbf" class="bulleted-list"><li style="list-style-type:circle">Default is 32768</li></ul></li></ul><ul id="7d1a8341-e759-4f45-8305-b442cc9a5d1c" class="bulleted-list"><li style="list-style-type:disc">MAC Address (48 Bits)</li></ul><p id="ff3e5c7d-91fc-4dad-8dad-5b8a3c260966" class="">The lowest Bridge ID will be elected the <strong>root bridge</strong>. This one will have all ports into forwarding state, becoming the heart of the switches.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4ef79fef-5baa-4a1f-a08e-58aa4d953921"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">In a tie, the lowest MAC Address decides the root bridge</div></figure><p id="2844ba88-2a4f-4463-9dbd-446e82976eac" class="">All the ports that don`t receive a BPDU, can only assume it is connected to a host, therefore, it will stay in a forwarding state.</p><h3 id="972828cc-79e4-4f1a-8723-2205187f3e2c" class="">Root Ports</h3><p id="d8d91d4e-f83a-49a1-a860-3a95a8f2ddf1" class="">The root port is the one that points to the root bridge with the lowest cost of its interfaces connected directly and indirectly to the root bridge. Every switch will have only one root port.</p><p id="0163fcf1-709a-4417-ae73-04a999a102d2" class=""><strong>The root cost is determined by the sum of cost of outgoing interfaces along the path to the root bridge.</strong></p><p id="675f45d9-caf0-41a4-82b0-f1a01dba6451" class="">If the root cost is the same, in order:</p><ol type="1" id="c3a941a7-b8d5-4d5a-aecf-bee95a4b5363" class="numbered-list" start="1"><li>Lowest neighbor bridge ID</li></ol><ol type="1" id="9ac94738-cd43-4703-a7ab-5572bb28c97d" class="numbered-list" start="2"><li>Lowest neighbor port ID</li></ol><h3 id="115975b8-bbb3-4fed-85a9-85b0e833fd1e" class="">Designated port</h3><p id="1af0de1b-fcb2-42e3-bd76-3e50c1a2b572" class="">All the ports of the root bridge and the ones on the other end of a root port will be a designated port.</p><p id="6a4f25b6-9924-436a-a65d-4e76e8e9cf54" class="">In the remaining links, it will be determined by:</p><ol type="1" id="5e5e01bc-8db4-4683-a9a0-be564251c2bf" class="numbered-list" start="1"><li>lowest root cost of the <strong>SWITCH (don`t confuse with root port)</strong></li></ol><ol type="1" id="b991b561-8bcc-4ecf-b76b-4f6d04f91271" class="numbered-list" start="2"><li>lowest bridge id of the <strong>SWITCH</strong></li></ol><h3 id="47a7e459-b6a2-4319-ae2c-c1191f9413a9" class="">Blocking Ports</h3><p id="4320a8bd-a7ac-4c97-b3ff-582854a1074f" class="">Theses ports are <strong>not </strong>in a forwarding state, but the receive and process BPDUs. They can be discovered after all port types have been discovered, so they will be the remaining ones.</p><h2 id="c1c60c2d-8fff-404d-a7da-3dc58e8d44b5" class="">Commands</h2><pre id="db1f134a-bd00-4666-8315-113054e35213" class="code"><code>show spanning-tree</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36e8774d-eedc-4353-b2b1-49641475eb2a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Displays information about the Spanning Tree Protocol on all VLANs</div></figure><pre id="a4cb01fc-e7ec-4fa8-9b58-2c9b1a7951ba" class="code"><code>show spanning-tree vlan 10 // show spanning-tree vlan {vlan-id}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="254e7164-bb0b-4fcd-a908-02b6bfc89310"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Displays the information of STP of a specific vlan</div></figure><pre id="f08d0d2d-70ac-4a84-8881-c1046eeb1dc5" class="code"><code>show spanning-tree details</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c6cebd26-fd3d-4df3-9c84-64653e0d54cb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Displays the STP with more details</div></figure><pre id="466a9053-8a4d-4c6c-b79b-e5831285a830" class="code"><code>show spanning-tree summary</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="35ae113b-c1da-4306-a40a-214669fb20b3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Says only the state of the ports</div></figure><h2 id="0cd91568-9f25-46a8-bf6c-f0cf3df0de01" class="">STP Port States</h2><table id="2ec82daa-141c-4bd9-a38c-bbede3d32574" class="simple-table"><tbody><tr id="6fe9fe7a-e430-42ee-bf41-800e15218006"><td id="]:]Y" class="">Blocking</td><td id="hE|`" class="">Stable</td></tr><tr id="be6b7888-d564-474d-a5cf-fa7d7aa99e40"><td id="]:]Y" class="">Listening</td><td id="hE|`" class="">Transitional</td></tr><tr id="88733ded-753c-4499-be57-90571f1cfa32"><td id="]:]Y" class="">Learning</td><td id="hE|`" class="">Transitional</td></tr><tr id="0e959124-c492-4a70-867f-e5c583b2b3d2"><td id="]:]Y" class="">Forwarding</td><td id="hE|`" class="">Stable</td></tr></tbody></table><h3 id="f8923686-f5a1-486e-80d9-c43289ab60a2" class="">Blocking</h3><p id="4e28be61-7a47-4ff0-8601-c030b1052d20" class="">Non-designated ports stay in a Blocking state</p><ul id="f4b32a20-71af-4ab9-8957-817dbd163f37" class="bulleted-list"><li style="list-style-type:disc">They are disabled to prevent loops.</li></ul><ul id="6bc10c84-1b03-4aed-ab78-7bb6d6270bf7" class="bulleted-list"><li style="list-style-type:disc">They do <strong>NOT </strong>send/receive regular traffic.</li></ul><ul id="122fe28b-d13e-41fa-aae4-9b52fea91e35" class="bulleted-list"><li style="list-style-type:disc">They do <strong>NOT </strong>learn MAC Addresses.</li></ul><ul id="468e5547-f8b6-4e34-894c-8b75147090e5" class="bulleted-list"><li style="list-style-type:disc">They <strong>DO </strong>receive BPDU, but do <strong>NOT </strong>forward them.</li></ul><h3 id="2e0c90ca-fe43-4955-b48b-c4e034458922" class="">Listening</h3><p id="fb8515f2-ed87-47b0-b3aa-5e77eac51f19" class="">This happens after the Blocking state for designated/root ports.</p><ul id="49364d03-a3c9-45c0-b9af-3547056db76b" class="bulleted-list"><li style="list-style-type:disc">They stay in this state for 15 seconds by default, as configured in the <strong>forward delay.</strong></li></ul><ul id="7530f3f6-8c63-4936-8030-8f12f7156ac5" class="bulleted-list"><li style="list-style-type:disc">They do <strong>NOT </strong>send/receive regular traffic.</li></ul><ul id="d9fc34eb-2198-4c86-bb35-4980832410e2" class="bulleted-list"><li style="list-style-type:disc">They do <strong>NOT </strong>learn MAC Addresses.</li></ul><ul id="c1cae369-50ee-4365-b90b-a3a44fc533e6" class="bulleted-list"><li style="list-style-type:disc">They <strong>DO </strong>send/receive BPDUs.</li></ul><h3 id="bcdd30da-9d5b-48ae-9775-819ae27dbbf2" class="">Learning</h3><p id="b7c593dd-c729-45a8-ae64-353594550142" class="">This is a preparation for the forwarding state, where the switch builds up some MAC addresses for its MAC address table</p><ul id="20dfc029-3a0d-4241-bc30-7add58bf2fbb" class="bulleted-list"><li style="list-style-type:disc">They stay in this state for 15 seconds by default (forward delay).</li></ul><ul id="dc11f2d4-b87d-4e9e-9583-0098b0915760" class="bulleted-list"><li style="list-style-type:disc">They do NOT send/receive regular traffic.</li></ul><ul id="ef9fd525-aa39-4786-9d00-417a360f2f3e" class="bulleted-list"><li style="list-style-type:disc">They DO learn MAC Addresses.</li></ul><ul id="2452071d-8be1-412a-b451-a6cfcd8e8cf4" class="bulleted-list"><li style="list-style-type:disc">They DO send/receive BPDUs.</li></ul><h3 id="7abd1487-4319-4376-b5a7-44926652f6a7" class="">Forwarding</h3><p id="46639be5-7133-4361-9253-ea531ef825c0" class="">This is the final state for Designated/Root ports, where normal operation occurs of a switch.</p><ul id="410d9cfe-6fc5-44f4-8c19-129928e8f872" class="bulleted-list"><li style="list-style-type:disc">They DO send/receive regular traffic.</li></ul><ul id="0788b991-4557-436c-bd3f-1639b3c265fc" class="bulleted-list"><li style="list-style-type:disc">They DO learn MAC Addresses.</li></ul><ul id="c857dd1b-7954-4498-9953-4f3654dd8047" class="bulleted-list"><li style="list-style-type:disc">They DO send/receive BPDUs.</li></ul><figure id="95688520-1d23-4600-8091-08085032db75" class="image"><a href="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled.png"><img style="width:1844px" src="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled.png"/></a></figure><h3 id="00f93a65-1fe1-4b51-a465-43cb87967945" class="">STP Timer</h3><figure id="b1286fb1-da55-4fe0-9a2a-0dcf1d11f761" class="image"><a href="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%201.png"><img style="width:1660px" src="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%201.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="330fbce8-4811-4045-b80b-928695f64a81"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The STP Timer on the root bridges defines the network settings</div></figure><h3 id="527c7648-1b03-498e-9f01-31c6c77b7057" class="">BPDU</h3><p id="669ea27b-8d60-4c26-b87b-d161346ac5da" class="">PVST+ MAC Address = 0100.0ccc.cd</p><p id="abd0b093-46c0-428b-9ca3-ad4d2b883358" class="">Classical STP MAC Address = 0180.c200.000</p><figure id="f54b4bc3-55ad-4a91-b35c-d1d01951b7c3" class="image"><a href="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%202.png"><img style="width:381px" src="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%202.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b97b4f64-ee06-4df5-bb65-79f975cf768e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The 80 in hexadecimal refers to the 128, which is the por default priority, while 02 refers to the number of the port (2).</div></figure><figure id="735f021f-dcdc-4767-a2e9-7787ec7fd6bc" class="image"><a href="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%203.png"><img style="width:241px" src="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%203.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7281c9f2-be67-4019-9cb1-224e08cf3f69"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">This increases each time it passes in a switch, and when received, the switch will subtract this value with the Max Age value</div></figure><h2 id="669cba82-6283-45ec-a0dd-e16620106bee" class="">PortFast</h2><p id="dbe0f0f7-ffaf-4e5e-8195-fb23305f9866" class="">It is a feature that minimize one problem of the STP. What if you connect a endhost to the switch? It will have to wait the 30 seconds of listening/learning states to make sure there are no loops. However, PortFast solves this problem, by bypassing these states and going directly to Forwarding mode.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d5161c31-bd48-4df6-a5d4-b6faf7d91d83"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">This should be only used in access ports to endhosts as it could cause a loop otherwise.</div></figure><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #1 - Specific interface</summary><div class="indented"><pre id="44b213e2-9d1f-4088-9f68-e67f45271f08" class="code"><code>configure terminal
+interface g0/1
+spanning-tree portfast // It only enables PortFast for that specific port</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37ea9f9f-d643-4da5-a402-e22912307120"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">You can set this in a interface in switchport trunk mode, however it just won`t work</div></figure></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #2 - Global PortFast</summary><div class="indented"><p id="3cf37947-b6f4-4d9b-a1dc-949f578f8924" class="">This enables PortFast on all access ports</p><pre id="60881408-97d2-43de-ad12-cb08464edfe9" class="code"><code>configure terminal // Global Configuration Mode
+spanning-tree portfast default</code></pre></div></details><h3 id="32020ad7-36df-46d0-9f03-c2c833935536" class="">BPDU Guard</h3><p id="c2d36528-fa02-4644-97c0-34989a58073d" class="">This is an additional feature for PortFast. It Prevents that someone plugs a switch in a PortFast interface, by disabling it.</p><pre id="71742011-f016-4a14-b41a-b8a1850fd96e" class="code"><code>configure terminal
+interface g0/1
+spanning-tree bpduguard enable</code></pre><pre id="73ac1f49-143a-4f60-ade4-57472959f597" class="code"><code>configure terminal
+interface g0/1
+spanning-tree portfast bpduguard default</code></pre><figure id="f8a6e7e8-7be3-4bf1-b176-da2fedd2dbc2" class="image"><a href="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%204.png"><img style="width:1138px" src="STP%20(Spanning%20Tree%20Protocol)%20f0f380fafb42404eac29892016c3dcd4/Untitled%204.png"/></a></figure><h2 id="5f95d267-7431-4985-abd6-b62da27d1796" class="">STP Configuration</h2><h3 id="ea307b6e-49e2-4cb8-a672-d89221eef2f8" class="">Define the Root Bridge and its Backup</h3><pre id="19786a72-9f14-4a9a-9042-a489250b43f6" class="code"><code>configure terminal
+spanning-tree vlan 10 root primary // Defines this switch as the Root Bridge for VLAN 10</code></pre><pre id="a416cfb6-c752-4911-940b-8880e5a26932" class="code"><code>configure terminal
+spanning-tree vlan 10 root secundary // Selects this switch as the next candidate as Root Bridge in case the primary fails</code></pre><h3 id="717bcbb6-1478-45ab-8047-d68bdd92742c" class="">Port Settings</h3><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Port Cost</summary><div class="indented"><pre id="d35487de-c814-4bc3-a2f5-233ff24b0595" class="code"><code>configure terminal
+interface g0/1
+spanning-tree vlan 1 cost 200 // Configures the cost of that port in VLAN 1</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Port Priority</summary><div class="indented"><pre id="31e03dbd-7b00-4634-82b4-5e036ce81b9e" class="code"><code>configure terminal
+interface g0/1
+spanning-tree vlan 1 port-priority 32 //Configures the port-priority of vlan 1 to (32.1)</code></pre><p id="2eedaf04-2152-4758-8095-88cf555d1760" class="">
+</p></div></details></div></article></body></html>

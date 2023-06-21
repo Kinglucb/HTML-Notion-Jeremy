@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Security Fundamentals</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c86f4ceb-e33e-4b5a-adcc-51ec7b6f5082" class="page sans"><header><h1 class="page-title">Security Fundamentals</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><h3 id="b1777964-2772-4846-86b9-8f269158c390" class="">CIA Triad</h3><p id="b711377b-9984-4b84-bad7-1e54e5227f97" class="">It is the mais dogma of Security</p><p id="0ef83ca3-aebc-4fc3-9329-abe9f5c2fb42" class=""><strong>C</strong>onfidentiality</p><p id="b53839a4-e605-4d15-9d87-85ecf09e910b" class=""><strong>I</strong>ntegrity</p><p id="da227e8f-bd34-490b-9c26-54dc73d340a1" class=""><strong>A</strong>vailability</p><h3 id="aefd6ada-792b-46b7-840b-951c7fd4bd70" class="">Common Terms</h3><ul id="0ef8a5ff-1ce0-4fc5-9fae-9692e01fdbd2" class="bulleted-list"><li style="list-style-type:disc"><strong>Vulnerability: </strong>Potential weakness in a system</li></ul><ul id="24fc2b4d-1007-4cad-9582-9c01589efb6a" class="bulleted-list"><li style="list-style-type:disc"><strong>Exploit:</strong> A way to use the vulnerability</li></ul><ul id="75aedd1f-b42e-425c-92ac-cf9191e6e9b6" class="bulleted-list"><li style="list-style-type:disc"><strong>Threat:</strong> Actual possibility of someone exploiting a vulnerability</li></ul><ul id="8b2733a1-3fce-4377-b2c4-fe70d7a3918b" class="bulleted-list"><li style="list-style-type:disc"><strong>Mitigation Techniques:</strong> Methods used to protect against threats</li></ul><h1 id="432a04b5-42e5-4f5b-94ce-1d42b342903d" class="">Common Attacks</h1><h2 id="ec05b733-c48b-4e5a-85b4-6949d06dcf38" class="">DoS (Denial of Service)</h2><p id="f85b64da-7687-44ce-a8f8-8e0e5df95cb2" class="">Threatens: Availability</p><p id="3778310e-9f8e-436a-a2df-18d94fe7d5eb" class="">It is an attack the focuses on making the system unusable. It can be done by a single machine or a bunch of them (botnet making a Distributed DoS)</p><h3 id="69cc2cb6-e9a0-4551-b517-09a30e3b1620" class="">Example TCP SYN flood</h3><p id="8ac4f989-5f40-4864-9105-81e8afa65853" class="">A machine or multiple of them flood the network with Discover messages to cause a DHCP Exhaustion, so new clients can get an IP, by spoofing multiple MAC Addresses.</p><h2 id="47b0f91f-81f6-4d12-8716-0d8fb942f9a8" class="">Spoofing</h2><p id="9685fa35-9d8c-449f-b3e7-587d4acf0041" class="">Threatens: CIA</p><p id="38718fdf-1678-457d-bb59-712f597e96e3" class="">It is the act of using a fake address (IP/MAC). It can be a collection of attacks. One of them is also the TCP SYN FLOOD as it spoofs the MAC Address.</p><h2 id="65e2623d-4619-40b0-a30e-88663f60f4a2" class="">Reflection/Amplification</h2><p id="840f3f38-06a9-4d3d-8609-3745a6e5b7c7" class="">Threatens: Availability</p><p id="d70f319c-5134-4e95-996c-3c3cf7ed3ccb" class="">This is an indirect attack. The threat spoofs its address as the target’s one and send a request to the <strong>reflector</strong>, which will reply to the target. The <strong>Amplification </strong>happens when such small request triggers a huge response to the target.</p><h2 id="c9b6c623-af12-489d-9c4a-ed05c6e3934c" class="">Man-in-the-Middle</h2><p id="c8061886-8ea2-421f-ad28-89bb1c40f91f" class="">Threatens: Confidentiality &amp; Integrity</p><p id="92e2b735-9707-4c34-8d0d-bd42c1ee70fe" class="">A threat places itself between the sender and the destination to view and/or modify a message being transmitted on the same link.</p><h3 id="9b246ec1-6d22-48b3-bc4e-90e3826bb603" class="">Example ARP Spoofing (poisoning)</h3><p id="96f09b24-2652-4b36-b9b2-dbb910c608f9" class="">Firstly, it is a normal ARP operation, where the HostA sends an ARP Request in broadcast, then the intended HostB replies with an ARP Reply. However, after that, the threat also sends an ARP Reply pretending to be HostB. So any messages that HostA try to send to HostB will first pass by the attacker, it being able to view the content of the frame and/or modify it.</p><h2 id="988f686d-eda3-4341-9517-f2aa69b61265" class="">Reconnaissance </h2><p id="27a773bd-1476-4c19-b06b-a7ef8d432d7f" class="">It is not a threat, but a way for the attacker to learn information about the future target.</p><h2 id="82f27a75-1f1e-4780-8ee0-e3784fc9cf42" class="">Malware</h2><p id="e71d9ad3-f4a0-4ec9-b6af-910dce6bd325" class="">Threatens: CIA</p><p id="6f04eaa5-4e7c-410b-9b5d-ea2442b34bb1" class="">It is any software with malicious intent. Some examples are:<div class="indented"><ul id="426d5866-b2df-4105-ab8d-6cf4b59636c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Virus: </strong>It is a piece of software that attaches itself to a legitimate software.</li></ul><ul id="d4097d53-5a28-41e6-84be-f582bc081a6c" class="bulleted-list"><li style="list-style-type:disc"><strong>Trojan Horse:</strong> It is a whole software that pretends to be a legitimate software.</li></ul><ul id="125dc5ce-cb20-41c8-bfdc-fe47bee112e2" class="bulleted-list"><li style="list-style-type:disc"><strong>Worm: </strong>It is a standalone software as well, with great replicating capabilities and the ability to run itself.</li></ul></div></p><h2 id="04694414-3b5e-4f50-9b28-19543c39dd84" class="">Social Engineering</h2><p id="1ea86c3d-c284-4cb7-90ad-337439d5b49f" class="">Threatens: CIA</p><p id="8f2ecb65-cbc0-44c5-80bc-7533af27d01b" class="">This method exploits the most common weakness of a system, the people, and makes them do certain actions or reveal information.</p><h3 id="13bef64b-9a01-48b7-a430-ad0746fcd371" class="">Example Phishing</h3><p id="a6d53249-fa7e-45f7-9ed7-99f0ec20beec" class="">Phishing is the act of luring someone into doing something malicious with a bait, like a reward. There various types of Phishing, some of them are:<div class="indented"><ul id="2fa3375b-93a7-4167-bfc0-e96498b35c53" class="bulleted-list"><li style="list-style-type:disc">Spear-Phishing: Phishing target toward a specific group of people</li></ul><ul id="2174eb52-1663-448b-8292-ddf94c2c51bc" class="bulleted-list"><li style="list-style-type:disc">Whaling: Targets rich or powerful persons</li></ul><ul id="1a941b1a-540e-429a-8a86-21f43e585bc5" class="bulleted-list"><li style="list-style-type:disc">Vishing: Phishing via Voice</li></ul><ul id="3383669f-6009-4964-ba54-28fc40f7a359" class="bulleted-list"><li style="list-style-type:disc">Smishing: Phishing via SMS</li></ul></div></p><h3 id="9bc0aecf-1e8c-4339-8f83-f39405d117e2" class="">Example Watering Hole</h3><p id="77a275a2-d990-4adf-995c-f0a4f4170769" class="">It is the act of putting a malicious resource in a previous trusted environment. For example, if someone put a link to download a malware in the <a href="http://amazon.com">amazon.com</a> website.</p><h3 id="15142aed-1f0b-4c58-8a4b-39e6bf98be61" class="">Example Tailgating</h3><p id="63e007dc-0736-477d-97d8-d38913dcbb95" class="">It is the act of entering a restricted area by following someone that is authorized, like opening a door for such person and go with it.</p><h2 id="022a0f6a-06c7-4465-835a-c2b2809d2f95" class="">Password-related</h2><p id="f6ded1e7-2d0c-44f8-92ec-ed4175264238" class="">This attacks target the account of someone/something, by trying to discover the password. Some of the ways of getting access to such accounts are:<div class="indented"><ul id="30e08fdd-9e2f-4fe4-8eeb-ccc32c8cacae" class="bulleted-list"><li style="list-style-type:disc">Guessing</li></ul><ul id="0c56e8ee-7794-4c37-a100-955ff9e3c0fc" class="bulleted-list"><li style="list-style-type:disc"><strong>Dictionary attack: </strong>The attacker iterates a list of common passwords</li></ul><ul id="1013c44b-9bbe-4871-901e-b8f8811369cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Brute Force attack: </strong>The attacker guess all possible combinations</li></ul></div></p><h1 id="091338d7-2305-4ee1-8a2c-2f45f84d63db" class="">Multi-Factor Authentication</h1><p id="0cbf6c4c-26bc-49ba-9686-1d4a64cbdb54" class="">It is a Mitigation Technique by employing more than one category of authentication. The categories are as follow:<div class="indented"><ul id="d267c33f-45ca-4c49-b571-f0c3e4429783" class="bulleted-list"><li style="list-style-type:disc"><strong>Something you know </strong>→ Username/Password, PIN…</li></ul><ul id="162cd31e-8ef5-42e4-ba9c-7744ae844bc3" class="bulleted-list"><li style="list-style-type:disc"><strong>Something you have </strong>→ Badge, Key Card, Key…</li></ul><ul id="444bd78f-276e-4bfe-a075-dd9aa2c8237c" class="bulleted-list"><li style="list-style-type:disc"><strong>Something you are </strong>→ Biometrics, Retina…</li></ul></div></p><h1 id="98125eb8-d0ab-4c07-a726-69cacf92fce6" class="">Digital Certificates</h1><p id="8af0417d-2e84-479e-be4a-b8eeea49be67" class="">This are virtual certificates signed by a device and issued by an organization. This can be used to prove the authenticity of something, or if it belongs to someone/something.</p><p id="5fb2be4c-22e9-4ddd-99c1-07a1e3466a05" class="">One example are the SSL Certificates used by websites.</p><h1 id="7246d3fc-6394-42ae-8ea9-e34f0b17f1df" class="">AAA</h1><p id="b2005e1b-fad4-4d6f-933f-33b772e19b04" class="">AAA stands for <strong>A</strong>uthentication,<strong> A</strong>uthorization and <strong>A</strong>ccounting.</p><p id="5819653d-6692-4d69-a61f-78a0aa03ae71" class="">Authentication → Confirms the user`s identity</p><p id="21958ba5-33d8-4d83-a38c-b6397bc86dd4" class="">Authorization → Tells what such user can and can`t do</p><p id="23d197bf-40f7-4765-a7fd-75188776f6a2" class="">Accounting → Logs everything such user has done</p><p id="7c1e894a-6e1e-4ed0-a1d8-b6545bff2b68" class="">There are two protocols used for AAA:</p><h3 id="df22fee9-161a-411f-a4df-a00a45513a7d" class="">Radius</h3><p id="c4613d17-eedd-4578-84c0-74a10d5ca1f5" class="">It is an industry standard</p><h3 id="273a0d69-6497-47df-9dbf-04fb2222e670" class="">TACACS+</h3><p id="ca78fdb6-30af-4058-8045-dbea60a63768" class="">It is Cisco property</p><h1 id="1dc0f2af-c8a0-41aa-9472-7280b03a8790" class="">Security Programs Elements</h1><p id="ff32b363-8915-4cdc-867d-c1832d3a5fe0" class="">These are actions (collection of) and procedures done in order to prevent attacks.</p><h3 id="9f61d866-0782-4fb6-b3dd-b7f721503811" class="">User awareness</h3><p id="d7dc5a80-261f-4b14-9497-34831e07f0b1" class="">They are actions that lead an user to realize by itself that he could be a potential victim of a threat.</p><h3 id="d9ab2dd4-8980-4df5-ac74-ea2d92e0ac50" class="">User Training</h3><p id="bae240b6-ec2b-47e2-8e37-eff2eec9460f" class="">They are dedicated lectures to inform the users of best-practice actions and what to avoid doing in order to maintain the environment and themselves safe from threats.</p><h3 id="6dccd60c-e2b2-4580-97c9-caa0633ea158" class="">Physical Access Control</h3><p id="18d99cf5-3193-4bf1-bde0-76ebaa7a9d97" class="">These are physical and tangible barriers placed to prevent unauthorized personnel from entering confidential areas.</p><p id="a13b1bfb-7eae-4090-8fe8-a349f2da929f" class="">
+</p></div></article></body></html>

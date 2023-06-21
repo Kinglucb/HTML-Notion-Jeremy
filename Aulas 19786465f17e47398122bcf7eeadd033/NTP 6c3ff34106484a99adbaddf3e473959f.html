@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>NTP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6c3ff341-0648-4a99-adba-ddf3e473959f" class="page sans"><header><h1 class="page-title">NTP</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="ad82b676-8875-454b-a349-625a88dc52a2" class="">All devices have an internal built-in hardware clock, it is used for multiple time-related operations. Therefore, it is important to keep the time updated. </p><p id="d068cd86-2481-4425-9edb-285bc8030619" class="">In the CCNA, the importance of time is for logging and its protocol: Syslog (<strong>show logging</strong>).</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1dbf0f27-e278-4262-b964-27b47d829458"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT: </strong>Use <strong>CLOCK</strong> to reference the software clock and <strong>CALENDAR </strong>to the hardware clock.</div></figure><h3 id="2f1fe55d-4975-4f41-9ff4-7ef68ea0a572" class="">View the current configured clock </h3><pre id="6100e4e6-4f64-4284-8299-773c551d9e3d" class="code"><code>show clock [detail]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8ed2248e-9e45-4398-b110-0ea33a94ee2b"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT:</strong> The reference for time is the UTC (Coordinated Universal Time)</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e73e1055-8236-499e-8130-905c342e4083"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Before the time, the character can be:
+* → Not authoritative (Not trusted)
+.  → Authoritative, NDP configured but not synced
+   → Authoritative</div></figure><h3 id="ebcb32a7-d4c8-4746-beec-a5b513b5b415" class="">View the hardware clock</h3><pre id="78f9457d-35da-4065-ac26-4b27a04171ab" class="code"><code>show calendar</code></pre><h2 id="e296595c-36b7-4826-be09-9d827e723787" class="">Set the time/date (Good Practice)</h2><ol type="1" id="cf7f3505-3fd1-4407-8788-d4c2cf566cd0" class="numbered-list" start="1"><li><strong>Configure the timezone</strong><pre id="897b4b95-1155-468c-b463-2317a7f34432" class="code"><code>configure terminal
+clock timezone {NAME} {-23 - 23}  // How much time from UT</code></pre></li></ol><ol type="1" id="bbd7aa56-2461-4b91-ac8b-f85ed1c1ce97" class="numbered-list" start="2"><li><strong>Set the clock</strong><pre id="9fd7bda2-d070-48bc-8334-9cb6258086e1" class="code"><code>exit     // PRIVILEGE EXEC MODE
+clock set {hh}:{mm}:{ss} {day} {MONTH} {year}   //Month is worded, not a number</code></pre></li></ol><ol type="1" id="120d7469-da75-4c6c-b49a-88f81287dcc8" class="numbered-list" start="3"><li><strong>Update the calendar</strong><pre id="a5269d7d-5f1b-4426-b777-d9e0e427017b" class="code"><code>clock update-calendar  // This will update the hardware`s internal clock</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7bc08e2f-44b1-47e4-8963-82c227406fdb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE: </strong>There is also the clock read-calendar, it updates the software clock based on the hardware`s internal clock.</div></figure></li></ol><h3 id="c1a1ada3-5066-4b2b-a658-abaa1b962d0d" class="">Daylight Save Time</h3><pre id="5f8f4a23-f027-4fc7-9a2c-db08b4417565" class="code"><code>configure terminal
+clock summer-time {NAME} {date | recurring} {which-week-starts} {DAY} {MONTH} {hh}:{mm} {which-week-ends} {DAY} {MONTH} {hh}:{mm}</code></pre><h1 id="d2c1445c-f097-41e0-b52c-b39fdacd11c6" class="">NTP (Network Time Protocol)</h1><p id="953a0284-e414-4419-b29a-bdd0b21d98d7" class="">It is used to synchronize automatically time over the network</p><p id="32152a51-6dfa-4495-b6bb-7e86349e10f8" class=""><strong>NTP clients</strong> request time from <strong>NTP Server</strong>.</p><h2 id="8832038c-8621-4289-9323-f2bbb115b75f" class="">Delay</h2><h3 id="e34f9a57-e7f2-40ae-bb3e-a8b8a2acb462" class="">If in the same LAN…</h3><p id="b7f3ef51-dcb2-4000-b2b4-50435bc44a79" class="">≤1 milissecond</p><h3 id="e8869451-839c-4f47-afcb-2aa7b0cad52e" class="">If over the WAN/Internet</h3><p id="7ff1a9ff-269e-44cc-8669-74ba5f9ddcc2" class="">≤ 50 milisseconds</p><h2 id="e2f98bfd-bc57-4009-bf8b-93e91497a735" class="">NTP Server Classification (Stratum)</h2><p id="73bcbc6d-142c-4a15-8ec3-9400bb5b8037" class="">The accuracy of a NTP Server is defined by its distance from the <strong>reference clock</strong>, this measure is called<strong> stratum.</strong></p><p id="28fa4705-f9f5-419d-9f47-de352e28f914" class="">Devices like <strong>Atomic clocks</strong> and <strong>GPS clocks</strong> are the source of the time → <strong>Stratum 0</strong></p><p id="c3db892a-f3e0-4b20-91d1-658cb72b16fc" class=""><strong>Primary Servers</strong> (NTP Servers directly connected to these clocks) → <strong>Stratum 1</strong></p><p id="de2cc9ba-5d2e-4772-be1c-c60359443da2" class=""><strong>Secondary Servers</strong> (Rest of the hierarchy of NTP Servers) → <strong>Stratum 2 up to Stratum 15</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f9144f89-01ed-4d08-ac18-e634903f6772"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Secondary servers can operate at both client and server mode</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d21a1284-e936-401c-81ec-ff3fa64a16a3"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%">IMPORTANT: The maximum stratum is <strong>stratum 15</strong></div></figure><figure id="42197212-6189-45cf-8a55-1db31a44aae9" class="image"><a href="NTP%206c3ff34106484a99adbaddf3e473959f/Untitled.png"><img style="width:671px" src="NTP%206c3ff34106484a99adbaddf3e473959f/Untitled.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="95156bf0-299f-4be2-bc02-e894eace64a9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE:</strong> NTP Servers in the same stratum can connect to each other to become more accurate and act as backups. This is called a “peer” relationship. To use this, the server must be configured to use <strong>“Symmetric mode”</strong></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fc4f03f9-632d-4e02-9cf1-7df628fc3532"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT:</strong> The NTP modes don`t exclude each other, they can co-exist.</div></figure><h2 id="3794c01e-e7ed-479b-bc61-ee8530703646" class="">Configuration</h2><h3 id="19368dd8-27aa-4c36-87b2-dd05f9bcd57c" class="">Server Address</h3><pre id="3529da6a-f34d-4146-83cf-b37bdfd5b683" class="code"><code>configure terminal
+ntp server {address} [key {key-number}] [prefer]   // The &#x27;prefer&#x27; keyword gives priority to a ntp server</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="dcbb5e4e-0f5f-4024-a10d-52b2ab4745cd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Multiple NTP servers can be configured, which is a good practice</div></figure><h3 id="60fe9ac9-a7d2-4e1b-aca7-fe7dff9d3407" class="">See information about the NTP Servers</h3><pre id="de01bb53-52bc-423b-bb5c-c63b556382da" class="code"><code>show ntp associations</code></pre><ul id="1f0af51b-c2aa-4c2b-984f-5f2fa996f74b" class="bulleted-list"><li style="list-style-type:disc">* sys.peer → The NTP server it is actually using</li></ul><ul id="bd6195a6-3a2a-474f-958f-3b54df70f428" class="bulleted-list"><li style="list-style-type:disc">+ candidate → NTP backup servers</li></ul><ul id="c27a80d5-3879-4702-bb18-a5c451fb1d64" class="bulleted-list"><li style="list-style-type:disc">~ configured → configured NTP servers</li></ul><h3 id="d187df5b-4596-4219-8d51-bf1942c7822c" class="">Show information about NTP</h3><pre id="d9ca0c08-d7a4-4447-9444-5afbb2fd2d6a" class="code"><code>show ntp status</code></pre><h3 id="31522740-b12a-4947-8650-3a750cc85364" class="">Make NTP update Calendar (Hardware)</h3><pre id="7a21152c-74ce-489f-867c-dc28623c5df3" class="code"><code>configure terminal
+ntp update-calendar</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a43e12cb-2843-475e-82ba-65863092c9c1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: When the system first boots up, it is the hardware clock that is used to synchronize the time for the first time</div></figure><h3 id="812fa351-d4de-4b24-9894-5cd3f735edc8" class=""><mark class="highlight-yellow_background">Source NTP Interface</mark></h3><p id="4ac934d9-d1b5-442b-b8e8-f7151f82b5c6" class="">This is used to specify which interface will the NTP messages be sent from, so clients can synchronize to this server</p><pre id="73b4773b-9dd8-4882-9697-96cf5ccd5510" class="code"><code>configure terminal
+ntp source {interface-id}</code></pre><h3 id="6a8a7b91-9030-484c-a278-641377496c45" class="">Make a device act as a Master Clock </h3><pre id="ffe7cc93-1080-45f2-ba2a-30a0a2c84c63" class="code"><code>configure terminal
+ntp master [stratum]  // This stratum is the one that will appear in ntp status</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4c3f125c-5952-480f-99cc-dd7a49e6d310"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> The default stratum for a device configured as master clock is <strong>Stratum 8</strong>.</div></figure><h3 id="d0188a05-27a9-4b7f-80d2-831aa8875f1f" class="">Configure Symmetric active mode</h3><p id="18ffd8bc-c79e-4bb9-a420-b26a54875c71" class="">This options makes the device sync with a neighboring NTP Server that has the same stratum, making it more accurate and act as a backup.</p><pre id="6f2342a9-95bb-4008-b79d-a2508bd112fe" class="code"><code>configure terminal
+ntp peer {ip-address} [key {key-number}] // The key is used for authentication</code></pre><h2 id="bdcff12e-6c70-45d4-8bff-0fac80f81f5d" class="">NTP Authentication</h2><p id="bb72a7b6-a74d-4ad5-ac8e-3b506b38b59b" class="">This is used to sync to only NTP Servers who has the same password.</p><h3 id="fce9203c-c8b8-4841-adbf-ca89172fe1de" class="">Enable</h3><pre id="6481cb49-07bc-4d44-8791-a4af112cc245" class="code"><code>configure terminal
+ntp authenticate</code></pre><h3 id="438e9372-c842-4540-bd80-96e6c651f8ba" class="">Set the password</h3><pre id="891c3755-3a3c-4425-8714-7d8563a36435" class="code"><code>configure terminal
+ntp authentication-key {key-number} md5 {password}</code></pre><h3 id="b8c0d0b0-8193-4323-a33f-639cf716983d" class="">Trust a password</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4bd7c096-34b3-43ad-b914-6df324642b68"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT: </strong>This step is required after setting a password.</div></figure><pre id="ebac1519-5d1c-4e95-a9cb-834950a65c02" class="code"><code>configure terminal
+ntp trusted-key {key-number}</code></pre><figure id="d290e1b7-7d90-455b-a047-f15dee785a57" class="image"><a href="NTP%206c3ff34106484a99adbaddf3e473959f/Untitled%201.png"><img style="width:1267px" src="NTP%206c3ff34106484a99adbaddf3e473959f/Untitled%201.png"/></a></figure><p id="2d0774c7-2f0c-4298-bb35-789c716160b4" class="">
+</p></div></article></body></html>

@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>QoS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b35a3ba7-b8c2-4164-a1e8-cc17d3cc8e29" class="page sans"><header><h1 class="page-title">QoS</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><h1 id="5c4385cc-d308-4c32-9241-8c4d07ee9b69" class="">IP Phones</h1><p id="49239f6a-02d3-4072-a1b3-f16aa6819e63" class="">Traditional phones use POTS (Plain Old Telephone Service). However, modern enterprise phones are IP Phones which use VoIP (Voice over IP).</p><p id="f0ff50fe-6eb5-4dd7-8628-0a0314e303fe" class="">In order to reduce the amount of switch ports being used, IP Phones have an internal 3-port switch:<div class="indented"><ul id="3e25cead-50e2-4080-9e73-fe9287ef885b" class="bulleted-list"><li style="list-style-type:disc">1x to connect to the Switch</li></ul><ul id="3bd263e9-2425-42c4-a22a-048b7e889d89" class="bulleted-list"><li style="list-style-type:disc">1x to connect to the PC</li></ul><ul id="c604565c-2e99-47ff-91aa-93df3bfc3020" class="bulleted-list"><li style="list-style-type:disc">1x (internal) to connect to itself</li></ul></div></p><p id="8cd453d8-b579-4854-a1c5-980b25c4d072" class="">For this to work, IP Phones use<strong> Voice VLANs</strong>. In the switch the mode remains as <em>static access</em>, but the voice traffic is tagged.</p><pre id="12dc1890-e194-4196-a59e-e22bcd2884ce" class="code"><code>configure terminal
+interface g0/0
+switchport mode access
+switchport access vlan 10 //EXAMPLE
+switchport voice vlan 99  //EXAMPLE</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cfc0117d-fdec-4a8b-bf78-681129d7fdb2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: The switch uses CDP to tell the IP Phone which VLAN to tag the frame.</div></figure><h1 id="a9711b31-1720-4e08-ba2a-be4183cb0d27" class="">PoE </h1><p id="461464e5-2bf9-41d7-86a6-48267d23a816" class="">PoE (Power over Ethernet) is an industry standard to power devices like IP Phones, IP Cameras, Wireless Access Points, lights and etc. However, it is different from using an power adapter because the same cable that transfers data also powers the device.</p><p id="c92d908b-fbf7-47db-8258-45e45d88069f" class="">The device that power the PoE capable devices is called <strong>PSE (Power Sourcing Equipment)</strong> and the device being fed is called <strong>PD (Powered Device).</strong></p><p id="dfdf9306-e7b7-4cf0-9000-0ebef3e45d1a" class="">PSE will convert the AC voltage of the outlet into DC voltage and power the devices in its PoE capable ports.</p><p id="6a56a6ff-656c-4af5-b62f-fb66b396a504" class="">In order to prevent a device to use more power than necessary is called Power Policing, which is a feature that takes a certain action in case the PD draws too much power.</p><pre id="52ac8194-894b-4a1e-9811-874e718ac997" class="code"><code>configure terminal
+power inline police [action {err-disable | log}]</code></pre><ul id="d0cc136c-a859-4862-996e-8d9cd3486591" class="bulleted-list"><li style="list-style-type:disc"><strong>err-disable</strong> → Puts the interface in a err-disable state and logs the event</li></ul><ul id="fd642848-3d1b-4f61-9903-55ab0b71aa7f" class="bulleted-list"><li style="list-style-type:disc"><strong>log </strong>→ Only restarts the interface and generate a log</li></ul><h3 id="21cccbc7-06fa-4e9f-b04b-67f3fcb2b860" class="">Standards</h3><table id="298ab681-63d6-4874-8731-c0b4a87f03e1" class="simple-table"><thead class="simple-table-header"><tr id="22cbb66a-21f8-4cb3-807f-3770067822c7"><th id="D?k=" class="simple-table-header-color simple-table-header">Name</th><th id="^x;R" class="simple-table-header-color simple-table-header">Standard</th><th id="?`jV" class="simple-table-header-color simple-table-header">Maximum Power (W)</th><th id="X;pT" class="simple-table-header-color simple-table-header">Pairs used</th></tr></thead><tbody><tr id="024abf58-b6f5-4700-a8c0-de8752e62a45"><td id="D?k=" class="">Cisco Inline Power
+          (ILP)</td><td id="^x;R" class="">N/A</td><td id="?`jV" class="">7</td><td id="X;pT" class="">2</td></tr><tr id="fb8feff5-494f-4953-bc11-ffbcfaeae3bb"><td id="D?k=" class="">PoE</td><td id="^x;R" class="">802.1af</td><td id="?`jV" class="">15</td><td id="X;pT" class="">2</td></tr><tr id="e97c4ed4-a219-45fa-8d10-61cf39de676b"><td id="D?k=" class="">PoE+</td><td id="^x;R" class="">802.1at</td><td id="?`jV" class="">30</td><td id="X;pT" class="">2</td></tr><tr id="d18010c9-13f4-4bb1-bf47-f64d4f243fec"><td id="D?k=" class="">UPoE</td><td id="^x;R" class="">802.1bt</td><td id="?`jV" class="">60</td><td id="X;pT" class="">4</td></tr><tr id="337672a2-84c2-46ca-8299-b337f9dad529"><td id="D?k=" class="">UPoE+</td><td id="^x;R" class="">802.1bt</td><td id="?`jV" class="">90</td><td id="X;pT" class="">4</td></tr></tbody></table><h1 id="14ee9035-6da5-4e67-87ac-bf5164337209" class="">QoS</h1><p id="b2a1ab75-b15f-401d-a24e-d37b6e14b549" class="">QoS (Quality of Service) is a set of tools that allows different treatments to different packets, by giving Higher and Lower priorities to certain packets.</p><h3 id="6db521b1-ac15-44ac-b63e-b5b2665c1cb6" class="">Terms</h3><ul id="8799c817-a384-4392-91e9-99ca01fcddc8" class="bulleted-list"><li style="list-style-type:disc"><strong>Bandwidth</strong> → Overall capacity of a link.</li></ul><ul id="afa99055-f235-47ce-8140-5f614f734d10" class="bulleted-list"><li style="list-style-type:disc"><strong>Delay </strong>→ The amount of time that it takes to a packet arrive to a destination (<strong>one-way delay</strong>) or to go and return (<strong>two-way delay</strong>).</li></ul><ul id="7d5b2fd9-71db-4a4c-895b-74e8cba3d1bb" class="bulleted-list"><li style="list-style-type:disc"><strong>Jitter </strong>→ It is the variation of the delay.</li></ul><ul id="3c9c683e-5220-4882-aeec-e11cd8cfac08" class="bulleted-list"><li style="list-style-type:disc"><strong>Loss </strong>→ Amount in % of dropped packets.</li></ul><h3 id="449795c0-03cc-4a87-ac37-9d948ee1845e" class="">Voice Standard</h3><p id="4e3f5d60-ad6d-45b1-80e9-0595007ad8d8" class=""><strong>Delay </strong>≤ 150ms</p><p id="b0b47c4a-1155-4de6-81e7-28fedcb5e046" class=""><strong>Jitter</strong> ≤ 30ms</p><p id="e50e27bf-96fa-430f-9c71-a813518bd840" class=""><strong>Loss </strong>≤ 1%</p><h2 id="17426efa-2c12-4600-82be-70aa57b5fe51" class="">Classification</h2><p id="426ba213-2943-4b4b-8477-65d6a30ab036" class="">It is the actual classes (categories) where the packets will be bonded to.</p><p id="77c1cf37-3014-48ed-b6b7-81c0fc673753" class="">You can classify packets via:<div class="indented"><ul id="207a9352-46cc-4188-9328-772a54cf071f" class="bulleted-list"><li style="list-style-type:disc"><strong>ACL </strong></li></ul><ul id="0f3a19e8-3469-4c08-b61d-9ce4984a3788" class="bulleted-list"><li style="list-style-type:disc"><strong>NBAR</strong></li></ul><ul id="73cca42a-be10-44eb-9529-eedce421261e" class="bulleted-list"><li style="list-style-type:disc"><strong>Layer 2 and Layer 3 fields</strong></li></ul></div></p><p id="f449a4e2-fc04-450c-a4aa-067470fa9bf9" class="">The term <strong>mark </strong>is important, which is the act of setting a value in a field that tells the class of the packet. Those fields can be PCP or DSCP (previous IPP).</p><p id="577ff9e3-c2cb-4fc1-96e2-1046cd465ccd" class="">PCP (Priority Code Point) is 3 bits in length, therefore it has 8 classes.</p><table id="37e1b7f1-27b9-4072-a957-1fd927c0e4cb" class="simple-table"><tbody><tr id="3e8d6d26-1441-46b4-b0f1-ef4190e3cd44"><td id="Z=mt" class="block-color-yellow_background">0</td><td id="utr:" class="block-color-yellow_background">Best Effort</td></tr><tr id="2340e1c4-47f8-4391-aa19-b79974c21a23"><td id="Z=mt" class="">1</td><td id="utr:" class="">Background</td></tr><tr id="09aa739a-f1a3-4678-b921-adfe1b9ca1f8"><td id="Z=mt" class="">2</td><td id="utr:" class="">Excellent Effort</td></tr><tr id="4b61bd4d-d3bd-42d8-b175-3664ffabdc9d"><td id="Z=mt" class="">3</td><td id="utr:" class="">Critical Applications</td></tr><tr id="be4f4f91-8ec0-4865-a51a-eb0ae1c8c6fd"><td id="Z=mt" class="block-color-yellow_background">4</td><td id="utr:" class="block-color-yellow_background">Video</td></tr><tr id="9fa19001-d82a-4aec-9ee7-cca04ce8a443"><td id="Z=mt" class="block-color-yellow_background">5</td><td id="utr:" class="block-color-yellow_background">Voice</td></tr><tr id="bc2914da-51e1-49a6-9fed-76ebf1b1f9fc"><td id="Z=mt" class="">6</td><td id="utr:" class="">Internetwork control</td></tr><tr id="1120a631-54c1-4d09-acad-350c2d908267"><td id="Z=mt" class="block-color-yellow_background">7 </td><td id="utr:" class="block-color-yellow_background">Network Control</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6500c00e-6c86-4506-86cf-453f56905a15"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: IP Phones when setting the connection mark the field as <strong>PCP3</strong>, but when the call actually occurs, it uses <strong>PCP5</strong>.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="baf96d10-8af6-474f-8ff3-78da40de17c7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: <em>Network Control</em> refers to the messages to manage the network (i.e. OSPF messages).</div></figure><h2 id="6273901d-9ecd-4c2a-bcec-c8b0b685cfed" class="">DSCP Classification</h2><p id="17a48ff2-1b6a-4db6-9d88-5eba06a60eec" class="">DSCP (Differentiated Services Code Point) is a 6 bit length field, which indicates the possibility of 64 classes. However, an standardization occurred to give better performance of QoS among different locations.</p><h3 id="cc505ef7-aa6f-4dfe-96c1-aaf0293b3638" class="">DF (Default Forwarding)</h3><p id="5218f697-b5f0-4b70-b6cc-9f654f6a5646" class="">It is the value for regular traffic.</p><p id="20ec90bf-6539-479a-b242-0c38b212c4a3" class="">Value: 0</p><h3 id="da0d3d8c-d5fe-4aec-b099-50e588debbe0" class="">EF (Expedited Forwarding)</h3><p id="5877e2c4-575f-4d38-9aa8-ac5e3f90f5b0" class="">It is the class for Low Latency/Low Jitter/Low Loss packets</p><p id="6dad92b4-d62f-4724-a243-a339060f604c" class="">Value: 46</p><h3 id="8c711199-26c1-425f-9f21-188c0db7446b" class="">AF (Assured Forwarding)</h3><p id="0b0df7bf-6825-4db6-b72d-d3cda85f32ca" class="">It is a class of <strong>four classes</strong>, which by itself are divided into 3 minor classes called <strong>drop precedence</strong>.</p><p id="05a56486-418c-4ece-971b-d4d6c6225e29" class=""><mark class="highlight-yellow_background">Packets within the </mark><strong><mark class="highlight-yellow_background">same class have the same priority</mark></strong><mark class="highlight-yellow_background">, but the one with the </mark><strong><mark class="highlight-yellow_background">higher drop precedence will be dropped</mark></strong><mark class="highlight-yellow_background">.</mark></p><figure id="fe792e85-cf5b-4090-8aa3-99494ad65545" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled.png"><img style="width:849px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled.png"/></a></figure><figure id="f6a26416-2c83-490b-a374-70bb7146aef1" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%201.png"><img style="width:915px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%201.png"/></a></figure><figure id="ed9d70dd-ef0a-4838-8568-2bb9c3c9ee10" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mi>F</mi><mi>X</mi><mi>Y</mi></mrow><annotation encoding="application/x-tex">AFXY</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.07847em;">FX</span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span></span></div></figure><figure id="607dacb9-aab1-47e0-93d8-db466be2f072" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>D</mi><mi>S</mi><mi>C</mi><mi>P</mi><mo>=</mo><mn>8</mn><mi>X</mi><mo>+</mo><mn>2</mn><mi>Y</mi></mrow><annotation encoding="application/x-tex">DSCP = 8X + 2Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.13889em;">SCP</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord">8</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span></span></div></figure><h3 id="1e23e602-874b-4c49-8bce-0316894ac710" class="">CS (Class Selector)</h3><p id="a636fcfa-bc79-45a5-944c-d2b92ce49ed2" class="">These classes are meant to be backwards compatible with IPP (IP Precedence, the old QoS field in IPv4).</p><p id="20d0fabe-503b-4259-a909-54fae4794954" class="">It sets the added bits of DSCP all to 0, and uses only the first 3. Therefore there are 8 CS classes:</p><p id="4d08fc4c-8228-4257-ba23-f2abfca3fdd9" class=""><strong>CS0, CS1, CS2, CS3, CS4, CS5, CS6, CS7.</strong></p><p id="209fe996-4999-46a2-804e-cc4f70e49e00" class="">Equivalents in DSCP:</p><p id="4295ab7e-dc79-4b43-bd8a-f875a24b38fd" class="">DSCP0, DSCP8, DSCP16, DSCP24, DSCP32, DSCP40, DSCP48, DSCP56.</p><figure id="d024e2d9-87b5-4f1d-8ffd-bcc0e63d1616" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%202.png"><img style="width:1012px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%202.png"/></a></figure><h2 id="93903da0-1d51-4264-9d9b-cab45a357ec8" class="">RFC 4594 Standards</h2><p id="9a9423ec-93b6-4c2b-9be0-6cdb7a1b581b" class="">It is an standard for setting the classification accordingly to some applications</p><ul id="3c57ad25-183b-45c8-a468-66b17ecc23ca" class="bulleted-list"><li style="list-style-type:disc">Video → <strong>EF</strong></li></ul><ul id="d8b45664-29b6-48a4-abd0-9ee68709daa7" class="bulleted-list"><li style="list-style-type:disc">Interactive Video → <strong>AF4x</strong></li></ul><ul id="a0f89278-4db1-4cec-82a7-75187e22b050" class="bulleted-list"><li style="list-style-type:disc">Streaming Video → <strong>AF3x</strong></li></ul><ul id="306432a5-1ea6-4d4c-b347-3b531df6934d" class="bulleted-list"><li style="list-style-type:disc">High Priority Data → <strong>AF2x</strong></li></ul><ul id="1ffea277-af0e-4647-b394-2ac4d2078874" class="bulleted-list"><li style="list-style-type:disc">Best Effort → <strong>DF</strong></li></ul><h2 id="c75596dc-67df-4f5f-a92a-abe34f708364" class="">Trust Boundaries</h2><p id="e351a3ba-7f39-45e8-b907-2ae192e03f03" class="">Is is a logical separation of QoS capable devices, that when trespassing it will make the QoS fields change value. Device inside the <em>Trust Boundary </em>are <strong>trusted devices</strong>, while devices away from the <em>Trust Boundary </em>are <strong>untrusted devices</strong>.</p><figure id="bd9fd605-0ea8-4373-8e11-92c946f4ffaf" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%203.png"><img style="width:1087px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%203.png"/></a></figure><figure id="0a626cf0-1a59-40a1-993c-3e3947852743" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%204.png"><img style="width:1084px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%204.png"/></a></figure><h2 id="b123b555-c773-40d2-a230-9482b8e4e6f5" class="">Queueing </h2><p id="9a78badf-1099-4aa3-981b-454b81d4046a" class="">It is a feature used when the device receives packets faster than it can forward it. Therefore, it will store they in a buffer with a FIFO (First in First Out) logic by default. It is a buffer.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5989403a-8176-40dc-bfe4-97043215f4e1"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT: </strong>If the queue fills up, any new arriving packet will be dropped. This is what is called as tail drop.</div></figure><p id="b4524193-504b-481d-a5ba-866639197e7e" class="">However, this tail drop also brings another problem than only dropping packets, it causes <strong>TCP Global synchronization</strong>.</p><p id="27c73a87-2390-47b3-bc3e-22d37f487dde" class="">This happens when due to tail drop, devices will decrease the TCP sliding windows, which leads to an underutilization of the network, but after that they will gradually increase the data rate, causing in the end another tail drop. This will stay in a loop, in other words, waves of tail drop.</p><p id="10edbee9-eda8-4001-b289-f3dafe2f324e" class="">In order to avoid these, two solutions were invented:</p><ul id="867e6fd2-21fb-44f4-8d5f-c02266625cd8" class="bulleted-list"><li style="list-style-type:disc"><strong>RED (Random Early Detection)</strong> → Randomly drops packets after meeting a minimum threshold</li></ul><ul id="1747f3be-fe4c-4820-b737-6feb77261f72" class="bulleted-list"><li style="list-style-type:disc"><strong>WRED (Weighted Random Early Detection)</strong> → Drops lower-priority packets after meeting a minimum threshold.</li></ul><p id="d2d3967a-b7e5-454f-91af-d811e07e17aa" class="">QoS also allows the existence of multiple queues, each one with a different size for certain classifications. Also, and scheduler is needed to decide from which queue to draw data and how much.</p><figure id="8a1ad009-387c-4f98-8747-200ae15548fe" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%205.png"><img style="width:1221px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%205.png"/></a></figure><h3 id="ec554613-57ba-4345-aef6-02c07033ab26" class="">Scheduling methods</h3><p id="0ac574ca-ec2c-49b7-9521-998cf9095cf4" class="">A scheduler is basically a traffic guard, telling whose turn is and how much data to be drawn from each queue.</p><ul id="8b072421-4e77-4f4e-bf9b-7092b4bdd029" class="bulleted-list"><li style="list-style-type:disc"><strong>round-robin</strong> → each queue has a turn, and also has the same data being drawn</li></ul><ul id="c4f136ac-a7dc-4c4b-82f7-7ffb9cfc1aac" class="bulleted-list"><li style="list-style-type:disc"><strong>weighted round-robin </strong>→ each queue has a turn, but a queue, a higher-priority one, can have more data being transmitted than other</li></ul><ul id="bfa8a2da-9045-4000-b64d-8aa89757a094" class="bulleted-list"><li style="list-style-type:disc"><strong>CBWFQ (Class-Based Weighted Fair Queuing)</strong> it uses weighted roud-robin but in times of congestion it reserves a minimum bandwidth for each queue</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b6c06f0e-0a12-46b2-ae34-01882e1e20a6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Since all this methods use round-robin logic, voice/video traffic have to wait for their turn for the scheduler to put their data into transmission, which is not ideal.</div></figure><ul id="b8c41242-79d1-47da-8b65-1ee682c92666" class="bulleted-list"><li style="list-style-type:disc"><strong>LLQ (Low Latency Queuing)</strong> designated one or more queues as<em> strict priority queues. </em>This means, that the scheduler will give the most priority to this queues, emptying them whenever they are available, even if not their turn. Essentially, they have a “Fast Pass”, they don`t have to wait. This however, can lead to <strong>starvation</strong> of the other queues if there is always something in those queues.</li></ul><h2 id="213f185a-6a9d-4ab5-bad8-4315a65f886c" class="">Shaping and Policing</h2><p id="c91d302c-a0ee-42f0-b592-1774f61421d6" class="">They control the rate of traffic. This is a useful feature for Service Providers limit the bandwidth to how much the customer has paid.</p><p id="914d47af-de31-4e21-9188-868fb0fec0e5" class="">Basically they will do the following with the data rate exceeds the maximum limit:</p><ul id="d0eaf694-cd43-433e-bb3f-53f2d29b23d1" class="bulleted-list"><li style="list-style-type:disc"><strong>Shaping </strong>→ Will buffer the data</li></ul><ul id="7e62c63e-77a2-4c4a-9765-67840c0623c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Policing </strong>→ Will drop the data</li></ul><figure id="f63066d7-a2d1-4915-84d0-1b2a6c0069a7" class="image"><a href="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%206.png"><img style="width:453px" src="QoS%20b35a3ba7b8c24164a1e8cc17d3cc8e29/Untitled%206.png"/></a></figure></div></article></body></html>

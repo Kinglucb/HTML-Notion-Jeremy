@@ -1,0 +1,719 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>VLAN</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9cd7b46d-96b7-4ce9-b299-78b953cffaba" class="page sans"><header><h1 class="page-title">VLAN</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><h1 id="27f4e716-58fd-4314-bc99-306fa6b0621c" class="">VLAN (Virtual Local Area Network)</h1><h2 id="c584206c-8a72-4d95-95e1-db4c3bbd6bac" class="">LAN (Local Area Network)</h2><p id="ffc48e2d-4b1d-4ef8-9f00-d0d2affe1dcd" class="">It is a group of devices in a single location. <strong>But it also is a single broadcast domain</strong>, including all devices in that broadcast domain.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d7fbba5c-fe75-443d-ba02-1d12eb8652c9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Important: A <strong>Broadcast domain</strong> is a group of devices that will receive a <strong>broadcast frame</strong> (MAC FFFF.FFFF.FFFF) sent by any member in that group.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0cec63cc-ef4d-4d22-a74e-27454fa135d1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Lots of unnecessary broadcast traffic can lead to decreased performance</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7b855737-2dd4-4ad6-b94f-0133c14f129d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">By dividing a network, putting a router/firewall between, you can apply policies that control the forwarding of packets</div></figure><h2 id="4fe37065-4763-4619-99b7-16cf06d2e322" class="">VLANs</h2><p id="b2f62ef1-1a9f-41ff-9e47-9389dad62212" class="">VLANs don`t forward broadcast/unknown frames between different VLANs. In order for frames to travel across VLANs the switch forwards the frame to the router.</p><ul id="8d646be6-894a-4f76-94fc-eae591430b2d" class="bulleted-list"><li style="list-style-type:disc">Logically separate hosts at Layer 2</li></ul><ul id="47d1bc45-8667-4e2b-b25e-f4f79570f2d7" class="bulleted-list"><li style="list-style-type:disc">Are configured in switches in per-interface basis.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cfa4b300-a170-4867-9bc0-36d46f48a018"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">There can be devices in the same subnet but in different VLANs.</div></figure><h3 id="863c1017-01ed-4d58-a6ca-4811fac212db" class="">See VLANs Status</h3><pre id="b1227666-664d-421d-a0eb-ddcca1f7efc4" class="code"><code>show vlan brief</code></pre><p id="0bfc38ff-bb97-47f3-8a62-6b54008f1d3f" class="">By default, all ports are assigned to the same VLAN, VLAN 1. Also, VLANs from 1002 to 1005 cannot be deleted, they are used for old technologies.</p><h2 id="075ab237-56f0-435b-a5f2-948da2620395" class="">Set VLANs</h2><pre id="391c5140-c779-4378-a281-ab6d09b8139b" class="code"><code>configure terminal // Global Configuration Mode
+interface g0/0 // Enter in an interface
+switchport mode access //Turn that port into an access port*
+switchport access vlan 10 // switchport access vlan {vlan-number} //assigns a VLAN to that port</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4d3a61c0-f1db-48d4-871b-7ce6391d669e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">*An access port is one that is connected to a single VLAN, and usually connect directly to the end host (PC, Server, etc.)</div></figure><h2 id="33517d42-c1a9-4681-aac7-74269608a249" class="">Select a VLAN</h2><pre id="70c5b963-f6c6-4918-beaf-176954ac8efe" class="code"><code>configure terminal
+vlan 10 // vlan {vlan-number} //If that vlan doesn`t exists, it creates it</code></pre><h2 id="3616b8ee-0477-482e-8927-f6ca2200cb83" class="">Change a VLAN`s name</h2><pre id="ce3d385b-dce5-4d96-933d-1f8273020978" class="code"><code>configure terminal
+vlan 10 // vlan {vlan-number}
+name ENGINEERING // name {Description}</code></pre><h1 id="ff10f6c8-0821-4008-b5b4-be17ae14a274" class="">VLAN Trunking</h1><h2 id="192e2815-231a-4666-85a9-596839f93158" class="">Trunk</h2><p id="4c03efe3-3b6c-4b3f-9ca6-86f9e072b554" class="">It is a single port that carries multiple VLANs. In order for the receiving device know what VLAN a frame belongs to, the trunk port will tag the frame indicating what VLAN it belongs to.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="16779983-92e3-430c-aeaa-c5713376bf00"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Trunk port = “tagged” port
+Access port = “untagged” port</div></figure><p id="5d0b07cd-d123-411b-a057-3a8af6edcec5" class="">There are two trunking protocols:</p><ul id="f61087bb-be1a-461c-885c-baaaf31d47e3" class="bulleted-list"><li style="list-style-type:disc">ISL<ul id="3126c701-b026-4b55-833c-4f59f62122c6" class="bulleted-list"><li style="list-style-type:circle">This is a old Cisco proprietary protocol</li></ul></li></ul><ul id="f5afc29d-adf5-446f-ad13-2c408e7c13c1" class="bulleted-list"><li style="list-style-type:disc">IEEE 802.1Q<ul id="b8738f7b-b2d6-4767-b19b-146cf5af0997" class="bulleted-list"><li style="list-style-type:circle">This is a international standard created by IEEE</li></ul><ul id="24c96e65-7246-4ba8-b0af-0b32112252f0" class="bulleted-list"><li style="list-style-type:circle">It consists of a field inserted into the frame with a size of 4 bytes (32 Bits)</li></ul><ul id="341c5889-e9fc-4475-8f53-63bceaf04a79" class="bulleted-list"><li style="list-style-type:circle">It is inserted in the frame between the <strong>Source </strong>and the <strong>Type/Length</strong> fields. Itself is made of 2 fields:<ul id="84577dae-a275-42cd-a250-524f7c042ad3" class="bulleted-list"><li style="list-style-type:square">TPID (Tag Protocol Identifier) (16 Bits)<ul id="6384db51-c957-4e6c-b31a-20ac86b31cb3" class="bulleted-list"><li style="list-style-type:disc">Value 0x8100</li></ul></li></ul><ul id="e37cefe8-fea3-419d-9330-998d041dcc7e" class="bulleted-list"><li style="list-style-type:square">TCI (Tag Control Information):<ul id="2be3c229-b65a-4ad5-86de-2a73d48f5482" class="bulleted-list"><li style="list-style-type:disc">PCP (3 Bits) (Priority Code Point)<ul id="1c3edcb2-2559-4efb-876d-33e85a6c898b" class="bulleted-list"><li style="list-style-type:circle">Used for CoS (Class of Service), used to prioritize traffic in congested networkds</li></ul></li></ul><ul id="7443351d-2eb9-404f-9c9d-3ec01b937758" class="bulleted-list"><li style="list-style-type:disc">DEI (1 Bit) (Drop Eligible Indicator)<ul id="6fb20e35-3229-4129-9870-107e0b2b23ad" class="bulleted-list"><li style="list-style-type:circle">Used to sinalize a frame that can be dropped if the network is congested</li></ul></li></ul><ul id="e772ee07-72c8-4c3b-99a7-2429ff58249a" class="bulleted-list"><li style="list-style-type:disc">VID (12 Bits) (VLAN ID)<ul id="9f34f052-9895-4ff6-873e-f41996bcba66" class="bulleted-list"><li style="list-style-type:circle">Used to identify the VLAN the frame belongs to</li></ul><ul id="3b65b467-f3c1-4a29-8483-e74881927c5e" class="bulleted-list"><li style="list-style-type:circle">Since it is 12 bits long, when powering the number 2, it results in a value of 4096 VLANs.<ul id="f97cdbad-6a02-408a-89be-4597528467c5" class="bulleted-list"><li style="list-style-type:square">VLAN 0 and 4095 are reserved</li></ul><ul id="6e7cb9a1-091f-4c75-a644-88e153a11f2b" class="bulleted-list"><li style="list-style-type:square">Actual VLAN range: 1 - 4094<ul id="e06211c0-a2d0-4123-819d-69a7b422a577" class="bulleted-list"><li style="list-style-type:disc">Normal VLANs: 1-1005</li></ul><ul id="7d19ff0f-7627-45fa-9975-6cacf8e9b178" class="bulleted-list"><li style="list-style-type:disc">Extended VLANs 1006-494</li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><ul id="f029c623-83fe-41c9-b394-5aa8975c5254" class="bulleted-list"><li style="list-style-type:circle">It has a feature called <strong>Native VLAN</strong><ul id="9e015b1c-09d6-4076-a4b1-796ff18e42c1" class="bulleted-list"><li style="list-style-type:square">When a switch sends a frame through a trunk port, when the frame belongs to the configured Native VLAN (1 for example), it will not tag it<ul id="b7904874-894f-408d-90c2-6ac449d395c0" class="bulleted-list"><li style="list-style-type:disc">Natives VLANs <strong>must be the same</strong> on both switch, for both of them to forward properly the frame</li></ul></li></ul></li></ul></li></ul><h3 id="26d013e8-06f8-42e3-8c53-7642f24e8b77" class="">Select Trunking Protocol</h3><pre id="4ca4ec7c-70b9-4b3c-86f6-b843247f4318" class="code"><code>configure terminal // Global Configuration Mode
+interface f1/0 // Interface Mode
+switchport trunk encapsulation dot1q //switchport trunk encapsulation {dot1q/isl/negotiate}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b961c1a7-ed77-433f-8ff0-dbca23022534"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">This is needed for older switches that support both ISL and 802.1Q standards</div></figure><h3 id="c51eba2b-cc21-40f3-ac53-787cd8854b41" class="">Turn on Trunk mode</h3><pre id="2b3de36d-1935-46a0-8e04-8625da32496c" class="code"><code>configure terminal
+interface f1/0
+switchport mode trunk</code></pre><h3 id="f5a4941c-39ff-443a-9cd1-81a649c6ef6e" class="">See trunk status</h3><pre id="3817e468-5f26-4c54-a0f5-50e73b4a4c3c" class="code"><code>show interfaces trunk</code></pre><h2 id="4a5f6c59-17dd-404c-a15c-ff8bc63e7335" class="">Manage VLANs in a Trunk Port</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Specific VLAN(s)</summary><div class="indented"><pre id="52cd6f6d-5a76-4f89-9ce5-7595b0918a1b" class="code"><code>configure terminal
+interface f0/1
+switchport trunk allowed vlan 10 // switchport trunk allowed vlan {vlan-id}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Add VLAN(s)</summary><div class="indented"><p id="a83ae680-d022-4a5d-a5d3-83586b46fcc2" class="">Adds a VLAN without rewriting the already allowed VLANs</p><pre id="5d88ecec-397e-4da3-9184-f0e718ed8c55" class="code"><code>configure terminal
+interface f0/1
+switchport trunk allowed vlan add 20 // switchport trunk allowed vlan add {vlan-id}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">All VLANs</summary><div class="indented"><p id="d31cab3b-bea0-404a-9cc3-724ffa9e8eb5" class="">As the name implies, it allows all VLANs through that trunk port</p><pre id="41b5202e-0fc3-4cf9-9fd3-d513d2db9351" class="code"><code>configure terminal
+interface f0/1
+switchport trunk allowed vlan all</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Except VLAN(s)</summary><div class="indented"><p id="f62c8e4d-58f1-43f6-b130-a213b612e2f0" class="">Adds only the ranges of VLANs not specified</p><pre id="16460fef-517c-4f7a-a16f-8e17d088ea7e" class="code"><code>configure terminal
+interface f0/1
+switchport trunk allowed vlan except 1,20,30 //switchport trunk allowed vlan except {vlan-id}</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">None VLAN(s)</summary><div class="indented"><p id="4f205c4e-e3f0-4b94-92c3-31ecb3f69733" class="">Blocks all frames belonging to VLANs to be forwarded to that port</p><pre id="62dfff78-21f8-483e-be34-236b39d6c3b7" class="code"><code>configure terminal
+interface f0/1
+switchport trunk allowed vlan none</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Remove VLAN(s)</summary><div class="indented"><p id="3acb2f67-b470-41aa-9b95-a8220a957861" class="">Remove specific VLAN IDs from the current list</p><pre id="3485413e-5da0-40fa-9971-50f87d6520d5" class="code"><code>configure terminal
+interface f0/1
+switchport trunk allowed vlan remove 10 // switchport trunk allowed vlan remove {vlan-id}</code></pre></div></details><h1 id="7c769cdc-4a35-46f9-b8b2-8ad34993cb2c" class="">Change Native VLAN</h1><p id="3e4aa7c1-9343-4284-b801-69c9482b7e01" class="">This is to be preferably configured to an unused VLAN</p><pre id="5bcf43a6-85b8-4800-b604-1d31c5d02bc1" class="code"><code>configure terminal
+interface f0/1
+switchport trunk native vlan 1001 // switchport trunk native vlan {vlan-id}</code></pre><h1 id="32ef56db-7e43-4c49-a1ba-fc71960ee7d5" class="">ROAS (Router on a Stick)</h1><p id="de6c5ee5-8c0a-4b88-9022-ecac0d190d7d" class="">It is used when only one interface is used to talk with a trunk port in a switch, discarding the use for a separate interface for each VLAN when inter-vlaning.</p><p id="2b0b0a8e-314e-4f87-a498-01e97eb420ca" class="">It uses <strong>subinterfaces</strong>, and treat them separately. Also each tagged frame, will be re-tagged to the configured vlan id when forwarded. While on the switch side, the port is configured as a regular trunk.</p><pre id="572d4a6f-7251-4c04-9fc4-c11845ca3264" class="code"><code>//adding VLANs 10, 20, 30
+configure terminal
+interface g0/0.10 // A . is added with the VLAN id (not necessary the same number, but is better to do so)
+encapsulation dot1q 10 //encapsulation {trunk protocol} {vlan}
+ip address 192.168.1.62 255.255.255.192
+interface g0/0.20
+encapsulation dot1q 20
+ip address 192.168.1.126 255.255.255.192
+interface g0/0.30
+encapsulation dot1q 30
+ip address 192.168.1.190 255.255.255.192</code></pre><h2 id="a48d115f-f322-41a1-abb9-9c3399b33e8e" class="">Native VLAN on ROAS</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #1 - Subinterface</summary><div class="indented"><pre id="3787958f-8f85-4dd7-b60c-da8509809804" class="code"><code>configure terminal // Global Configuration Mode
+interface g0.10  //subinterface
+encapsulation dot1q 10 native</code></pre></div></details><h1 id="5726a687-17b3-4524-912a-c55174a61e6b" class="">Multilayer Switch</h1><ul id="eebab05f-7f97-4bf7-ad00-25e6c7558478" class="bulleted-list"><li style="list-style-type:disc">It is capable of both switching and routing</li></ul><ul id="7084d711-e97c-4417-b339-9819d39d12cb" class="bulleted-list"><li style="list-style-type:disc">It is “Layer 3 aware”</li></ul><ul id="c8c5e75f-6eb6-48e9-b323-25b24754eeca" class="bulleted-list"><li style="list-style-type:disc">You can assign ip addresses to its interfaces</li></ul><ul id="613e7f9d-267e-49db-b5a0-9de1846c127d" class="bulleted-list"><li style="list-style-type:disc">You can virtual interfaces for VLANs, and assign IP addresses to those interfaces</li></ul><ul id="2905fc3a-a313-4f8c-b308-5a4c894eae76" class="bulleted-list"><li style="list-style-type:disc">You can configure routes</li></ul><ul id="d5e6c0ec-c40b-46e2-83cf-9f819d7d537a" class="bulleted-list"><li style="list-style-type:disc">Capable of Inter-VLAN routing</li></ul><h2 id="90ed63ba-233c-417a-8394-6b1f70c99bb0" class="">SVI (Switch Virtual Interface)</h2><p id="81cbf663-9b53-4c21-a6c7-e117fcf6daa7" class="">These are interfaces virtually created in a switch in order for it to perform routing. Therefore, you can assign IP addresses to them. So instead of configuring the default gateway on a pc belonging to a VLAN as the router, you can assign it to the virtual interface created in the multilayer switch and it will perform the inter-VLAN routing.</p><h3 id="e6e45431-3c85-4044-9f55-87cb2a625ea8" class=""><mark class="highlight-yellow_background">Enable Routing Functions</mark></h3><pre id="e20ee414-05e7-4087-a274-2b18d2820307" class="code"><code>configure terminal // Global Configuration Mode
+ip routing</code></pre><h3 id="db3ad76e-e224-4a3d-87fe-68e824ab14e7" class="">Turn a Port from Switch mode to Router mode</h3><pre id="80855637-3f07-455a-a765-83aec40d366c" class="code"><code>configure terminal // Global Configuration Mode
+interface g0/1 // Interface mode
+no switchport</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="577922e6-eee9-4f2e-9077-b13622dca9df"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">When you want the devices connected to the multilayer switch to reach Internet, configure its default route to a router connected to the Internet.</div></figure><h3 id="7b88481f-312b-4c27-9ce8-d860871378d7" class="">Create a SVI</h3><pre id="4d27390c-cc8e-4538-873c-ca444c6d32dc" class="code"><code>configure terminal // Global Configuration Mode
+interface vlan10 // interface vlan{vlan-id} // Create the SVI for that VLAN
+ip address 192.168.0.62 255.255.255.192 // ip address {ip-address} {subnet mask}
+no shutdown</code></pre><h3 id="0a9e9704-aa2a-4630-b9b3-b344950e0509" class="">Conditions to a SVI to be up</h3><ul id="8cd3e6c0-9218-4041-87ea-280bd008e29e" class="bulleted-list"><li style="list-style-type:disc">The VLAN must exist in a switch (It is not automatically created as enabling an access port)</li></ul><ul id="47942818-ec7d-4609-877d-d81de67cbc7d" class="bulleted-list"><li style="list-style-type:disc">The Switch must have a access port to that VLAN in up/up state, AND/OR one trunk link with that VLAN allowed</li></ul><ul id="b0bab462-36c1-4dbb-8fa2-204888901bed" class="bulleted-list"><li style="list-style-type:disc">The VLAN must not be in <strong>shutdown</strong></li></ul><ul id="640e93e2-1cc3-4245-832d-26463ac02d9a" class="bulleted-list"><li style="list-style-type:disc">The SVI must not be in <strong>shutdown</strong></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c14b3115-eae5-4002-8910-03ff4dcfe665"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">you can create and name a VLAN at the same time: <strong>vlan </strong><em>vlan-id </em><strong>name </strong><em>vlan-name</em></div></figure></div></article></body></html>

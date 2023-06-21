@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Wireless</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="25d57add-6b1b-4f59-addf-a9cced133a8d" class="page sans"><header><h1 class="page-title">Wireless</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="271d5a6e-3b94-4783-a1ab-a1c98e50881d" class="">The standards for wireless LANs are defined in the IEEE 802.11. Also, Wi-Fi is a trademark of the Wi-Fi Alliance, which is responsible for testing and certification of equipment over the 802.11 standards.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3c0e9a1e-3e21-41dd-b072-fbf66e6e528d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Wi-Fi is not the correct term, it is 802.11 wireless LAN.</div></figure><h3 id="f9154e78-0d4c-4409-b101-8dbc6a0a20bf" class="">Issues of Wireless Networks</h3><ul id="7515fa52-d3a5-4c16-9479-35e0d368d847" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">All devices within the range will receive the frames, like devices connected to a hub.</mark><ul id="ae6bbd15-fe4e-4a03-8647-0d8e255872b6" class="bulleted-list"><li style="list-style-type:circle">Privacy concern .</li></ul><ul id="0538344e-a7af-40a0-9ce2-5c0487f45317" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">CSMA/CA (Carrier Sense Multiple Access with Collision </mark><mark class="highlight-yellow_background"><strong>Avoidance</strong></mark><mark class="highlight-yellow_background">), so it works with </mark><strong><mark class="highlight-yellow_background">half-duplex</mark></strong>.</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4e699e8d-4210-4bf6-84c8-3a33124525d3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Differently from CSMA/CD that jams the connection on every collision, here it tries to avoid collision by also waiting to transmit the data but without jamming the connection.
+CSMA/CD → Used in wired networks to detect and recover from collisions.
+CSMA/CA → Used in wireless networks to avoid collisions. </div></figure><figure id="0dd70bb6-1fbc-467f-b7bd-31fae9ceda5f" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled.png"><img style="width:1158px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled.png"/></a></figure><ul id="e53d0c36-e3e3-4fdf-9a20-f3e24fa6fee6" class="bulleted-list"><li style="list-style-type:disc">Wireless communications are regulated by international and national bodies.<ul id="60e13b6e-c4a7-404b-8309-996588ec7f10" class="bulleted-list"><li style="list-style-type:circle">Fortunately, 802.11 outlines which frequencies the compliant devices must use.</li></ul></li></ul><ul id="e6f268f1-acc0-462a-8657-33060d086a80" class="bulleted-list"><li style="list-style-type:disc">Devices using the same channels can cause interference.</li></ul><ul id="929d8383-ba0f-45ca-a537-8eb95ad8cd8b" class="bulleted-list"><li style="list-style-type:disc">Wireless signal coverage area must be considered.<ul id="d507e0e0-cc62-4211-aa20-767c8ac0a9b5" class="bulleted-list"><li style="list-style-type:circle">Signal range.</li></ul><ul id="8e7112a9-af77-4bc6-8b2f-76ea8f5696e1" class="bulleted-list"><li style="list-style-type:circle">Signal <strong>absorption</strong>, <strong>reflection</strong>, <strong>refraction</strong>, <strong>diffraction </strong>and <strong>scattering</strong>.<ul id="dff12365-b869-45d3-aa38-0fae424ad71b" class="bulleted-list"><li style="list-style-type:square"><strong>Absorption:</strong> It happens when the electromagnet waves are absorbed and turned into heat when trespassing a material. This results is a weakened signal.<figure id="47636d05-faf6-4a0b-bd19-75291d8b9706" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%201.png"><img style="width:1037px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%201.png"/></a></figure></li></ul><ul id="274176a2-f567-4102-894e-9cfb12830e6c" class="bulleted-list"><li style="list-style-type:square"><strong>Reflection:</strong> It happens when the signal bounces off a material, for example metal.<figure id="fd66794c-6a76-4282-be16-631498a63734" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%202.png"><img style="width:1098px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%202.png"/></a></figure></li></ul><ul id="634ec3f7-1e8d-4837-934e-bdbae199185b" class="bulleted-list"><li style="list-style-type:square"><strong>Refraction:</strong> This results with the signal being bent, it happens when it enters a medium that changes its speed, like glass and water.<figure id="86306332-016e-4006-8783-056ebc1ecb1f" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%203.png"><img style="width:873px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%203.png"/></a></figure></li></ul><ul id="fc977482-7ac0-4e57-a802-0b0dbe13be3a" class="bulleted-list"><li style="list-style-type:square"><strong>Diffraction: </strong>This happens when a wave encounters a obstacle and travels around it.</li></ul><figure id="a70bdd4d-5719-4602-8c86-40bb33b2dbb0" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%204.png"><img style="width:933px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%204.png"/></a></figure><ul id="1a955916-2ec7-44f3-a221-2b50c0c2d6bd" class="bulleted-list"><li style="list-style-type:square"><strong>Scattering:</strong> An uneven surfaces causes the signal to scatter in all directions. Some materials that cause that are dust, smog, etc.</li></ul><figure id="da2842da-87ac-40fc-89be-c8a061caf47c" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%205.png"><img style="width:1051px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%205.png"/></a></figure></li></ul></li></ul><h1 id="bd38110c-0163-4ad6-930f-9c71bec5825b" class="">Radio Frequency</h1><p id="5ec0bad6-8b91-453f-8f8c-1581b7fdd4d6" class="">If applied an alternating current in an antenna, it will produce an electromagnetic field which propagates as waves</p><p id="4465120e-b660-4fa6-a707-59471ac38454" class="">You can measure such waves through amplitude and frequency:</p><ul id="9cc10525-32e8-4bfe-a661-207b3bc0cc20" class="bulleted-list"><li style="list-style-type:disc"><strong>Amplitude:</strong> It is the maximum strength of the electromagnetic field. It is the distance from the center of the wave to the top of a crest or the bottom of a trough.</li></ul><ul id="a7c74ee4-cdb6-4137-82df-e05e5e92132f" class="bulleted-list"><li style="list-style-type:disc"><strong>Frequency:</strong> It is the amount of cycles per a given time. In hertz the unit of time is seconds.<ul id="08ea48d3-0fee-497c-8042-35dc9c1424c6" class="bulleted-list"><li style="list-style-type:circle">For example, if a wave repeats itself 4 times in a second, it has a frequency of 4 Hz</li></ul><ul id="ddf2974d-6d74-4682-80ed-9e0dbe3bcba3" class="bulleted-list"><li style="list-style-type:circle"><strong>Period</strong> → It is the amount of time that took each cycle. It is the inverse of the frequency.</li></ul></li></ul><h2 id="0d16ca3b-8b9f-4af6-917b-f426cdfb4702" class="">Frequency</h2><p id="15c4a414-fcad-4566-9bb9-b0e59e75d903" class="">Wi-Fi uses two main <em>bands</em> (frequency ranges)</p><ul id="c0fbb79e-758c-4013-b7b2-5eb3d468cafc" class="bulleted-list"><li style="list-style-type:disc"><strong>2.4 GHz</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="06d40ac1-6822-4cf8-9867-83e7d5427f42"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOT </strong>IMPORTANT: The actual range is 2.400 GHz to 2.4835 GHz.</div></figure><ul id="71348ca6-0b32-4c23-8f3b-61588f786e4d" class="bulleted-list"><li style="list-style-type:circle">It reaches further distances at open space and can penetrate better obstacles.</li></ul><ul id="ffb4bfab-76c6-4e67-a7e3-a7b4846f0843" class="bulleted-list"><li style="list-style-type:circle">However, it suffers more from interference since more devices use this band.</li></ul></li></ul><ul id="54991522-7bd8-46d1-856c-1728ca00e16c" class="bulleted-list"><li style="list-style-type:disc"><strong>5 GHz</strong><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c9cd5800-9f24-42b3-a63e-cc0ad40bc11b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOT</strong> IMPORTANT: The actual range is 5.150 GHz to 5.825 GHz.</div></figure></li></ul><h2 id="e6090cd3-5c0b-49f7-a675-17076154c77e" class="">Channels</h2><p id="58924daa-3b7e-4709-a814-d9975cbd95e5" class="">Each band is divided into <em>channels</em>. <span style="border-bottom:0.05em solid">Usually</span> a device will transmit and receive in only one channel.</p><p id="39e18908-67f8-48df-b7fb-f28ac20c68b2" class="">Channels also overlap each other frequency range. It is recommend to use APs in those selected channels that don`t overlap each other to avoid interference.</p><h3 id="1e814e02-43ab-48c6-9803-19f4994a7c45" class="">2.4GHz</h3><p id="d71cdd73-f511-43f7-8843-550ee558652a" class="">It is divided into several channels, each one having a frequency range of 22 MHz.</p><p id="e9684ff4-5887-4a07-8fcc-189a80675347" class="">Among those channels, it`s recommended to use the channels <mark class="highlight-yellow_background"><strong>1,6 and 11</strong></mark>, because they don`t overlap each other (their frequency ranges are separated).</p><h3 id="5c227f64-a973-46bc-b3d5-4df5369a93f6" class="">5 GHz</h3><p id="7020130b-6ffc-4c96-8b7a-c1429516d570" class="">It is also divided into several channels, each one having a frequency range of 20 Mhz.</p><p id="860b1a80-54f9-4325-a657-24959f9a68f0" class="">There is more non-overlapping channels than 2.4GHz</p><h3 id="8a54e5c7-2dab-45ca-9dac-ac1f1dec56c7" class="">Honeycomb</h3><p id="cffeec07-ace1-4ad7-ab52-fb5e23eba9d2" class="">Knowing the previous fact, it is recommended that you put the APs in a honeycomb like pattern with non-overlapping channels. </p><figure id="8738c026-b2fe-4fbc-b6fb-305d49c525eb" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%206.png"><img style="width:1216px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%206.png"/></a></figure><h3 id="03f0cdad-867b-48cf-84dc-7d94b6980ef5" class="">Standards</h3><figure id="d1793299-39f5-4db0-be19-55dc0a299513" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%207.png"><img style="width:982px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%207.png"/></a></figure><h1 id="a42dc72c-e2d9-4380-babf-fb5c1e28fc4d" class="">Service Sets</h1><p id="48f69839-1a66-42da-ae6c-9838b6f4dc12" class="">They are groups of wireless networks devices</p><p id="f20c3302-af4e-4d79-b741-3d62b7127fb2" class="">There are three main types:</p><ul id="691f074b-586c-480c-bf69-b77b7ef5b85b" class="bulleted-list"><li style="list-style-type:disc">Independent</li></ul><ul id="3c396c2a-09af-4d92-83e1-45cfade0c014" class="bulleted-list"><li style="list-style-type:disc">Infrastructure</li></ul><ul id="a07f038d-914f-4155-9f5b-a0027480a43b" class="bulleted-list"><li style="list-style-type:disc">Mesh</li></ul><p id="05c8bcde-5882-446e-b94f-ac9af3d6b0a2" class=""><mark class="highlight-yellow_background">All devices within a same service set has the same </mark><strong><mark class="highlight-yellow_background">SSID</mark></strong><mark class="highlight-yellow_background"> </mark><strong><mark class="highlight-yellow_background">(Service Set Identifier)</mark></strong></p><p id="3b587668-95c1-45be-8601-acd92b7de9ea" class="">SSID is a human-readable name to identify a service set, a group of wireless network devices.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a1ee646f-9a92-4b2f-a1b1-ce93f2cd3f4e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT: SSIDs</strong> don’t have to be unique.</div></figure><h2 id="068d15f6-c3d3-4da7-b3c7-d4640ff678af" class="">IBSS (Independent Basic Service Set)</h2><p id="61a29736-1bba-4024-84f9-0f822efa3d3b" class="">It is a wireless network where wireless devices connect directly to each other without using an AP (Access Point)</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="686cb559-5e27-4dd1-8db8-319eb1a3a735"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> It is also called an <strong>ad hoc </strong>network.</div></figure><p id="e69afa53-f779-4347-8965-87e2f06d9a41" class="">An example of Independent Basic Service Set is AirDrop.</p><figure id="8a6fbc83-0807-4257-bd68-d82eeadce19a" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%208.png"><img style="width:812px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%208.png"/></a></figure><h2 id="970aad4f-73c4-4e23-a33d-2193b067ce06" class="">BSS (Basic Service Set)</h2><p id="5c373e7f-134b-443f-833a-b9aa175b3871" class="">It is a kind of <strong>Infrastructure</strong> Service Set, this times all devices <strong>connect to an AP (Access Point) </strong>to then communicate with each other.</p><p id="f5551d1b-d80a-4bd9-bc41-7098a5e71ff0" class="">Since it is a Service Set, it has a SSID. However, it also has a <strong>BSSID (Basic Service Set ID)</strong> that is associated with the AP`s radio MAC Address, therefore, being unique.</p><p id="fc3ebce3-d081-48ee-a35f-410ec54e8fd1" class="">Wireless devices request to <strong><em>associate </em></strong>with the BSS. Also, those devices will then be called <strong>“clients”</strong> or <strong>“stations”</strong>.</p><p id="d76554cb-5402-4f97-86f8-32d53b68c23b" class="">The physical area (range) that the APs is capable of generating a usable signal is called <strong>BSA (Basic Service Area)</strong>.</p><figure id="dfd87268-03eb-4503-8d67-f0f961adb7e4" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%209.png"><img style="width:585px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%209.png"/></a></figure><h3 id="73e1dbda-21a4-48e3-810f-436c443a1af8" class="">But How can someone extended an wireless LAN?</h3><p id="c4b76c43-4988-4da5-a3ae-74e02e6ea14b" class="">Devices connected to the same AP (Access Point) are in the same BSS (Basic Service Set). However, if you want to have multiple APs, and therefore, multiple BSSs acting as a single logical wireless LAN (Local Area Network), you will have to form an ESS (Extended Service Set).</p><p id="7ad5722b-6bbb-4cfa-9687-1c54f5b66262" class=""><mark class="highlight-yellow_background"><strong>ESS (Extended Service Set)</strong></mark><mark class="highlight-yellow_background"> is a bundle of multiple BSSs, or access points, that form a single wireless LAN.</mark></p><p id="834afc03-4df7-4506-ba95-0b39ec856ef6" class="">Some of the characteristics are:</p><ul id="e7005c4e-bc18-4436-a216-cd161cd51ac0" class="bulleted-list"><li style="list-style-type:disc">Each BSS will use have the <strong>SAME SSID</strong>.</li></ul><ul id="ec295fae-4e6a-45bf-9b26-223e72f97d16" class="bulleted-list"><li style="list-style-type:disc">Each BSS will have a <strong>UNIQUE BSSID</strong>.</li></ul><ul id="6dc1705e-2ebe-407a-9b5a-67a3fc0c9791" class="bulleted-list"><li style="list-style-type:disc">Each BSS uses <strong>different channels</strong> to avoid interference.</li></ul><p id="41eaea4b-8f2f-40b6-becd-673010236fec" class="">Also clients can move between APs without needing to reconnect, providing a seamless wi-fi experience when moving to different areas. </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26b28997-12f1-48d8-9671-13993f53b047"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> This is called <span style="border-bottom:0.05em solid"><strong>Roaming</strong></span>.</div></figure><figure id="25a98d62-467c-4f61-8945-be274552db69" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2010.png"><img style="width:509px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2010.png"/></a></figure><h2 id="c6a09e10-b6cc-4a13-afb4-da8416f5a56b" class="">MBSS (Mesh Basic Service Set)</h2><p id="7811b3d0-d5f9-4b0f-9503-e4356ee7bac3" class="">It is used in situations where a wired connection is not possible between APs. Therefore, there will be two radios:</p><ul id="77044f88-4817-484c-b94a-6f45682d5f33" class="bulleted-list"><li style="list-style-type:disc">Normal one to provide a BSS to the wireless clients</li></ul><ul id="fbf271bc-41d3-438a-8cec-434b76c99948" class="bulleted-list"><li style="list-style-type:disc">Backhaul network to connect the APs and bridge their traffic</li></ul><p id="2e7c84ce-9c02-4ef7-894a-2b91b259f8e9" class="">At least one AP will be connected to the wire, such AP will be called RAP (Root Access Point). The other APs will be called MAP (Mesh Access Point).</p><p id="f37342fe-de3f-4fde-b376-e0bf78102222" class="">Also, a protocol is used to determine the best path through the mesh.</p><h2 id="41881372-3981-422f-82b5-b7b44a147e6f" class="">Distribution System</h2><p id="b2a42fe3-e760-40c6-85fe-81cd23b6f6bf" class="">This term referes to the wired infrastructure that maps the wireless one. So, usually every BSS or ESS will have a VLAN assigned in the wired network. This happens because most wireless networks are not standalone, there are the wired part of the infrastructure.</p><ul id="b5a4a966-443d-4c24-b0f5-5f3c4e64a579" class="bulleted-list"><li style="list-style-type:disc">It is possible for a single AP to create multiple wireless LANs (WLANs), each with their unique SSID.</li></ul><ul id="c41b79d0-4150-4e3a-bd07-1f08cfe33670" class="bulleted-list"><li style="list-style-type:disc">Each WLAN is mapped to a different VLAN connected to the wired network via a trunk.</li></ul><ul id="57661b85-212d-4089-ac7c-67a1ffa8ca7f" class="bulleted-list"><li style="list-style-type:disc">Each WLAN uses a unique BSSID, usually by incrementing the last digit of the BSSID by one.</li></ul><h1 id="2b1aa2a6-1eeb-4b15-bf69-ae499ebd4ecc" class="">Additional AP Operational Modes</h1><h2 id="5ee726ca-c07b-4837-8487-2754bcd31bd8" class="">Repeater</h2><p id="f622d981-1d44-4a5c-9282-21861df51108" class="">As the name implies, it repeats the signal that it receives from the AP</p><p id="9539ca66-503c-4b59-a8ca-fd914fd81cec" class="">If it has only one channel, it will retransmit in the same channel, causing interference. If not, it will retransmit in another channel.</p><figure id="dcc653b8-611c-4dfb-9379-1ff59592f834" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2011.png"><img style="width:903px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2011.png"/></a></figure><h2 id="d5e6c620-15ae-4138-b330-d4df9ebef764" class="">WGB (Workgroup Bridge)</h2><p id="633b5cf5-4742-453e-9414-cc6108b73de3" class="">It is a way for devices not capable of wireless capabilities to connect to a wireless network. In other words, the AP will be the bridge between a wired connection and a wireless one.</p><p id="62d78e06-0474-4455-8216-38529f5f35b8" class="">There are two types of WGBs:</p><ul id="7a9f96ed-e0fb-426e-8769-077249169142" class="bulleted-list"><li style="list-style-type:disc">uWGB → an 802.11 standard that allows only one device to be bridged to the wireless network</li></ul><ul id="56aa936f-2832-467e-84d9-2046f456d1db" class="bulleted-list"><li style="list-style-type:disc">WGB → Cisco proprietary version that allows multiple wired clients to be bridged to the wireless network</li></ul><figure id="ed35687f-df22-417f-89fb-94fdd5978e54" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2012.png"><img style="width:801px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2012.png"/></a></figure><h2 id="c4bdf0c8-e2bb-4da9-80d6-9db265147f0b" class="">Outdoor Bridge</h2><p id="639a82fa-7eb1-4bfc-b9fd-4d21839afc4a" class="">It is a way to connect networks over long distances without a physical cable. In this feature, the router will usually use specialized antennas and focus the transmit power over one direction.</p><p id="e1bdea7f-5304-4d55-9a54-76490b9b0c79" class="">It can be a point-to-point connection or point-to-multipoint.</p><figure id="b6317c0d-99b4-4647-a29b-d446f3a33b18" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2013.png"><img style="width:1100px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2013.png"/></a></figure><figure id="3598aa78-7325-4804-ba42-a08cd1ef79b0" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2014.png"><img style="width:1261px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2014.png"/></a></figure><h1 id="cb6b63ef-475d-4ea9-8b4f-bffeeeceb45f" class="">802.11 Frame</h1><figure id="0308c8aa-29da-430f-94e8-1155ed2b3aaf" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2015.png"><img style="width:1827px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2015.png"/></a></figure><ul id="189315a4-eb01-4b65-976d-a0f0672ed6c3" class="bulleted-list"><li style="list-style-type:disc"><strong>Frame Control: </strong>Tells the message type and subtype</li></ul><ul id="72e2100b-6361-4be6-9d1e-2527bba356f2" class="bulleted-list"><li style="list-style-type:disc"><strong>Duration/ID</strong>: It can very depending on the message type:<ul id="9c38bc04-26c4-4a60-8f2a-ef38a47e7576" class="bulleted-list"><li style="list-style-type:circle">Could indicate the <strong>time </strong>(in microseconds) that the channel will be dedicated to the transmission of the frame</li></ul><ul id="b545ab50-f57f-48f3-9a7f-33762dac4f82" class="bulleted-list"><li style="list-style-type:circle">Could tell the <strong>identifier of the association</strong> (connection)</li></ul></li></ul><ul id="5bf97c86-2029-4e2f-a2aa-3e6de8b9df72" class="bulleted-list"><li style="list-style-type:disc"><strong>Address: </strong>How many and the order of the addresses could vary depending on the message type, but they could be:<ul id="93594e3f-ea43-4394-8aa9-e4fe10bd24ba" class="bulleted-list"><li style="list-style-type:circle"><strong>Destination Address (DA): </strong>The final recipient of the frame</li></ul><ul id="3d816b32-3d68-4020-87ab-35b7b09b51ce" class="bulleted-list"><li style="list-style-type:circle"><strong>Source Address (SA):</strong> The original sender of the frame</li></ul><ul id="899e49c3-16c7-4e43-a272-5f17fc79ec05" class="bulleted-list"><li style="list-style-type:circle"><strong>Receiver Address (RA):</strong> The immediate recipient of the frame, not necessarily the final destination.</li></ul><ul id="558b3924-6e26-418f-bb7d-c414cadd2673" class="bulleted-list"><li style="list-style-type:circle"><strong>Transmitter Address (TA):</strong> The immediate sender of the frame, not necessarily the original sender of the frame</li></ul></li></ul><ul id="491a9c01-5872-466e-9bef-3f7062130318" class="bulleted-list"><li style="list-style-type:disc"><strong>Sequence Control: </strong>It is a way for the frame to be re-arranged and duplicate frames to be discarded. </li></ul><ul id="36d0d6b0-f39c-456e-bb05-b1bbd424ad7b" class="bulleted-list"><li style="list-style-type:disc"><strong>QoS Control:</strong> As the name implies, it is used for QoS</li></ul><ul id="dfd075a7-d1a0-428d-ad38-ecdacd80cbff" class="bulleted-list"><li style="list-style-type:disc"><strong>HT Control:</strong> HT means “High Throughput”, it is a field introduced in 802.11n, and is used for such.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6a53997b-fe78-4320-a03d-ed6bde00aa95"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: 802.11n is also called “High Throughput WiFi” (HT). While 802.11ac is called “Very High Throughput Wifi” (VHT).</div></figure><ul id="fe2a2b3a-87e6-46ac-86b6-5781275beed1" class="bulleted-list"><li style="list-style-type:disc"><strong>Frame Body (Packet):</strong> It is where the Layer 3 PDU is stored (Data + IP Header).</li></ul><ul id="d387ee08-bf3c-4bb5-bc08-4da477c91a0a" class="bulleted-list"><li style="list-style-type:disc"><strong>FCS (Frame Check Sequence):</strong> Used to detect errors in the frame.</li></ul><h1 id="1cbf59be-0a21-4c5e-82ff-d556f1ff358a" class="">Association Process</h1><p id="95e259d2-c912-4ab7-82c2-ee1c68feebf3" class="">There are three states a station (client) can have with an AP:</p><ol type="1" id="c5d0c123-2c6c-4a76-bcc3-ad705bb056bd" class="numbered-list" start="1"><li><mark class="highlight-red_background">Not authenticated, not associated.</mark></li></ol><ol type="1" id="c6b6f541-aeca-4a81-8bee-69ee37bdce61" class="numbered-list" start="2"><li><mark class="highlight-yellow_background">Authenticated, not associated.</mark></li></ol><ol type="1" id="d040b2f9-33d4-4c6b-a532-a7dd250cabe1" class="numbered-list" start="3"><li><mark class="highlight-teal_background">Authenticated and associated.</mark><ol type="a" id="3e96f0cc-dd4a-4fea-a95f-335b24cd56c1" class="numbered-list" start="1"><li>This last step is required in order for a client to send traffic through the AP</li></ol></li></ol><p id="d2f5bbca-e697-4eeb-8b63-515a61203e0f" class="">In order for a device to discover the possible BSSs there are two ways:</p><ul id="6f5aad9e-74de-4cce-9a4b-d49722e06ced" class="bulleted-list"><li style="list-style-type:disc"><strong>Active scanning:</strong><ul id="999818bd-5894-4d5b-9cc1-2f0f49d6e1cc" class="bulleted-list"><li style="list-style-type:circle">The station sends a probe requests  and waits for a response</li></ul></li></ul><ul id="2d4365a3-30e7-478b-97be-6eedbcb3d02f" class="bulleted-list"><li style="list-style-type:disc"><strong>Passive scanning:</strong><ul id="48d29464-abbe-411e-a552-46b37dbc3000" class="bulleted-list"><li style="list-style-type:circle">The station listens for <strong>beacon </strong>messages from an AP. These messages are sent periodically by an AP to advertise their BSS.</li></ul></li></ul><p id="4014acb1-c19b-4964-b91b-60ce36e936b3" class="">The image bellow summarizes the process of going through discovering the AP until associating with it:</p><figure id="bcba4d2e-e671-4aa5-86ea-9461f105d42c" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2016.png"><img style="width:1313px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2016.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="95e756a3-1f38-4ffd-9700-30a61537e802"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><span style="border-bottom:0.05em solid"><strong>NOTE:</strong></span>
+<strong>Probe Request:</strong> The station asks if any AP is available
+<strong>Probe Response:</strong> The AP responds with its details
+<strong>Authentication Request:</strong> For example, the station sends a password
+<strong>Authentication Response:</strong> The AP replies with the password validation</div></figure><h1 id="1c3c8190-9c0c-4a07-9fc7-8c731136982a" class="">Message Types</h1><ul id="258f1fb1-248d-4cd5-9dcd-a0e494e97bd4" class="bulleted-list"><li style="list-style-type:disc"><strong>Management:</strong> used to manage the BSS<ul id="56f48d09-d591-4f71-b588-517cc34aa824" class="bulleted-list"><li style="list-style-type:circle">Beacon</li></ul><ul id="21127aac-4fdd-4c74-8a5c-6cd567e512f3" class="bulleted-list"><li style="list-style-type:circle">Probe (Request/Response)</li></ul><ul id="81493246-d015-4c30-ad36-56d205286fcc" class="bulleted-list"><li style="list-style-type:circle">Authentication (Request/Response)</li></ul><ul id="5fb8f987-d0d2-478a-9e64-8735a2c00622" class="bulleted-list"><li style="list-style-type:circle">Association (Request/Response)</li></ul></li></ul><ul id="bd5a8ced-47da-49ff-a991-f418bdff8a04" class="bulleted-list"><li style="list-style-type:disc"><strong>Control: </strong>It controls the access to the medium (radio frequency). They assist the other two types of messages (data and management).<ul id="771e838c-4b70-4d82-b843-4bae4778526c" class="bulleted-list"><li style="list-style-type:circle">RTS (Request to Send)</li></ul><ul id="61039f5e-2227-46b6-b827-50fecce4839d" class="bulleted-list"><li style="list-style-type:circle">CTS (Clear to Send)</li></ul><ul id="07bc99c8-bc5a-4175-86e0-ba1a6a7c6554" class="bulleted-list"><li style="list-style-type:circle">ACK → Acknowledges that a frame was received successfully.</li></ul></li></ul><ul id="99868430-d00f-40a2-9455-0232f2615c74" class="bulleted-list"><li style="list-style-type:disc"><strong>Data:</strong> Used to actually data packets.</li></ul><h1 id="4dfff199-765d-438d-b95b-0bf97f68a46c" class="">AP Deployment Types</h1><h2 id="72abe21e-e690-44db-b1be-680045f3926b" class="">Autonomous APs</h2><p id="bef01414-50ab-4cd2-95fa-04cdc2df07d1" class="">These types of APs are as the name implies: self-contained, they <mark class="highlight-yellow_background">don`t use a central management done by a </mark><strong><mark class="highlight-yellow_background">WLC (Wireless LAN Controller).</mark></strong></p><p id="99e02d18-25c8-4b08-a32f-85f6fed3e12c" class="">Each configuration, each being: Security policies, Access to the console (CLI or GUI), RF Parameters (Transmit Power, Channels, etc.) and QoS rules are done in a<mark class="highlight-yellow_background"><strong> per-AP configured</strong></mark>.</p><p id="e7b96a0f-3917-4018-bb94-07f59119851b" class="">Each AP is connected to the wired network <mark class="highlight-yellow_background"><strong>via a TRUNK</strong></mark>. This results in the whole network needing to have the same VLAN configuration, which can cause:<div class="indented"><ul id="7e06dfa2-82e9-4059-ae95-97738acb016f" class="bulleted-list"><li style="list-style-type:disc">Large Broadcast Domains</li></ul><ul id="c95f1f6c-7041-4bdd-81b9-289cf1f5c276" class="bulleted-list"><li style="list-style-type:disc">STP disabling links</li></ul><ul id="37ffc851-3ccb-460d-9f06-8ed10e3a0cc5" class="bulleted-list"><li style="list-style-type:disc">Each VLAN configuration is labor-intensive</li></ul></div></p><p id="659dff5c-4228-4f0f-bb4a-3731baa87711" class="">Also, each packet has a direct path through the network, and<mark class="highlight-yellow_background"><strong> if the destination`s device is in the same AP, that AP will only forward that packets inside itself.</strong></mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="47dc7388-b160-4918-9c53-5949a14bc8dc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Each AP will have a remote management IP Addressed assigned to it, so you can SSH/Telnet to it or use a HTTP/HTTPS web interface (GUI).</div></figure><p id="3a4da231-519c-4825-9c32-86248c25d185" class="">Autonomous APs have the following modes:<div class="indented"><ul id="79b59566-3e52-47f1-aa45-06b76139a514" class="bulleted-list"><li style="list-style-type:disc">Repeater</li></ul><ul id="120b7e20-f6df-464c-ae4b-2c4a35e384f7" class="bulleted-list"><li style="list-style-type:disc">Workgroup Bridge</li></ul><ul id="48857ab6-b37a-4d23-8312-ef0c2c0544dc" class="bulleted-list"><li style="list-style-type:disc">Outdoor Bridge</li></ul></div></p><figure id="cfafdcdd-213e-41c7-9049-952248b2447d" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2017.png"><img style="width:466px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2017.png"/></a></figure><h2 id="7ee539b4-924a-4de7-97ac-0ea91518f5a0" class="">Lightweight APs</h2><p id="83fa4dee-617c-47e5-a8a5-370eda63924f" class="">It has what is called a <strong>split-MAC architecture. </strong>What this means is that the work is split between the Lightweight APs and the WLC (Wireless LAN Controller):<div class="indented"><ul id="24136a5f-0ce7-440b-ae93-23be94efe283" class="bulleted-list"><li style="list-style-type:disc">Lightweight APs: They handle “real-time” operations<ul id="39fb30f4-80cb-4701-b806-1af53f09032c" class="bulleted-list"><li style="list-style-type:circle">Modulation of the radio frequency to actually send and receive a frame</li></ul><ul id="b822f238-99a0-48d8-b923-6fbce913a176" class="bulleted-list"><li style="list-style-type:circle">Beacon and Probe Responses</li></ul><ul id="eabaddff-13ee-444c-ab59-3aa0cc027a36" class="bulleted-list"><li style="list-style-type:circle">Encryption and de-encryption of frames</li></ul></li></ul><ul id="d2401b10-ce49-4abd-8be5-7f840452c59d" class="bulleted-list"><li style="list-style-type:disc">WLC: It handles the configuration of the APs and controls the traffic<ul id="2699c2f3-9c7c-464c-b66a-326650662ca0" class="bulleted-list"><li style="list-style-type:circle">Manages the RF parameters used by each AP (Transmit Power, channels, etc.)</li></ul><ul id="15cb2cc8-930f-4d14-af89-cf0dd273b800" class="bulleted-list"><li style="list-style-type:circle">Security Policies</li></ul><ul id="64d23775-a0ac-4bf8-8fda-9ed6b3703068" class="bulleted-list"><li style="list-style-type:circle">QoS</li></ul><ul id="07fae477-0528-4178-ac2a-d56e886d97e4" class="bulleted-list"><li style="list-style-type:circle">Client Authentication</li></ul><ul id="666167a2-c969-4dc4-b0aa-6a6eb0b1561c" class="bulleted-list"><li style="list-style-type:circle">Client Association</li></ul><ul id="53d9b1ae-cb44-4e2c-846b-2a48e98a7c81" class="bulleted-list"><li style="list-style-type:circle">Roaming</li></ul></li></ul></div></p><p id="93b795c5-2837-4c53-82f0-ff2424862957" class=""><mark class="highlight-yellow_background"><strong>All the configuration is done to the WLC → Only one Management IP Address.</strong></mark></p><p id="3ef125fa-e60d-405f-916f-e5e6091582c6" class="">The APs and the WLC authenticates themselves via digital certificates (X.509 standard certificates).</p><p id="1d6affb5-b516-4dae-a008-b3c7f9da2b5b" class="">The WLC and APs can be in different VLANS/Subnets.</p><p id="e40cf46c-9c87-48b0-a974-935e2f41bc41" class="">The APs and the WLC communicate via CAPWAP (Control and Provisioning of Wireless Access Points)<div class="indented"><p id="6be55474-5997-4cae-b765-86fe29cfe9d7" class="">Two tunnels are created using this protocol:<div class="indented"><ul id="92de0798-b3b4-4dcf-80b0-3dbec42108d4" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Control (UDP 5246):</strong></span> Where all the configurations travel and the control of the traffic.<ul id="8ac3d769-d663-4a77-884b-fc8077621c5c" class="bulleted-list"><li style="list-style-type:circle">It is ENCRYPTED by default</li></ul></li></ul><ul id="6630de75-1dbe-4555-b5c1-1aae45958330" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>Data (UDP 5247):</strong></span> Where the actual data travels. <strong>First the data is tunneled to the WLC and then it goes to the wired network, inclusive se o cliente de destino estiver no mesmo AP ele deve passar pelo WLC</strong>.<ul id="4d0cf7c4-66e6-4158-865b-089a78d87cef" class="bulleted-list"><li style="list-style-type:circle">NOT ENCRYPTED by default<ul id="37344e5a-b9e4-4b1c-af0b-3af7bfde21cc" class="bulleted-list"><li style="list-style-type:square">DTLS (Datagram Transport Layer Security) is optional.</li></ul></li></ul></li></ul></div></p></div></p><p id="2db8140c-f3e5-4b12-bb3e-4870aa9c5df3" class="">Lightweight APs have the following modes:</p><ul id="817a7fb0-80f2-46fc-a3e1-74d1fa82dcc1" class="bulleted-list"><li style="list-style-type:disc"><strong>Local (</strong><strong><em>Default</em></strong><strong>)</strong><ul id="4e35dc0a-deba-433b-9159-4a66e978faf8" class="bulleted-list"><li style="list-style-type:circle">In this mode the AP offers a BSS (or multiple) to clients associate with.</li></ul></li></ul><ul id="06161404-ef26-4942-86da-7a60b7493d86" class="bulleted-list"><li style="list-style-type:disc"><strong>FlexConnect</strong><ul id="47a74495-26ce-4390-9252-e7b2241cee76" class="bulleted-list"><li style="list-style-type:circle">It is the same as local, however if the connection to the WLC is lost, it will forward traffic accordingly between the wireless and wired network</li></ul></li></ul><ul id="1ba99da5-c3d5-4e6a-a57e-95eaf81fa914" class="bulleted-list"><li style="list-style-type:disc"><strong>Sniffer</strong><ul id="aabd3416-1932-40ee-a4e2-0689335773b6" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red_background">It doesn`t offer a BSS for clients to associate with.</mark></li></ul><ul id="8b5275f1-0ffa-4b9b-97e4-49a14c0b6a17" class="bulleted-list"><li style="list-style-type:circle">Captures 802.11 frames to send to a device that analyzes those frames, like Wireshark.</li></ul></li></ul><ul id="1351a4d2-273b-4176-a49f-3b5aa7093384" class="bulleted-list"><li style="list-style-type:disc"><strong>Monitor</strong><ul id="e3ef2484-4aee-4787-868e-64cbc598a015" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red_background">It doesn`t offer a BSS.</mark></li></ul><ul id="1d51f2fb-47c9-40c5-8a6e-3f8818248dac" class="bulleted-list"><li style="list-style-type:circle">Captures 802.11 frames with the purpose of finding rogue devices and analyzing the radio frequency to monitore interferences and the overall health. If a client is a rogue device, it sends a de-authentication message to disassociate such rogue device from the AP.</li></ul></li></ul><ul id="edf4603b-ceb2-4d1f-be89-1bc7f369f0c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Rogue Detector</strong><ul id="463fa297-4b7f-4134-ac52-16388f3defd2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red_background">It doesn`t offer a BSS</mark></li></ul><ul id="197ad7bf-55d3-4d24-8192-45124d24d8ba" class="bulleted-list"><li style="list-style-type:circle">Doesn`t use radio</li></ul><ul id="ae8100fd-4ceb-47f4-8d06-73e8090350db" class="bulleted-list"><li style="list-style-type:circle">It receives a list of suspected rogue devices from the WLC and AP MAC addresses. It listens for ARP messages in the network and correlates that data with what it received from the WLC to better identify rogue devices.</li></ul></li></ul><ul id="16ea8a26-3094-43cd-9186-118525556b36" class="bulleted-list"><li style="list-style-type:disc"><strong>SE-Detector (Spectrum Expert Connect):</strong><ul id="3586d8e4-a4ce-4ac5-9a22-74ed63515c17" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red_background">It doesn`t offer a BSS</mark></li></ul><ul id="ab1be5db-cd36-42f3-adcd-d4375acdfaa2" class="bulleted-list"><li style="list-style-type:circle">It is used to capture data from the Radio Frequency (RF) Spectrum and send that data to a PC with a software like Cisco Spectrum Expert to analyze and present such data about the environment being studied.</li></ul><ul id="df3ac958-6799-45fd-aa5a-e9f74796ef48" class="bulleted-list"><li style="list-style-type:circle">Helps to find sources of interference</li></ul></li></ul><ul id="3026d953-71c2-4727-8331-dc856fe95c23" class="bulleted-list"><li style="list-style-type:disc"><strong>Bridge/Mesh</strong><ul id="980d63fa-6616-431d-91b9-5e714a12a662" class="bulleted-list"><li style="list-style-type:circle">Works like Outdoor Bridge, by connecting sites wirelessly.</li></ul><ul id="4299cbe5-1fde-4414-a831-2bbd279ee3b6" class="bulleted-list"><li style="list-style-type:circle">It can be used to connect APs without a wired connection to the wired infrastructure working like a bridge or a mesh.</li></ul></li></ul><ul id="50f70001-22e6-40f8-8633-3fd9d7192e37" class="bulleted-list"><li style="list-style-type:disc"><strong>Flex plus Bridge</strong><ul id="211c5ac9-6e8d-4aa8-a824-7c2b2c0385dc" class="bulleted-list"><li style="list-style-type:circle">The same as the Bridge/Mesh but with the capability of switching traffic locally  in case the connection to the WLC is lost.</li></ul></li></ul><figure id="b5fa96e3-08cd-4fd3-ad57-dffb227b02c1" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2018.png"><img style="width:506px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2018.png"/></a></figure><h2 id="8a3ebb29-691f-47fa-9ba7-a7e879453aad" class="">Cloud-based APs</h2><p id="a6292e83-54a8-4081-87d0-e3deaee9c4e2" class="">This is the type of APs the Meraki APs are.</p><p id="d0da3ed5-3cca-4ad7-b6ae-a85ded17db26" class="">Basically, the control of each AP is still centrally managed, it is done via the Meraki Dashboard hosted in the Cloud. However, as said only a control tunnel is used, the data is locally switched.</p><figure id="009ef7b6-76d5-4451-b9c5-f8559265ef6b" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2019.png"><img style="width:1064px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2019.png"/></a></figure><figure id="86802f79-8dea-4bcf-b27a-913f55420a4d" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2020.png"><img style="width:562px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2020.png"/></a></figure><h1 id="ffe6be43-bfac-41be-8a2d-339c4adc9fdd" class="">Benefits of using a WLC</h1><figure id="d97d9f74-8e87-4568-8014-f5a956bdc745" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2021.png"><img style="width:1157px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2021.png"/></a></figure><ul id="6774c429-a4ac-46d9-807a-a39d99a7246d" class="bulleted-list"><li style="list-style-type:disc"><strong>Scalability: </strong>It is much simpler to deploy new APs and configure them</li></ul><ul id="2fe60fbb-1674-4c96-b914-68c06493910a" class="bulleted-list"><li style="list-style-type:disc"><strong>Dynamic channel assignment: </strong>There is no need to assign a channel to each AP manually, the WLC does it.</li></ul><ul id="748f0042-3a00-41d0-8171-b85914b9e7ce" class="bulleted-list"><li style="list-style-type:disc"><strong>Transmit power optimization:</strong> The transmit power of each AP will be configured to the needed extent. This reduces the interference between APs</li></ul><ul id="fe642d5f-269a-46e5-9312-a1096dbaca51" class="bulleted-list"><li style="list-style-type:disc"><strong>Self-healing wireless coverage:</strong> If an AP dies, the transmit power of neighboring APs can be adjusted to reduce the gray area</li></ul><ul id="90436aa5-6288-44f6-b503-735fffaa50af" class="bulleted-list"><li style="list-style-type:disc"><strong>Seamless roaming</strong></li></ul><ul id="f1c2096f-eb43-488a-9419-6f29166d27c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Client load-balanced:</strong> the clients can be load-balanced between APs within range</li></ul><ul id="45b59677-9c95-498d-af82-8f795b890cc0" class="bulleted-list"><li style="list-style-type:disc"><strong>Consistent QoS/Security policies across the network.</strong></li></ul><h2 id="70f76f5b-8f35-40fe-9b42-6729bb9354de" class="">WLC Deployments</h2><p id="fa09b50c-ef9e-473e-8e17-d188c1a1c828" class=""><strong>It refers to where the WLC will be deployed.</strong></p><ul id="eb991055-bd79-4eac-b762-dc5bb618b0db" class="bulleted-list"><li style="list-style-type:disc">Unified: It is a dedicated physical appliance.<ul id="44f8dd2a-f8ef-48dd-9bfb-04843430611b" class="bulleted-list"><li style="list-style-type:circle">Up to 6000 APs<ul id="32bea2f7-1f11-4070-8d8c-a8e4e69fe082" class="bulleted-list"><li style="list-style-type:square">They can be clustered to support more APs</li></ul></li></ul></li></ul><ul id="50ebdb3f-d358-4ba4-8224-811c6e92882c" class="bulleted-list"><li style="list-style-type:disc">Cloud-based: It is a VM running on the cloud.<ul id="7fb54c61-24f9-419a-950b-399aad3cd06f" class="bulleted-list"><li style="list-style-type:circle">Up to 3000 APs<ul id="dfd6ad10-0d17-430c-935c-efb47df31da9" class="bulleted-list"><li style="list-style-type:square">Can be clustered</li></ul></li></ul></li></ul><ul id="fb6b7cfa-2632-41ac-b2cb-d1555dd3f656" class="bulleted-list"><li style="list-style-type:disc">Embedded: Function embedded inside a switch<ul id="2d7e9db2-cdfa-49c5-8ea2-9451c24271b2" class="bulleted-list"><li style="list-style-type:circle">Up to 200 APs<ul id="02678987-71e7-45bf-ac29-26306fecf232" class="bulleted-list"><li style="list-style-type:square">Can be clustered</li></ul></li></ul></li></ul><ul id="6f3936a3-aa57-4294-a756-fbd108104c06" class="bulleted-list"><li style="list-style-type:disc">Mobility Express: Function embedded inside an AP<ul id="2f535ad3-7b42-4caa-bff1-2d6bd6848eca" class="bulleted-list"><li style="list-style-type:circle">Up to 100 APs<ul id="697389dd-e351-414e-bb3d-dc1cd766bac9" class="bulleted-list"><li style="list-style-type:square">Can be clustered</li></ul></li></ul></li></ul><h1 id="2e958807-9bcf-4958-a990-ef290f4dec22" class="">Wireless Security</h1><h2 id="63163150-2b7e-47e1-b974-033257b39664" class="">Authentication</h2><p id="2c1b7a4f-0fe6-4ccf-82ab-90096902a4bd" class="">It is the process of validating a client so it can associate with an AP.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8e1f94c8-c061-4979-a39a-6457c6bf7f79"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Clients can also authenticate the AP to make sure it is connecting to the right AP.</div></figure><p id="a113b1fe-3707-4f03-bb1a-7a3ecd9ea7ba" class="">You can insure authentication through:<div class="indented"><ul id="c13008d3-67b0-4537-9f1c-cb6172d0a550" class="bulleted-list"><li style="list-style-type:disc">Passwords</li></ul><ul id="b45b2d91-0e78-486f-bd19-af22d19b85a6" class="bulleted-list"><li style="list-style-type:disc">Username/Passwords</li></ul><ul id="84018b5f-0b00-477d-ad01-78dcb9145f1a" class="bulleted-list"><li style="list-style-type:disc">Certificates</li></ul></div></p><p id="5944726b-b7f4-4937-9a83-4667a926e0ee" class="">Some of the current Authentication Methods are:<div class="indented"><ul id="6bb4c4a8-a125-43fa-93f5-9a3af26da271" class="bulleted-list"><li style="list-style-type:disc"><strong>Open Authentication</strong></li></ul><ul id="67319b36-163f-4bab-ad80-647ce97a17ae" class="bulleted-list"><li style="list-style-type:disc"><strong>WEP (Wired Equivalent Privacy</strong></li></ul><ul id="f3c4df75-384e-4a37-a336-21870ca4a434" class="bulleted-list"><li style="list-style-type:disc"><strong>EAP (Extensible Authentication Protocol)</strong></li></ul><ul id="a26020ad-0904-48d4-af5d-324d9c1c85e0" class="bulleted-list"><li style="list-style-type:disc"><strong>LEAP (Lightweight EAP)</strong></li></ul><ul id="841ee342-9477-4321-bd41-1a84c64ab467" class="bulleted-list"><li style="list-style-type:disc"><strong>EAP-FAST (EAP Flexible Authentication via Secure Tunneling)</strong></li></ul><ul id="93b7f5e3-e760-4294-b594-475b3c231c0b" class="bulleted-list"><li style="list-style-type:disc"><strong>PEAP (Protected EAP)</strong></li></ul><ul id="bcc2cefe-9280-4fbb-90d4-09f40d3a76b5" class="bulleted-list"><li style="list-style-type:disc"><strong>EAP-TLS (EAP Transport Layer Security)</strong></li></ul></div></p><h3 id="0721dd92-42e2-494a-947e-dd0f7844ea17" class="">Open Authentication</h3><p id="dbd212a5-cbe8-4c2b-b580-a8f2b351e549" class="">In this method, the client only sends a authentication request with NO CREDENTIALS, and it is granted access.</p><p id="120f9ee2-ddac-4131-b7b1-58b6e592f207" class="">It is not secure, but it can be associated with other methods, such as a web authentication (i.e. Starbucks`s WiFi)</p><h3 id="99d41585-e91f-4b42-8329-b735fa1a485b" class="">WEP (Wired Equivalent Privacy)</h3><p id="3a3fba8d-9972-492c-b5ba-c6c5217c8929" class="">It is used for both authentication and encryption.</p><p id="3a0e309d-238f-4821-8bd1-4c6eedc93765" class="">For encryption it uses RC4 algorithm, which can be easily cracked…</p><p id="0be40003-9a2d-4557-8d13-b8db37120cbb" class="">It is a shared-key protocol, requiring the sender and receiver to have the same key. Such keys can be 40-bit or 102-bit long. Also, it is added a IV (Initialization Vector) to bring the total lenght to 64-bit or 128-bit </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c89415b5-79c9-416d-9f4c-4cdbbdb19a32"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: The bigger the key, the better.</div></figure><h3 id="e9ba20cf-ec11-4e4c-823c-37a944cdb018" class="">EAP (Extensible Authentication Protocol)</h3><p id="26ad75fc-6953-481f-b213-5f025aadc38d" class="">It is simply a framework of authentication. It defines authentication functions which are by the various <em>EAP Methods</em>.</p><p id="4b8f4526-dd4d-4281-8b52-e3b5fbd42481" class="">As said before, there are 4 EAP Methods: EAP-FAST, PEAP, EAP-TLS and LEAP.</p><p id="0b9d4e5a-9882-46b9-9cf8-774fbfaaaae4" class="">It uses the 802.1X protocol, which provides <em>port-based network access control</em>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6482d3f2-f5dd-4c5f-8be0-e969bb0f78c9"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><em>IMPORTANT:</em> 802.1X allows a client to associate, but its access starts limited until they authenticate. In 802.1X there are the following terms:
+Supplicant: the device that is trying to connect to the network
+Authenticator: the device that provides access to the network
+Authentication server (AS): the device that receives the client credentials and validates it, permitting/denying access.</div></figure><figure id="c7e56d17-7363-454d-92d5-738460d836c3" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2022.png"><img style="width:1241px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2022.png"/></a></figure><h3 id="2cfa8422-cfaa-4f4d-bf57-7397aa1798f9" class="">LEAP (Lightweight EAP)</h3><p id="bacec50a-6740-4a73-8405-e4d2af4c67be" class="">It was developed by Cisco.</p><p id="54e6de10-4502-4144-ae55-c88eea5631e1" class="">Clients must provide a username/password. In addition to that, it requires mutual authentication by each one sending an challenge phrase like WEP but for both the client and the server.</p><p id="a17104cf-cb44-4183-bd55-3e013b3a4816" class="">For this Dynamic WEP Keys are used to encrypt the data, which is vulnerable and should not be used.</p><figure id="eb1d71f7-007d-448e-bddc-da39b8f559a0" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2023.png"><img style="width:821px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2023.png"/></a></figure><h3 id="a1080e48-6dfd-471e-a8ec-244c90d6a0a7" class="">EAP-FAST (EAP Flexible Authentication with Secure Tunneling)</h3><p id="6c7ebf84-ec6d-485d-88e2-f3b2f2c77017" class="">It was also developed by Cisco.</p><p id="7bbd4146-c9d6-46da-ad2c-2f4e11ec429a" class="">In EAP-FAST, the client first obtains a shared secret called PAC (Protected Access Credential) from the server. Using this PAC, the client establishes a secure TLS tunnel to send its credentials to the server for authentication securely.</p><figure id="1060e371-5457-41dc-9a25-d22cffcb112b" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2024.png"><img style="width:811px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2024.png"/></a></figure><h3 id="11305c40-0f75-4009-80c4-814b54337865" class="">PEAP (Protected EAP)</h3><p id="bd18dff7-a216-4ec8-a0e2-64eb05f049f1" class="">Like EAP-FAST a secure TLS tunnel is required to authenticate the credentials, however, instead of a PAC, the server first sends its digital certificate. The client then authenticates the server and a Secure TLS Tunnel is created, so it can send its credentials to be authenticated by the server.</p><figure id="b2fa2129-0fbd-4b8a-b468-f5a18c1660cb" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2025.png"><img style="width:830px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2025.png"/></a></figure><h3 id="36850c7d-7900-4cd3-a357-84d7c9d905a3" class="">EAP-TLS (EAP Transport Layer Security)</h3><p id="1af1fd07-a9c8-4e08-855a-07ca00ae0051" class="">This time both the server and client exchange certificates, and because of that no credentials are needed. However, a secure TLS tunnel is still create to share encryption keys.</p><p id="f3b7e85f-fa2e-433a-a338-c140b01f6828" class=""><mark class="highlight-teal_background">Because each client must have a digital certificate, it is the most secure authentication method!</mark></p><figure id="ab85d37f-79aa-4517-b695-5b3af5535939" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2026.png"><img style="width:855px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2026.png"/></a></figure><h2 id="471e7697-92e8-407e-af74-ae9d1d0ee4cb" class="">Encryption</h2><p id="d7fa5e23-010f-4f27-b92d-15cb83ef87c3" class="">Due to the fact that an AP acts as a hub and that a wireless signal is not contained in a wire, frames can be captured by anyone within range. Therefore, such frames should be encrypted, so if someone catches such frame, it can`t do anything with it.</p><p id="9270728e-a6e0-4db3-ad6e-8efff04b14c9" class="">There many protocols that can be use to encrypt a data.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="344b1b09-4571-4f78-beb3-71c9dc021cc5"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><strong>IMPORTANT:</strong> All the devices associated with an AP will use the same encryption protocol. HOWEVER, each one will have a unique encryption/decryption key.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1ecf2340-9b6a-4527-b378-8d51747906af"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: There is also a <strong>group key</strong> that every client associated has a copy of, so it can receive broadcast messages.</div></figure><p id="764b47ee-4743-4f8e-976d-4a6716dfb002" class="">Some of the used Encryption Methods are:</p><ul id="b2fca306-df28-4beb-9a8c-9a17f50d79f4" class="bulleted-list"><li style="list-style-type:disc"><strong>WEP (Wired Equivalent Protocol)</strong></li></ul><ul id="93e35712-dc08-438c-bc7a-b09051ab607a" class="bulleted-list"><li style="list-style-type:disc"><strong>TKIP (Temporal Key Integrity Protocol)</strong></li></ul><ul id="630227ea-02b1-411f-978b-5bdc9ce121f9" class="bulleted-list"><li style="list-style-type:disc"><strong>CCMP (Counter/CBC-MAC Protocol)</strong></li></ul><ul id="ca84ea4c-fb3a-4048-866f-9d6e7d12ea76" class="bulleted-list"><li style="list-style-type:disc"><strong>GCMP (Galouis/Counter Mode Protocol)</strong></li></ul><h3 id="330c9c36-2303-45fb-b4db-ba6ebf2d7659" class="">TKIP (Temporal Key Integrity Protocol)</h3><p id="38bd91bc-b0af-4adf-bb67-e10d520930c0" class="">It is based in WEP to protect devices that were only capable of using WEP after it was found to be vulnerable. Some of the features it brings over WEP are:</p><ul id="4557f30a-00d9-45f4-8c06-ec32f1fac41f" class="bulleted-list"><li style="list-style-type:disc">A <strong>MIC</strong> (Message Integrity Check) was added</li></ul><ul id="52bd039c-53b0-4959-a739-e5f08e40139b" class="bulleted-list"><li style="list-style-type:disc">Every frame has a unique WEP Key generated by a <strong>Key mixing algorithm.</strong></li></ul><ul id="276bcc53-fb6e-4f9c-9196-843f843281f7" class="bulleted-list"><li style="list-style-type:disc"><strong>Initialization Vector</strong> was <strong>increased </strong>from 24 bits to 48 bits</li></ul><ul id="ef15fda2-eb5d-4582-9589-3591d4a166ef" class="bulleted-list"><li style="list-style-type:disc">The MIC included the <strong>sender`s MAC Address</strong></li></ul><ul id="ab3f7c65-0048-4b36-8074-63fec86258f8" class="bulleted-list"><li style="list-style-type:disc">A <strong>timestamp </strong>was added</li></ul><ul id="0935a167-6cc5-4677-95ca-ae0a0930f893" class="bulleted-list"><li style="list-style-type:disc"><strong>TKIP sequence number </strong>was added to keep track of each frame sent from each source MAC Address</li></ul><ul id="efaf5a61-f851-41db-9f78-f12b1b659966" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>Used in WPA1</strong></mark></li></ul><h3 id="de3626e0-6f5d-4d4d-adae-ac981a82548b" class="">CCMP (Counter/CBC-MAC Protocol)</h3><p id="b5c4314f-d295-41a3-b130-45287586c36f" class="">It was developed after TKIP and is more secure. And it must be supported by the hardware. It adds:</p><p id="aec092b1-b84d-43db-8a6d-a1d18f4b0937" class="">Uses two different algorithms for Encryption and MIC:</p><p id="d89c3077-8e69-4dc4-8a9d-ba0752d5f43a" class=""><strong>AES (Advanced Encryption Standard) counter mode encryption.</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3e7e8068-abe6-46ba-b00d-6e1370d2b340"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: There are multiple modes inside AES, and the counter one has great performance.</div></figure><p id="9914cc22-5ca0-458a-a10b-3e248791a77e" class=""><strong>CBC-MAC (Cipher Block Chaining Message Authentication Code) is used as MIC to ensure integrity.</strong></p><p id="21107b71-08ba-4597-8dfe-84ee1d94a600" class=""><mark class="highlight-yellow_background"><strong>It is used in WPA2</strong></mark></p><h3 id="9e968209-94bb-4b1a-aca0-98cf9a50258b" class="">GCMP (Galois/Counter Mode Protocol)</h3><p id="d8e564c4-09f5-45cb-a585-0be68dcaa106" class="">It is more secure and efficient than CCMP, allowing for higher throughput.</p><p id="cf57c8e9-883d-416f-849c-8a79b1d57058" class="">It uses:</p><p id="bfa70ee1-3484-4b3a-b152-dc3cbf94271e" class=""><strong>AES counter mode (the same as CCMP).</strong></p><p id="fce74a1c-ba85-4e7d-833d-0cefba09342f" class=""><strong>GMAC (Galois Message Authentication Code) as MIC.</strong></p><p id="9bcf3094-61a8-425e-b183-029b3d99b6ee" class=""><mark class="highlight-yellow_background"><strong>It is used in WPA3</strong></mark></p><h2 id="0ea5b058-938a-4205-8e67-9ab2247526ce" class="">Integrity</h2><p id="54195a70-860a-4c0c-8332-112b487a775d" class="">This is the propriety of making sure a message is not modified by an unauthorized third-party during the sending of a frame.</p><p id="86f62f80-cf39-4ed1-b723-b537014e2e55" class="">A MIC (Message Integrity Check) is added to messages to ensure integrity.<div class="indented"><ol type="1" id="dea3f14b-497f-43c4-b0f1-35736d4a556a" class="numbered-list" start="1"><li>The client (or AP, depending who is sending the message) calculates a MIC based on the protocol and message and attaches such value as a header with the message.</li></ol><ol type="1" id="6a99ba5a-15a2-4920-8170-9fd6dda9a2c9" class="numbered-list" start="2"><li>The client encrypts and sends the frame</li></ol><ol type="1" id="df261819-9f08-439b-a807-b736d30e7fac" class="numbered-list" start="3"><li>The AP (receiver) decrypts the message</li></ol><ol type="1" id="60340ba4-5c93-4017-b401-ada73dbc951c" class="numbered-list" start="4"><li>The recipient independently calculates the MIC using the same protocol</li></ol><ol type="1" id="4da6ac95-db29-4b7a-aa0a-7350192910d2" class="numbered-list" start="5"><li>The recipient checks if the calculated MIC matches the message MIC<ol type="a" id="28fd1461-24bf-4792-9048-e80e9ecb360f" class="numbered-list" start="1"><li>If the same it processes the message</li></ol><ol type="a" id="cfedec17-8d69-4cc0-8ec1-c3238ec5291a" class="numbered-list" start="2"><li>If different, it discards the message</li></ol></li></ol></div></p><figure id="496f54b8-12cd-4cd1-a697-94ae94ed5819" class="image"><a href="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2027.png"><img style="width:536px" src="Wireless%2025d57add6b1b4f59addfa9cced133a8d/Untitled%2027.png"/></a></figure><h2 id="e5bdc5c3-fe2d-42c8-b117-bee9829b7086" class="">WPA (WiFi Protected Access)</h2><p id="5408a9fc-a777-426a-acec-1e777046da69" class="">They certifications provided by the Wi-Fi Alliance that bundles multiples protocols.</p><p id="8a2198c9-d64a-4766-945a-0eed6835f6c6" class="">There are current three versions of WPA.</p><p id="f25071f6-5f4a-43ef-88a3-97f66cde3ca9" class="">There is also two modes in every WPA:</p><ul id="5bdf2a59-a7b8-478b-8546-20162273062a" class="bulleted-list"><li style="list-style-type:disc">Personal Mode: In this one a Pre-Shared Key (PSK) is manually configured on each end, and for authentication it doesn`t transmit those PSKs over the air, instead it used keys generated from the PSK for the four-way handshake. Therefore, if both devices use the same PSK they will be capable of decrypting each other`s messages.</li></ul><ul id="9240a0e1-aceb-4aef-bba3-9accb04c1099" class="bulleted-list"><li style="list-style-type:disc">Enterprise Mode: 802.1X is used with an authentication server (RADIUS server).<ul id="0c92bbe9-baaf-4bb3-bec1-f5beaddd3ca4" class="bulleted-list"><li style="list-style-type:circle">Any EAP method can be used.</li></ul></li></ul><h3 id="a4317cb5-b09e-4f97-a136-d4cf76b17ed1" class="">WPA</h3><p id="a8c4dd99-ac75-4312-a9ef-68d9752c2afa" class="">It was developed after WEP was proven to be vulnerable</p><ul id="4f537631-0e6e-483d-a90e-f00103172495" class="bulleted-list"><li style="list-style-type:disc">TKIP provides encryption/MIC</li></ul><h3 id="72323f7a-c18f-40c0-8d8e-2c228c4214e1" class="">WPA2</h3><ul id="45aa0d68-33f8-4377-abdc-1d514f90aa10" class="bulleted-list"><li style="list-style-type:disc">CCMP for Encryption/MIC  </li></ul><h3 id="3b22ee57-db99-4dce-b2a8-03ec703f38cb" class="">WPA3</h3><ul id="932e4565-f4b2-4087-b34a-10b8f2250fe1" class="bulleted-list"><li style="list-style-type:disc">GCMP for Encryption/MIC  </li></ul><ul id="8a684ed8-5393-4e5e-9b17-5a67b861470b" class="bulleted-list"><li style="list-style-type:disc">Also adds the following features:<ul id="f9184cf3-3123-4658-a02a-e66ad44f8700" class="bulleted-list"><li style="list-style-type:circle"><strong>PMF (Protected Management Frames) </strong>→ prevents eavesdropping/forging</li></ul><ul id="06a93a79-0eb5-4b2f-840e-59977f2e098b" class="bulleted-list"><li style="list-style-type:circle"><strong>SAE (Simultaneous Authentication of Equals) →</strong> protects the four-way handshake in Personal Mode</li></ul><ul id="c718e253-dcfb-4f89-9760-062a1486c89e" class="bulleted-list"><li style="list-style-type:circle"><strong>Forward secrecy </strong>→ prevents data from being decrypted after it was transmitted over the air.</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="90828b57-6e73-4b58-97c6-df8dae268b63"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: All these WPA certifications use Enterprise and Personal Modes for authentication.</div></figure><h1 id="24693ba9-d4dc-4218-9b26-3d6bb15cb818" class="">Configuration</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="19e05705-1e95-4901-ac72-fd4f287bebc1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: WLCs only use LAG (Etherchannel) in static mode → No PAgP and no LACP</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="33b8024e-3c38-4849-8452-207e41c5ddd8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: <strong>option 43 ip </strong><em>wlc-ipaddres</em>s can be used in dhcp to tell the APs the IP of the WLC</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9fa0dfa5-2db2-4fe0-ac02-f29cb067ef88"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Port → Physical Interface
+           Interface → Logical Interface</div></figure><h3 id="1d64a123-cf75-408a-b3d0-1cc728bfb3ac" class="">Types of Ports</h3><ul id="d3657625-8ac5-4ed3-afd2-4c3814052b9f" class="bulleted-list"><li style="list-style-type:disc"><strong>Service Port: </strong>A dedicated management port. Used for out-of-band management, in other words, traffic to manage the WLC is separated from the normal data traffic. Must connect to a switch in access mode, because it only supports a single VLAN.</li></ul><ul id="e2c9b4f0-4578-49ce-92c2-1b3b0f5596c1" class="bulleted-list"><li style="list-style-type:disc"><strong>Distribution System Port: </strong>It is used for regular traffic, a standard port. It is used to connect to the distribution system (DS) (Wired network) and are used for data traffic. They usually connect to the switch via trunk, and can be aggregatted to form an EtherChannel (LAG).</li></ul><ul id="f21225f3-18b4-4e84-8160-37acbf0f6995" class="bulleted-list"><li style="list-style-type:disc"><strong>Console Port:</strong> Serial port used with Ethernet or USB.</li></ul><ul id="6b2fc617-0c90-4553-8e8e-8ec9f361ad32" class="bulleted-list"><li style="list-style-type:disc"><strong>Redundancy Port:</strong> Used to connect to another WLC for High Availability (HA). If a WLC fails, the other one takes its work.</li></ul><h3 id="197c89cf-bfab-43f8-89ae-2bfbb7b83845" class="">Types of interfaces</h3><ul id="0c42ea5e-b9e3-463b-8cf0-435b13ac0cc5" class="bulleted-list"><li style="list-style-type:disc"><strong>Management interface: </strong>Used for management traffic like Telnet, SSH, HTTP and HTTPS, RADIUS Authentication, NTP, Syslog, etc. CAPWAP tunnels are also formed to/from the WLC`s management interface.</li></ul><ul id="731b53cd-7045-40fe-a551-477f913645b7" class="bulleted-list"><li style="list-style-type:disc"><strong>Redundancy interface: </strong>It is used to refer to the stand-by WLC when they are connected via the redundancy port. One will be the <em>active </em>and the other will be the <em>stand-by</em>.</li></ul><ul id="9b023fdf-2a9a-4217-93f2-c27608324fc6" class="bulleted-list"><li style="list-style-type:disc"><strong>Virtual Interface:</strong> It is used when communicating with wireless clients to relay DHCP requests, perform client web authentication, etc.<mark class="highlight-yellow_background"><strong> It is always an IP Address in a non-existant subnet and a unique IP Address (i.e. 1.1.1.1).</strong></mark> When the DHCP Server sits in a different subnet of a specific WLAN, the WLC will use the virtual interface IP Address as the source IP Address. This is used to mantain consistency across multiple relayed DHCP messages.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="983391bf-a025-49ae-8c4d-8c92811389c1"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT:</strong> Remember that in relayed DHCP messages, the IP address in the ‘giaddr’ is used as the Destination IP address, not the Source IP address of the relayed message. Therefore, even if the IP address of the virtual interface sits in a non-existant subnet, the DHCP Server will send a Offer or Ack to the ‘giaddr’ address (usually, the Dynamic Interface IP address) and not the virtual interface`s IP address as the Destination IP Address of the frame.</div></figure></li></ul><ul id="dea67fb2-c62b-4eb5-84fb-a7218ff766d1" class="bulleted-list"><li style="list-style-type:disc"><strong>Service port interface:</strong> when a service port is used, this interface is bounded to it and used for out-of-band management instead of a management interface.</li></ul><ul id="601dcf2e-b8a9-4c81-b7ae-d16fdcc24678" class="bulleted-list"><li style="list-style-type:disc"><strong>Dynamic interface:</strong> These interfaces are used to map a WLAN to a VLAN. For example, traffic from a specific SSID, “Internal” in this example, will be sent to the wired network (DS) from the WLC`s “Internal” dynamic interface.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ca6ea661-298c-4ccb-b294-3d0593abcd24"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: To summarize, CAPWAP establishes two tunnels to the management interface - a control tunnel, that transports control and management traffic, a data tunnel, that carries data traffic.</div></figure><h3 id="2dfb495d-b0fb-400c-92ef-44402dbb82c0" class="">Layer 3 Security</h3><ul id="93952e2a-4923-4337-beba-62f6c0d72d4d" class="bulleted-list"><li style="list-style-type:disc"><strong>Web Authentication:</strong> After the wireless client gets an IP address and tries to access a web page, it will be prompted for a username/password.</li></ul><ul id="13dba7a7-de4c-42f4-92fa-b44de7f83555" class="bulleted-list"><li style="list-style-type:disc"><strong>Web Passthrough:</strong> Does the same, but no username/password are required. Simply a warning message appears that the client must agree to gain access to the Internet.</li></ul><ul id="06c7a847-912b-4ea4-be17-5b54dba5a41f" class="bulleted-list"><li style="list-style-type:disc"><strong>Conditional </strong>and <strong>Splash Page</strong> are similar, but require 802.1X layer 2 authentication.</li></ul><h3 id="a6fd476d-516b-4bd4-b718-20f1a7037caf" class="">QoS</h3><ul id="05376314-bdf7-4d19-ad9c-5b171563b8c2" class="bulleted-list"><li style="list-style-type:disc"><strong>Bronze </strong>→ This profile is designed for low-priority background traffic, such as software updates, backups, and other non-interactive applications. It provides the least priority and ensures that these services do not negatively impact higher-priority traffic.</li></ul><ul id="38a2b3ae-3b9b-45d6-bf65-62207a106a4e" class="bulleted-list"><li style="list-style-type:disc"><strong>Silver </strong>→ This profile is designed for general data traffic, such as web browsing, email, and casual file transfers. It represents the default priority level for most types of network traffic.</li></ul><ul id="71ede305-2b20-4f30-a23f-89e049ef04aa" class="bulleted-list"><li style="list-style-type:disc"><strong>Gold </strong>→ This profile is intended for high-priority video applications and other types of multimedia traffic that require consistent bandwidth and low latency.</li></ul><ul id="5020823b-0a7e-4bbd-984c-78d1c3c10a88" class="bulleted-list"><li style="list-style-type:disc"><strong>Platinum </strong>→ This profile is designed for time-sensitive and latency-sensitive traffic, such as Voice over IP (VoIP) and video conferencing applications. It provides the highest priority to ensure minimal delay and packet loss.</li></ul><h3 id="af0f7d70-b416-499f-9adf-dfbc65c5bce0" class="">WLAN Types</h3><ul id="b08e6b9d-dfa2-4629-8c1d-fd228ead931f" class="bulleted-list"><li style="list-style-type:disc">normal WLAN → Used for normal clients, usually employees.</li></ul><ul id="3f7f9a29-2438-4c73-81cf-cf711479e8b8" class="bulleted-list"><li style="list-style-type:disc">Guest LAN → Used for guest, restricting their access.</li></ul><ul id="d598c452-ff8b-4bba-a223-e312c6df7cb3" class="bulleted-list"><li style="list-style-type:disc">Remote LAN → Used to connect remote branch and offices, those APs will use FlexConnect, while still being remotely configured and updated via the WLC.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="617a4d25-b20c-4283-9262-98b87a4fdc76"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Management via Wireless → Enables/Disables the ability of configuring the WLC via a wireless client.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5fec6d3f-00fb-4029-92eb-8e73f22cb01f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">CPU ACL: Limits access to the CPU of the WLC via an ACL. So devices can reach or not via SSH, Telnet, HTTP and HTTPs, retrieve SNMP information, etc.</div></figure><p id="406ebfd5-e58c-4bf7-af27-92f7e6c9d3fa" class="">
+</p></div></article></body></html>

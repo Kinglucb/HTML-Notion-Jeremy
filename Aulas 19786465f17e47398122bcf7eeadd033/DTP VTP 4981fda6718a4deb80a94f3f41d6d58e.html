@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DTP/VTP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4981fda6-718a-4deb-80a9-4f3f41d6d58e" class="page sans"><header><h1 class="page-title">DTP/VTP</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><h1 id="d233abbc-cda6-4e3e-b08a-55be4606ddac" class="">DTP (Dynamic Trunking Protocol)</h1><p id="babaa858-eca8-4251-b70f-10b2a281b14c" class="">This proprietary Cisco Protocol allow its switches to auto-negotiate the state of their ports: if connected to a switch it uses <strong>trunk </strong>mode, but if connected to a host it uses <strong>access </strong>mode.</p><p id="fe3dcb3e-622e-40aa-aa89-9f5f9d1c057b" class="">It is enabled by default in Cisco switches and can be exploited for vulnerabilities</p><p id="342b399f-5e3b-42ec-9e9f-55c1fbb28161" class="">There are two DTP Modes you can set in a switch: <strong>Dynamic Desirable</strong> or <strong>Dynamic Auto</strong></p><p id="20d45116-1756-4186-a707-afc6dd9a7982" class="">Desirable mode will actively try to form a trunk, while in Auto mode it will not, it will just “follow the flow”.</p><pre id="0f6dfa41-8e6e-4e6d-8bd3-1a394462cae2" class="code"><code>configure terminal
+interface g0/0
+switchport mode dynamic {auto/desirable}</code></pre><table id="45495d14-39fa-4153-9d38-09b34510ff04" class="simple-table"><thead class="simple-table-header"><tr id="6169e060-9450-4bbc-bacc-ed83fda18ecf"><th id="hyhn" class="simple-table-header-color simple-table-header" style="width:107.2px">Administrative Mode</th><th id="qUG&lt;" class="simple-table-header-color simple-table-header" style="width:107.2px">Trunk</th><th id="ik[T" class="simple-table-header-color simple-table-header" style="width:107.2px">Dynamic Desirable</th><th id="qZa;" class="simple-table-header-color simple-table-header" style="width:107.2px">Access</th><th id="I?K_" class="simple-table-header-color simple-table-header" style="width:107.2px">Auto</th></tr></thead><tbody><tr id="96f9d0e0-675c-4615-858e-068f9e6d0e5b"><th id="hyhn" class="simple-table-header-color simple-table-header" style="width:107.2px">Trunk</th><td id="qUG&lt;" class="" style="width:107.2px">Trunk</td><td id="ik[T" class="" style="width:107.2px">Trunk</td><td id="qZa;" class="" style="width:107.2px">X</td><td id="I?K_" class="" style="width:107.2px">Trunk</td></tr><tr id="169ec1e7-a139-411d-823d-11c2fa77ecf3"><th id="hyhn" class="simple-table-header-color simple-table-header" style="width:107.2px">Dynamically Desirable</th><td id="qUG&lt;" class="" style="width:107.2px">Trunk</td><td id="ik[T" class="" style="width:107.2px">Trunk</td><td id="qZa;" class="" style="width:107.2px">Access</td><td id="I?K_" class="" style="width:107.2px">Trunk</td></tr><tr id="6edf73ef-59ba-4936-8053-0cdfcd79f16b"><th id="hyhn" class="simple-table-header-color simple-table-header" style="width:107.2px">Access</th><td id="qUG&lt;" class="" style="width:107.2px">X</td><td id="ik[T" class="" style="width:107.2px">Access</td><td id="qZa;" class="" style="width:107.2px">Access</td><td id="I?K_" class="" style="width:107.2px">Access</td></tr><tr id="596aff66-b500-4a6e-85fe-f15ce1932499"><th id="hyhn" class="simple-table-header-color simple-table-header" style="width:107.2px">Auto</th><td id="qUG&lt;" class="" style="width:107.2px">Trunk</td><td id="ik[T" class="" style="width:107.2px">Trunk</td><td id="qZa;" class="" style="width:107.2px">Access</td><td id="I?K_" class="" style="width:107.2px">Access</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="22789220-ab38-45b2-a494-4e4f0cf61d65"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">DTP will not form automatically a trunk with a PC or a router, so if you want ROAS, it will have to be manually configured</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9238f33d-d8b8-41be-bc2c-35807f7e08a1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">On default it is configured:
+- Older Switches  = Dynamic Desirable
+- Newer Switches = Dynamic Auto</div></figure><h2 id="2f20fa4e-b143-4794-803f-33f4b9f90fa8" class="">Disable DTP Negotiation</h2><pre id="fdd4d5e4-f9fd-4ce1-b2b5-102ea6c865a2" class="code"><code>configure terminal
+interface g0/0
+switchport nonegotiate</code></pre><p id="119875a0-f8dc-47be-afc9-9b794bc7e70c" class="">Switches with more than one encapsulation protocol, will auto-negotiate (<strong>switchport trunk encapsulation negotiate</strong>) the protocol. Where, if both of them support ISL, it is it that will be used. Also, DTP Frames will be sent through VLAN 1 in ISL and the Native VLAN through 802.1Q</p><h3 id="29009833-12c9-4ba7-9d1c-2d2a878e93fe" class="">Show switchport status</h3><pre id="085f6d2e-a832-4b34-a88c-48719842bddf" class="code"><code>show interface g0/0 switchport // show interface {interface-id} switchport</code></pre><h1 id="b5c7d93c-a579-4434-88e8-3793de4fe167" class="">VTP (VLAN Trunking Protocol)</h1><p id="f760009e-96b9-43e5-839a-12ff0021202d" class="">It is a protocol used to synchronize VLAN Databases (configurations) across a domain. For example, If I add/remove/modify a VLAN in switch 1, it will send a VTP advertisement through its trunk port and the switch 2 will have the same VLAN settings.</p><p id="349cef62-e488-4251-ac91-3079b1a9de4f" class="">There are essentially three VTP Modes:</p><ul id="bbfce8a0-a0cb-4990-9b1c-9a2ea01c1182" class="bulleted-list"><li style="list-style-type:disc">VTP Server<ul id="897a4162-a780-43c9-be3e-8bfddbd6fe81" class="bulleted-list"><li style="list-style-type:circle">In this mode changes can me made to the VLAN Database, and all this changes will be forwarded via trunk to the other switches connected.</li></ul><ul id="712c2929-fe38-4eff-816a-1adab400f2ac" class="bulleted-list"><li style="list-style-type:circle">Can act as a VTP Client as well, the VLAN Database will be determined by the highest Configuration Revision. which increases by one at every modification made.</li></ul><ul id="294d1d81-a05f-45d9-bf32-a3c43524d62e" class="bulleted-list"><li style="list-style-type:circle">Store the VLAN Database locally (NVRAM)</li></ul><ul id="cf2713de-08bd-4486-8594-fbe916e25b23" class="bulleted-list"><li style="list-style-type:circle">Default mode for Cisco switches</li></ul></li></ul><ul id="5b3c8f62-0167-4e93-a86b-cd2b894811d8" class="bulleted-list"><li style="list-style-type:disc">VTP Client<ul id="0699edbb-1882-4746-bda2-86dd22085313" class="bulleted-list"><li style="list-style-type:circle">In this mode, however, no changes can be made to the VLAN Database. It only syncs the VLAN Database and advertises to other switches.</li></ul><ul id="d84f2d17-4a76-4b65-8375-3fafadcd6a13" class="bulleted-list"><li style="list-style-type:circle">Only stores the VLAN Database in VTP Version 3</li></ul></li></ul><ul id="d4715f6b-c74b-47f1-b66e-bfe0cfb1243e" class="bulleted-list"><li style="list-style-type:disc">VTP Transparent<ul id="4c986964-d08f-4132-9a2b-dac447eb46f2" class="bulleted-list"><li style="list-style-type:circle">This mode isolates the switch from the others, so no VTP advertisement will modify its VLAN Database and it will not advertise itself, everything is local (NVRAM).</li></ul><ul id="6b8f22db-a3cf-4b10-a520-4b3392daf5ad" class="bulleted-list"><li style="list-style-type:circle">However, it will forward VTP Advertisements if in the same VTP Domain</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b1ea9039-d3e0-4e35-9355-e9ea3fd21303"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">WARNING: An older switch introduced to the network with a higher revision number, could disrupt a network, forcing every switch to rewrite their VLAN Database to match the older switch`s one.</div></figure><h3 id="b47efe53-8b21-486e-af78-70ceb55f47f7" class="">Show VTP Status</h3><pre id="a59efc48-4e33-45da-ba0f-21c3c5fa08b8" class="code"><code>show vtp status</code></pre><h3 id="2613c04d-f403-4255-b50f-c141f4626e2d" class="">Change VTP Domain Name</h3><pre id="56752fac-a61c-4408-89cd-41fb95b3c016" class="code"><code>configure terminal // Global Configuration Mode
+vtp domain cisco // vtp domain {domain-name}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="91cb51c1-b2f9-4c79-a055-75abad398742"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Switches in VTP Server and VTP Client will receive a VTP Domain if it has none.</div></figure><h3 id="55f7040e-2691-48b2-b59d-21a6463f52af" class="">Set VTP Mode</h3><pre id="8d45f6d1-112c-4acb-8d7a-f0ecd9a35ab4" class="code"><code>configure terminal // Global Configuration Mode
+vtp mode {client/server/transparent}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3f41406a-6449-42fb-87c1-7e52fce90eb7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Setting VTP Mode to Transparent or change the VTP Domain will reset the revision number to 0</div></figure><h3 id="e4a11954-78eb-409f-9c6e-489e216612fc" class="">Switch VTP version</h3><pre id="5e50f98d-2695-4278-90fb-09bcebf836bd" class="code"><code>configure terminal
+vtp version {1/2/3}</code></pre><p id="3ffd18ea-100d-4148-b8ac-5a011f2ffbde" class="">VTP Version 2 only introduces Token Ring to VLANs, but VTP Version 3 introduce more features.</p><h3 id="b6d9d3f3-b2e9-4d17-b53d-2b7b7a90d4e6" class="">VTP Password</h3><p id="1eafab2f-13d9-4745-997a-f202a97cdebd" class="">Setting a password allows only switches with the correct password to synchronize the VLAN Database</p><pre id="a67476fb-7f19-46f9-9096-f626af3ef930" class="code"><code>configure terminal
+vtp password cisco // vtp password {password-name}</code></pre><h2 id="10868caf-c6a7-4926-9119-391a882da659" class="">How to only know the Root Bridge for every vlan?</h2><pre id="522eb0e5-f931-421b-bbc2-64bc43c7d6f4" class="code"><code>show spanning-tree root detail</code></pre></div></article></body></html>

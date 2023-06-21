@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DHCP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0ab7061a-56aa-4c7b-bc09-b15c732404b7" class="page sans"><header><h1 class="page-title">DHCP</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="975ccc0b-8ad0-45c5-bb2e-2ace2fe410ac" class="">It allows devices to automatically/dynamically learn their:<div class="indented"><ul id="bc6b3beb-f032-4beb-8ba9-9f9e9e9479c6" class="bulleted-list"><li style="list-style-type:disc">IP Address</li></ul><ul id="e1721107-ee74-488c-ae57-a654d856e16c" class="bulleted-list"><li style="list-style-type:disc">Subnet Mask</li></ul><ul id="20654c84-377e-40a2-a99c-e2bd7fb4f080" class="bulleted-list"><li style="list-style-type:disc">Default Gateway</li></ul><ul id="f501730d-3e79-4945-b9f6-42e001b63165" class="bulleted-list"><li style="list-style-type:disc">DNS Servers</li></ul><ul id="2935296a-89b6-4a4d-8a64-053857758c72" class="bulleted-list"><li style="list-style-type:disc">…</li></ul></div></p><p id="8ef24276-a7b4-4159-9ca6-58afebb3d929" class="">
+</p><p id="12eda901-12e1-4ca4-b331-18b6f8d383cd" class="">“Client Devices” such as PCs, smartphones and etc., usually rely on DHCP. However, routers, switches, servers and etc., usually are manually configured.</p><p id="d3f4edf3-ad3f-47b7-98ec-06140d401c56" class="">In SOHO networks the router will usually also act as the DHCP Server. However, in large networks it will usually be in a Windows/Linux server.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6d330c55-972f-4c22-92be-f5be2eb4c3fb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: When you issue the ipconfig /all command in Windows, you can see a “(preferred)” keyword next to the IP Address. This means that the device was assigned that IP address before, so it asked if it could receive that same IP address after it expired. It is present in the Option 50 in the DHCP Discovery Message.</div></figure><p id="9393843d-2dd4-48d3-9f30-fd7d983cf74c" class=""><strong>Lease time</strong> → DHCP servers <strong>lease </strong>IP addresses to devices, and usually they are not permanent. Therefore, the device must give in its IP Address after the Lease Time expires.</p><p id="da864b6a-d092-4c85-aa52-de66b2589213" class=""><strong>ipconfig /release</strong> → It tells Windows to release its IP Address. It does that by sending a <strong><em>DHCP Release</em></strong> message to the DHCP Server. It will stay without configuration.</p><p id="d16e917d-cf56-4f81-88e9-2570787cf786" class=""><strong>ipconfig /renew</strong> → It asks the DHCP Server for configuration.</p><ul id="23c429fa-dd4f-487b-9ac4-32fd9431a571" class="bulleted-list"><li style="list-style-type:disc">DHCP Server Port → UDP 67</li></ul><ul id="c50cbb93-26fb-4bfb-8dfc-54f00d04c809" class="bulleted-list"><li style="list-style-type:disc">DHCP client Port → UDP 68</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f803d566-83d7-433c-8866-a5ad9b1240dd"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT: Unlike usual services, the source port is not ephemeral!</strong></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fbcecafd-2dbb-4419-be1f-527f4b9f3662"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Search for “DHCP Magic Cookie”</div></figure><h1 id="558cbf5c-3139-4c9b-9780-f633c773f3ba" class="">D.O.R.A. messages</h1><h2 id="b93e9165-eb89-4337-8d6d-a82886af1d55" class="">Discover</h2><p id="6632e044-d6a3-448c-98e7-8af8c0866733" class="">It is the first message, it the <strong>DHCP Client</strong> asks if there is any DHCP server in the network, saying that it requires an IP Address.</p><ul id="391eab59-c3e3-41c7-863f-5017adc0d767" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background"><strong>Broadcast</strong></mark></li></ul><h2 id="eec8738a-d231-415a-9ac9-27fa7e434e08" class="">Offer</h2><p id="8f8b9421-5459-45b7-aa90-ff6b260b296b" class="">In response to the Discover message, the <strong>DHCP Server(s)</strong> “offer” an IP Address that is available to be used.</p><ul id="bd4a914e-cbd3-418b-b1fd-23fa137a38d1" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>Unicast </strong></mark>or <mark class="highlight-blue_background"><strong>Broadcast</strong></mark></li></ul><h2 id="17d383be-6658-457a-a703-941687c4efb4" class="">Request</h2><p id="f6144c61-ce8a-4cee-9f9c-e273e7e1b7d4" class="">It is send by the <strong>DHCP Client</strong>, saying that it accepted the IP Address and from which DHCP Server.</p><ul id="2441ea82-c5d2-462c-9bb8-fca8905494bb" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background"><strong>Broadcast</strong></mark></li></ul><h2 id="f9dec5f7-3f58-4ee8-8553-380f83c4d1ca" class="">Ack</h2><p id="adce20fe-e6fe-4bef-a3d3-7ab809cddde4" class="">It is a response from the <strong>DHCP Server</strong>, telling the DHCP Client that it`s okay to use that IP Address.</p><ul id="f80f9216-1e33-4979-9645-7f3b060bf475" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background"><strong>Unicast </strong></mark>or <mark class="highlight-blue_background"><strong>Broadcast</strong></mark></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="aa867a72-9e98-4954-b0af-910bddb742ce"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: If the response from the DHCP Server is gonna be Unicast or Broadcast is determined by the <strong><em>Bootp flags </em></strong>field in the DHCP Discover and Request messages sent by the DHCP Client. This is because some devices only support broadcast messages before they configure an IP Address.</div></figure><figure id="99acef04-78a6-4121-9c9a-046e6f374126" class="image"><a href="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled.png"><img style="width:1234px" src="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled.png"/></a></figure><figure id="5e77c0dd-6d23-441d-af6e-2d119b05199c" class="image"><a href="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled%201.png"><img style="width:1023px" src="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled%201.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9489187d-510a-4bcc-9037-5b2ff96b7447"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: There is also the following DHCP messages:
+Server → <strong>NACK </strong>= It is the opposite of Ack, and is used to deny the Request message of the client
+Client → <strong>Release </strong>= It is used to free an IP Address
+               <strong>Decline </strong>= It is issued when it receives more than one Offer                 message, so it declines the offered IP addresses.</div></figure><h1 id="c9f37b7d-e6fb-492f-b00f-b1c05503f454" class="">DHCP Relay Agent</h1><p id="8bcbe349-6b76-430a-914d-034613bab742" class="">In a large network, the DHCP server will be centralized and can be situated in a different subnet than the possible DHCP client. Therefore, the routers located in the subnets that may have potential DHCP Clients must act as DHCP Relay agents, because broadcast messages (Discover and Request) are not forwarded by routers.</p><h3 id="d55c1e6c-7085-4ffa-8373-612b74910b60" class="">How does it work?</h3><p id="2f457f14-62ef-4faf-a31d-77028cdc63a9" class="">When acting as a DHCP Relay Agent, the router will receive DORA messages and change the IP Header (yes, change the IP Header) to use its own IP Address as the Source (IP Address of the Interface it received it) and in the ‘giaddr’ (Gateway IP Address) field of the DHCP message and the DHCP Server IP Address as the Destination IP Address. It basically turns Broadcast messages from the client into Unicast messages, acting as an intermediary. <mark class="highlight-yellow_background"><strong>And the DHCP Server will send an Offer or Ack to the IP address specified in the ‘giaddr’ field.</strong></mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c49b77b8-354f-46b0-8e72-cdd3632d4717"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE: </strong>The reason the DHCP server sends responses to the &#x27;giaddr&#x27; address and not the source IP address in the IP header is due to the way DHCP relay works. The &#x27;giaddr&#x27; field is specifically designed to instruct the DHCP server where to send its responses when a DHCP request is relayed. This becomes particularly important in scenarios where the source IP address of the relayed DHCP request is the IP address of a WLC&#x27;s virtual interface, but the DHCP server needs to send its responses to the dynamic interface&#x27;s IP address.</div></figure><h3 id="6844284f-0651-4f55-9fcc-9605af9ff717" class="">But how does the DHCP Server knows what subnet the DHCP Client must be configured to?</h3><p id="374caabe-a969-434a-85fd-83ca5a269d73" class="">It knows by the Relay Agent IP Address as the source, it being that subnet`s interface IP Address.</p><figure id="661ac443-c265-4c50-b08c-39cd48a36c79" class="image"><a href="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled%202.png"><img style="width:1255px" src="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled%202.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="531243e0-b2df-4152-960d-2af6d177e3de"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: There is a field in the DHCP messages, that is the DHCP Client MAC Address. Therefore, if a DHCP Server receives an DHCP message with the Source MAC Address (Ethernet Header) different than the CHADDR (DHCP message Client`s MAC Address) it will know it was received via a Relay Agent.</div></figure><h1 id="0006773b-c7ad-45e6-8ce8-0628a4f80458" class="">DHCP Server configuration in Cisco IOS</h1><h3 id="d9dac945-d81e-4794-acc8-7137b8727f46" class="">Exclude IP Addresses from the pools</h3><p id="87bec8da-0a89-4435-9443-9c3beeaf084d" class="">This command excludes a range of IP Addresses from being offered by the DHCP Server.</p><pre id="09100e65-ef6b-46fe-bee8-8a9d659b91f7" class="code"><code>configure terminal
+ip dhcp excluded-address {first-ip-address} {last-ip-address}</code></pre><h3 id="92a73dc8-ad08-4551-b9ec-ed02c57b9d38" class="">Enable/Disable DHCP message processing</h3><pre id="c8582096-7d06-4901-8bb1-217c3aa04f26" class="code"><code>configure terminal
+[no] service dhcp</code></pre><h2 id="2a282f45-d58f-4dcd-ad86-15b6eeed2617" class=""><mark class="highlight-yellow_background">Create DHCP Pool</mark></h2><p id="5db5db07-ae26-4b19-a2f5-2c6e2220a8c6" class="">It creates a pool and labels it. This pool creates a collection of information that will be offered to the DHCP Client.</p><pre id="fb1f51c4-95f6-4257-9c67-ad632e5bb2be" class="code"><code>configure terminal
+ip dhcp pool {pool-name}</code></pre><p id="00b21bb6-ca7b-46c3-a51a-6c61877369e1" class="">This also enters DHCP Config mode for that Pool.</p><h3 id="45a3038d-6635-4926-a3c9-81a151262f8a" class="">Specify the Subnet and the Mask</h3><pre id="17c03fa6-bc8a-4dcd-809d-9d7a26519555" class="code"><code>Router(dhcp-config)#network {subnet-id} {subnet-mask | prefix length}</code></pre><h3 id="cfe0a910-6c81-4f63-ac06-e2bfc1b9fbd5" class="">Specify the Default Gateway</h3><pre id="995e0139-8aa7-4eaf-8ba7-4a8a94908613" class="code"><code>Router(dhcp-config)#default-router {ip-address}</code></pre><h3 id="8ba31341-d400-41e9-9204-71cc988f53fe" class="">Specify the DNS Server</h3><pre id="3734a0d6-cce8-4f40-9d8c-b14eed930730" class="code"><code>Router(dhcp-config)#dns-server {ip-address}</code></pre><h3 id="3f9dd99d-a9ac-4324-a714-e9ac756e0103" class="">Specify the Domain name</h3><pre id="12d434ee-1a38-47b6-ad63-4c0aea888936" class="code"><code>Router(dhcp-config)#domain-name {name}</code></pre><h3 id="4a76d53a-3583-4c47-8e92-a1425943574d" class="">Configure Lease Time</h3><pre id="c2056629-5984-423a-baed-e5903f9febcd" class="code"><code>Router(dhcp-config)#lease {{day} [hour] [minutes] | infinite}</code></pre><h2 id="72615bee-fba0-42cb-98d7-c93b89b41eef" class="">Clear Bindings</h2><pre id="28def104-5826-4cf3-acbd-48ed3c286148" class="code"><code>clear ip dhcp bindings *</code></pre><h1 id="7d925f04-b444-4cde-acd4-f4f6c1bf1d15" class="">DHCP Relay Configuration</h1><ol type="1" id="1f005bf6-6ef4-4a67-ab73-67ecb710773d" class="numbered-list" start="1"><li>Enter Interface configuration mode<pre id="4ed59b2d-4a01-443e-801b-b9a7811dd0c4" class="code"><code>configure terminal
+interface g0/0 // It has to be the interface on the subnet that will receive the IP Addresses offered by the DHCP Server</code></pre></li></ol><ol type="1" id="e589ac50-dbe4-45a7-b540-f219ff175af8" class="numbered-list" start="2"><li>Enable DHCP Relay and point to the DHCP Server<pre id="4675ca32-934f-490b-b14a-416c73968710" class="code"><code>ip helper-address {dhcp-server-ip}</code></pre></li></ol><h1 id="902c0adc-e8ca-45b4-90bb-ec3b086abf51" class="">DHCP Client Configuration</h1><pre id="efff2c16-e0d6-43a2-9dcd-43753aec56fc" class="code"><code>configure terminal
+interface {interface-id}
+ip address dhcp</code></pre><h2 id="1a0e5f0a-0d9a-4117-835d-04c45c4a160d" class="">Show commands</h2><h3 id="dddc812a-d116-4db1-866f-5fc458ab8841" class="">Show all the DHCP Clients </h3><p id="a4f2d66f-f083-465e-a343-e63668066efb" class="">It shows information about each DHCP Client that was assigned an IP Address</p><pre id="e3f3bf6f-77a9-4358-bae4-cd53aec4241d" class="code"><code>show ip dhcp binding</code></pre><h3 id="dbc5b8c6-322a-400e-bce0-27be4fd28249" class="">Show the Pools settings</h3><pre id="07de76fc-87dc-4d83-bc58-f143847108f9" class="code"><code>show ip dhcp pool</code></pre><h3 id="0c9d7c4e-f768-46b1-b769-0675037d36df" class="">Show Operational Statistics for DHCP Server</h3><pre id="82d938a1-3c9e-4721-95b0-9af393aa2cea" class="code"><code>show ip dhcp server statistics</code></pre><h3 id="8df6fdce-a6e3-4e76-9a0e-d28193511b6e" class="">Verify the Relay configuration</h3><pre id="eba85685-6afe-4038-aedc-90ec58ac2b94" class="code"><code>show ip interface {interface-id}</code></pre><h1 id="d53c1116-c7ab-4865-b680-053c58928372" class="">SUMMARY</h1><figure id="b6a470ce-c57c-4deb-822c-e74e95470cec" class="image"><a href="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled%203.png"><img style="width:1023px" src="DHCP%200ab7061a56aa4c7bbc09b15c732404b7/Untitled%203.png"/></a></figure><h1 id="f35790cb-99c6-4204-8b3f-ecf13a4847c3" class="">Curiosities</h1><h3 id="326e7f1e-475a-4c75-bc5e-4b7c8566d728" class="">DHCP Request without Discover and Offer</h3><p id="f67fa586-36df-471f-b7e5-26d3e84c58ca" class="">The DHCP process usually begins with a DHCPDISCOVER message from the client when it first connects to the network. However, a client may also directly send a DHCPREQUEST message under certain circumstances. Let&#x27;s consider a few scenarios:</p><ol type="1" id="f5c0df15-fa26-4490-9994-870c62738d22" class="numbered-list" start="1"><li><strong>Initial DHCP process</strong>: A new client or a client on a new network will start with a DHCPDISCOVER message, as it doesn&#x27;t yet have a valid IP address for the current network.</li></ol><ol type="1" id="3367c8cc-249e-47a8-a6ab-b9f68b5c1541" class="numbered-list" start="2"><li><strong>Renewing a lease</strong>: When a client is trying to renew its lease, it can directly send a DHCPREQUEST to the server, requesting to extend its lease on the current IP address. This request is sent unicast directly to the server that granted the lease, rather than as a broadcast.</li></ol><ol type="1" id="b31dafb7-7f0a-4235-9ea8-424e664f104b" class="numbered-list" start="3"><li><strong>Rebooting or reconnecting</strong>: If a client device reboots or temporarily disconnects from the network, but it&#x27;s still within its lease period, it may send a DHCPREQUEST message directly to the server upon reconnection, requesting the same IP address it had before.</li></ol><ol type="1" id="32e784d9-d0fc-48cc-b3b2-c93f3625929e" class="numbered-list" start="4"><li><strong>Receiving a NACK or no response</strong>: If the client receives a DHCP NACK in response to its DHCPREQUEST, or if it doesn&#x27;t receive a response after a certain period of time, it will start the process over with a DHCPDISCOVER message.</li></ol><p id="40f29075-fe05-4aca-b57e-bb915ea02dff" class="">So, while the process usually starts with DHCPDISCOVER, there are situations where a client might send a DHCPREQUEST without sending a DHCPDISCOVER first, particularly when renewing a lease or after a temporary disconnection. However, if the client&#x27;s request is denied (with a DHCP NACK) or ignored, it will then revert to sending a DHCPDISCOVER to start the process anew.</p><p id="3f0a2172-0b67-4a57-9c83-11dc970ee4f1" class="">
+</p></div></article></body></html>

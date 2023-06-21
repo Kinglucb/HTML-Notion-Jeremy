@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>NAT</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="69af2d60-3d6d-4cc4-ab24-68d4bf5996bf" class="page sans"><header><h1 class="page-title">NAT</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><h3 id="ca8c5191-a41d-4ef0-9937-438c0204d0f6" class="">Private IP Addresses</h3><p id="d8f65416-2485-4a9b-b190-d1c1519d140d" class="">Following the RFC 1918 the following IP Addresses ranges are considered private. Therefore, they don`t have to be globally unique and the ISP router will not forward them.</p><ul id="d4e4b518-9034-4dc6-a5a9-4ca58f45f025" class="bulleted-list"><li style="list-style-type:disc"><strong>10.0.0.0/8</strong> (10.0.0.0 - 10.255.255.255)</li></ul><ul id="b2c694f8-e5ec-4e75-997e-b0dede341410" class="bulleted-list"><li style="list-style-type:disc"><strong>172.16.0.0/12</strong> (172.16.0.0 - 172.31.255.255)</li></ul><ul id="fcc3d2e0-debd-4f00-82f7-cb7e9cc586ff" class="bulleted-list"><li style="list-style-type:disc"><strong>192.168.0.0/16</strong> (192.168.0.0 - 192.168.255.255)</li></ul><h1 id="6bc5538d-f2ca-4398-b74a-fd5c7391fac6" class="">NAT</h1><p id="2a446423-bdef-4513-89d4-2c9da8a02a06" class=""><strong>Network Address Translation (NAT)</strong> is a feature that allows the IP header of a packet to be modified. In other words, it will change the Source or/and Destination IP Addresses of the packet as configured.</p><p id="c295e33e-1936-419a-8c09-b529049ea811" class="">This is a must feature when using IPv4 Private IP Addresses.</p><p id="e933f3d6-fcee-42fa-8132-b59e0dea589e" class="">There are many types of NAT, one of them is <strong>Source NAT</strong>. As the name implies, it changes the <strong>Source IP Address</strong> in the IP Header <strong>statically</strong> or <strong>dynamically</strong>, as configured. </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1475ca6e-615f-4411-8854-4ae6f85a6ad8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: When the router receives the reply from the destination of the first packet, it translates the Destination to the original source of the packet. It is not Destination NAT, it is simply reverting the translation so the PC1 (for example) can receive the packet and know it is for it.</div></figure><h2 id="01985c23-6136-4fe6-8d30-c5ad52a3e535" class="">Static SNAT (Source NAT)</h2><p id="4002af88-c2c9-4bcf-b553-f8ac1359d077" class="">This is a <strong>one-to-one</strong> operation that a manually configured specific IP address as the source of the packet is translated into another pre-configured IP Address. The translated IP Address is unique. Therefore, you can`t configure a Static SNAT for multiple source IP addresses into a single translated IP Address (many-to-one). </p><p id="573ec2f3-50e7-44c3-b810-c7f54026ca02" class="">An <strong>inside local</strong> address is mapped to an <strong>inside global</strong> address.</p><ul id="22650905-9db8-4c8f-a67f-035e1d3d07fe" class="bulleted-list"><li style="list-style-type:disc"><strong>Inside Local </strong>→ Original Source IP Address<ul id="a7df88f7-e1a7-40d6-8a33-fc5eab18b659" class="bulleted-list"><li style="list-style-type:circle">LAN perspective</li></ul></li></ul><ul id="de91b300-5b4d-4632-8a7f-51e660e75005" class="bulleted-list"><li style="list-style-type:disc"><strong>Inside Global </strong>→ Translated Source  IP Address<ul id="72f0bfd7-4ba3-4e0a-a6be-f0d016907aa8" class="bulleted-list"><li style="list-style-type:circle">WAN perspective</li></ul></li></ul><ul id="de03f643-754a-45a7-89a0-891e5133ea0a" class="bulleted-list"><li style="list-style-type:disc"><strong>Outside Local</strong> → Original Destination IP Address<ul id="e4c8f72e-9869-4f3b-ae99-359225958cc4" class="bulleted-list"><li style="list-style-type:circle">LAN perspective</li></ul></li></ul><ul id="cdb2a7e2-dfa8-4c74-996c-0a015048d97f" class="bulleted-list"><li style="list-style-type:disc"><strong>Outside Global </strong>→ Translated (if translated) Destination IP Address<ul id="d310a4be-79df-4421-93ff-410e765ffc68" class="bulleted-list"><li style="list-style-type:circle">WAN perspective</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d4db88bf-7335-467a-b508-e35a74567e6f"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT: </strong>The device that created the packet is called <em>inside host</em>.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5b7b54bb-9ac9-462d-9e4b-84412727cbd7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: It is not a very useful feature for the Internet, since it is a one-to-one operation.</div></figure><figure id="89e0d679-da16-4223-bb99-49c14ab30e3a" class="image"><a href="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled.png"><img style="width:677px" src="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled.png"/></a></figure><figure id="c35b6d21-5ebf-41db-92cd-49ae06b185c2" class="image"><a href="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%201.png"><img style="width:684px" src="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%201.png"/></a></figure><figure id="b144b7b2-1c72-4df2-881a-5910e07e6e08" class="image"><a href="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%202.png"><img style="width:1636px" src="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%202.png"/></a></figure><h3 id="9726b7e7-247f-4133-99b2-45cd47a0e2ca" class="">Configuring Static SNAT</h3><ol type="1" id="c63a18bc-9a20-45bd-bd98-70e1de36cac3" class="numbered-list" start="1"><li><strong>Define the </strong><strong><em>inside</em></strong><strong> interface</strong><ol type="a" id="4a8559ff-bbfb-45bc-9551-d9cca7220468" class="numbered-list" start="1"><li>This is the inside network, LAN.</li></ol><pre id="dd649bc4-1fb0-4492-8ed8-a4995cc880f8" class="code"><code>interface g0/1   //Example
+ip nat inside</code></pre></li></ol><ol type="1" id="cd0b08b0-77c4-470a-8120-60a9c1af19a1" class="numbered-list" start="2"><li><strong>Define the outside interface</strong><ol type="a" id="eef233fb-9f39-4c69-b546-0de9a2617e68" class="numbered-list" start="1"><li>This is the outside network, WAN.</li></ol><pre id="1aba1228-d40c-48af-b46a-6ef5e77c8ed3" class="code"><code>interface g0/0
+ip nat outside</code></pre></li></ol><ol type="1" id="f744b5fe-1b83-47c0-8943-1803835e7980" class="numbered-list" start="3"><li><strong>Define the Static translations</strong><pre id="d5fd0285-a328-49cb-8260-b2cf5584c0eb" class="code"><code>ip nat inside source static {inside-local-ip} {inside-global-ip}</code></pre><ul id="d2ca724c-96ea-4d37-aef0-60199db741d1" class="bulleted-list"><li style="list-style-type:disc"><strong>“inside” parameter</strong> → Tells if the packet before being translated by NAT will enter from the inside interface, instead of the outside interface.</li></ul></li></ol><h1 id="8f05008f-a24e-42d4-a9d4-1cfba729dab9" class="">Dynamic NAT</h1><p id="387fa817-13ab-429d-ba6c-b3a84460f7cf" class="">It works similarly to Static NAT, it is also a <strong>one-to-one</strong> mapping of an IP Address to another IP Address. However, this time instead of manually mapping the IP addresses, the router will automatically do this translating the IP Addresses to a <strong>pool </strong>of available IP Addresses.</p><p id="e5bc9a99-28f5-46a3-839f-854ca1e5379e" class="">An <strong>inside local </strong>address is <span style="border-bottom:0.05em solid"><strong>automatically</strong></span> translated to <strong>one of the available inside global addresses</strong>.</p><p id="be125b29-e71c-4b56-8c9f-8fe637769883" class="">To do this you must create an <strong>ACL </strong>that specifies which addresses are allowed to be translated. Also, you must create a <strong>pool </strong>that specifies the available inside global addresses.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b6b855f6-d2ea-4760-adf7-bd10bf2b5327"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT:</strong> If a packet doesn`t match the ACL, it will not be discarded, only not translated.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1ad30025-8b64-49c4-ba31-ad4b381d7c54"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT: </strong><em>NAT Pool Exhaustion</em> happens when an inside local ip addresses tries to be translated to an inside global IP addresses, but there are no more inside global IP addresses available. Therefore, <strong>the packet will be dropped.</strong></div></figure><h2 id="72aba857-4ec4-45c8-b303-b05c482b44a1" class="">How to configure Dynamic NAT</h2><ol type="1" id="41345048-6f6e-4764-a728-390ea8aff89c" class="numbered-list" start="1"><li><strong>Set the Inside and Outside interfaces</strong><pre id="51b8ab1f-e971-471a-a639-5a40a385c043" class="code"><code>configure terminal
+interface g0/0
+ip nat outside
+interface f0/1
+ip nat inside</code></pre></li></ol><ol type="1" id="e070bf8d-7217-4d4b-87a7-87990801369d" class="numbered-list" start="2"><li><strong>Create the ACL that specify the range of IP Addresses to be translated</strong><pre id="49b18e60-290e-4a7e-a062-14ae7cbfa68f" class="code"><code>access-list {1-99 | 1300-1999} permit {ip-address} {wildcard} </code></pre></li></ol><ol type="1" id="ef56bb2f-1460-4399-a8c5-519dff4c2993" class="numbered-list" start="3"><li><strong>Create the pool of inside global IP addresses</strong><pre id="6bba13c7-795d-4888-8783-230dc1af8503" class="code"><code>ip nat pool {POOL-NAME} {first-address} {last-address} {prefix-length /{prefix-length} | netmask {mask}}</code></pre></li></ol><ol type="1" id="b5ce0062-0384-4cce-905a-0cc4f3651ebc" class="numbered-list" start="4"><li><strong>Apply the NAT</strong><pre id="a07e59db-875a-4bde-85cb-8963943236da" class="code"><code>ip nat inside source list {acl-id} pool {POOL-NAME}</code></pre></li></ol><h1 id="555790f0-52a1-4734-aa90-149b5676d90c" class="">Dynamic PAT / NAT Overload</h1><p id="c33eeb72-fb7a-4f92-97a7-40162a3a45a1" class="">This is the most common use for NAT, it allows a many-to-one operation, where multiple inside local IP Addresses can be translated to a single IP Addresses.</p><p id="a9b3da8d-019f-40ef-be1a-27812d1c3ae9" class="">It can do that by remembering the source port used by each inside host and bonding them together, so when the reply comes, it knows for which IP address to translate back to a inside local IP addresses by the destination port that the server replies.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="969b9e9b-8c73-457e-8083-e21746f775c5"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT:</strong> If more than one <em>inside host</em> use the same source port accidentally, it will increment the port by 1 and keep track of it. However, if a different source port is used, it will not translate the source port.</div></figure><figure id="2af9555c-691b-4047-9fa4-b4f05ae77f5c" class="image"><a href="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%203.png"><img style="width:1342px" src="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%203.png"/></a></figure><h2 id="0d674f10-ebc2-4eca-95c9-a42ada0b50e4" class="">How to configure PAT</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #1 - Pool</summary><div class="indented"><ol type="1" id="cad797e4-bc1a-4ca8-b6df-13c5ae29265d" class="numbered-list" start="1"><li><strong>Specify the inside and outside interfaces</strong><pre id="ee01caaf-c41d-4366-94ed-55f9083c0f11" class="code"><code>configure terminal
+interface g0/0   //EXAMPLE
+ip nat outside
+interface f0/1   //EXAMPLE
+ip nat inside</code></pre></li></ol><ol type="1" id="0aa80504-7560-4f53-8def-dbe59db4232b" class="numbered-list" start="2"><li><strong>Specify the range of IP Addresses to be translated</strong><pre id="11b0518b-8eac-48dc-addd-564811658434" class="code"><code>access-list {acl-id} permit {ip-address} {wild-card}</code></pre></li></ol><ol type="1" id="179ba6e4-d690-4add-9ea7-69159885bf31" class="numbered-list" start="3"><li><strong>Create the pool of inside global (public) IP Addresses</strong><pre id="69941848-ff06-467a-bf9b-556efbc600ea" class="code"><code>ip nat pool {POOL-NAME} {first-ip} {last-ip} {prefix-length /{prefix-length} | netmask {mask}}</code></pre></li></ol><ol type="1" id="f16091cf-e0e5-406f-acdc-4bf52a3a0be3" class="numbered-list" start="4"><li><strong>Apply the NAT</strong><pre id="9e9129f9-1c54-4413-b298-557e4e6ec475" class="code"><code>ip nat inside source list {acl-id} pool {POOL-NAME} overload</code></pre></li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #2 - Router`s External Interface (Recommended)</summary><div class="indented"><ol type="1" id="a45dfbbd-947e-457f-b235-fa049708f306" class="numbered-list" start="1"><li><strong>Specify the inside and outside interfaces</strong><pre id="e0b30cd6-224f-4b32-b690-1eb544d7520c" class="code"><code>configure terminal
+interface g0/0   //EXAMPLE
+ip nat outside
+interface f0/1   //EXAMPLE
+ip nat inside</code></pre></li></ol><ol type="1" id="7a96ed98-7751-4ba4-bfdb-852646668643" class="numbered-list" start="2"><li><strong>Specify the range of IP Addresses to be translated</strong><pre id="26813566-4d74-44b5-8150-b1f425f4762a" class="code"><code>access-list {acl-id} permit {ip-address} {wild-card}</code></pre></li></ol><ol type="1" id="7ccfd790-7450-4b3c-8888-e0089485bfc5" class="numbered-list" start="3"><li><strong>Apply NAT</strong><pre id="b835c3c0-4b46-4dd5-b061-22c941db9766" class="code"><code>ip nat inside source list {acl-id} interface {interface-id} overload</code></pre></li></ol><p id="f5aaf169-73da-44de-aa1a-7609d5fe3bef" class="">
+</p></div></details><hr id="fe2131a6-fe13-483c-88fb-b06fa71022d9"/><h3 id="94b1a92b-3c00-438a-873b-ddec0590c100" class="">See the NAT Translations</h3><pre id="809dd678-51cf-4432-b7ec-5346dacabc50" class="code"><code>show nat translations</code></pre><h3 id="8baabf52-209e-4581-8c6d-658a4920af44" class="">Clear NAT Translation table</h3><pre id="b3cddc8c-4ba3-49de-9975-ef4f70a2c89b" class="code"><code>clear ip nat translations *</code></pre><h3 id="a3788841-c2ae-4752-affd-d3492074c24d" class="">See NAT Statistics</h3><pre id="35ba9de1-a572-4bd8-9a81-87b6305b371b" class="code"><code>show ip nat statistics</code></pre><h1 id="c9fcdb6b-bfce-418c-b7eb-bcf1c2e27a39" class="">REMEMBER</h1><p id="5c64893f-9c25-4c5a-9937-493eabb50561" class="">Inside/Outside → Location of the device</p><p id="4ef16e20-e94d-4351-abfb-522dcb3008db" class="">Local/Global → Perspective</p><figure id="74416e40-0726-4d69-82ad-7300ac76ad2b" class="image"><a href="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%204.png"><img style="width:325px" src="NAT%2069af2d603d6d4cc4ab2468d4bf5996bf/Untitled%204.png"/></a></figure><p id="3865e63f-4c94-40f0-88ca-498aef13dcec" class="">
+</p></div></article></body></html>

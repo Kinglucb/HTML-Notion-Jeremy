@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>IPv6</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8967c299-88a6-4256-a4c5-72c72868093d" class="page sans"><header><h1 class="page-title">IPv6</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><h3 id="786ca4cb-9856-4665-ae83-8651f52e2ef4" class="">Benefits</h3><ul id="c43f1e83-fd3c-407b-843d-e8c4cf6bfd6e" class="bulleted-list"><li style="list-style-type:disc">Dramatically higher number of IP Addresses</li></ul><ul id="ea59574a-3784-408e-99a5-84b95416cdbb" class="bulleted-list"><li style="list-style-type:disc">Built-in security</li></ul><ul id="0399bfdb-ec4e-4a3e-8255-5bc4ac89fe6b" class="bulleted-list"><li style="list-style-type:disc">Automatic address configuration</li></ul><ul id="d1844be5-9d24-4ef6-bc64-b43ae022f9b3" class="bulleted-list"><li style="list-style-type:disc">Simple header structure</li></ul><ul id="43378a0e-e58d-4833-b7e8-b6b3344d75c3" class="bulleted-list"><li style="list-style-type:disc">better support for mobile devices</li></ul><h3 id="525bd263-85c2-4d07-8e1b-76044648201f" class="">Which technologies assist in the transition from IPv4 to IPv6?</h3><ul id="38718234-03c8-4ebd-9a87-667edca28881" class="bulleted-list"><li style="list-style-type:disc">Dual-stacking<ul id="323c7b5a-216c-4d98-9b6d-4daf3c89a989" class="bulleted-list"><li style="list-style-type:circle">Allows a device to work with both IPv4 and IPv6, therefore, having access to both networks</li></ul></li></ul><ul id="4c67c1e3-5dee-4a60-b5e8-9a723e800ad6" class="bulleted-list"><li style="list-style-type:disc">6to4 tunneling<ul id="7e47c4fa-94eb-475e-83f2-f0efc73f13cf" class="bulleted-list"><li style="list-style-type:circle">Allows an IPv4 network to encapsulate and transport IPv6 traffic</li></ul></li></ul><ul id="d5c957a9-c875-4319-b633-cb1b44270c9b" class="bulleted-list"><li style="list-style-type:disc">4to6 tunneling<ul id="c8b64d2b-bae1-4375-8a86-306e51bcb7e3" class="bulleted-list"><li style="list-style-type:circle">Allows and IPv6 network to encapsulate and transport IPv4 traffic</li></ul></li></ul><h1 id="9d182b79-f72e-431d-9390-5ca9aa203b16" class="">Hexadecimal</h1><p id="59a1faed-e1e2-4e3c-855a-1699778cae8f" class="">IPv6 is written in hexadecimal.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="59cee72c-4d4b-49d0-826c-f3bfac624084"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">REMEMBER: 4 bits → 1 hexadecimal number (1111 = F)</div></figure><p id="aa6049fd-7d32-486f-85da-914cac386afc" class="">In comparison with IPv4`s 32 bits of length, IPv6 has 128 bits of length → 2^128 IP addresses. It is also grouped in 8  set of 4 hexadecimal numbers. For example: 4ef4:223b:6789:ab34:73fe:51bb:aaaa:56be</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8c3565a3-0464-4761-9d6a-5735901facd6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IMPORTANT: It uses prefix (CIDR) notation for the mask (i.e. /64)</div></figure><h3 id="45caa0a4-cd4c-4a1f-8fd6-1ed3f38bf7d0" class="">Abbreviation </h3><ul id="f4f65712-88d9-40ba-a358-d1c12a46cce4" class="bulleted-list"><li style="list-style-type:disc">Leading 0s can be “erased”<ul id="7d7013a8-a4e8-4a3c-a9dd-3f8a3ca6b47e" class="bulleted-list"><li style="list-style-type:circle">For example 2001:002f:000b:43db:000c:0bce:3958:8908 → 2001:2f:b:43db:c:bce:3958:8908</li></ul></li></ul><ul id="e5526802-0eeb-49ea-83ad-00ab96b65a66" class="bulleted-list"><li style="list-style-type:disc">Consecutive quartets can be omitted (ONLY 1 TIME)<ul id="2fd62a28-324a-43a3-8aff-67082b386b50" class="bulleted-list"><li style="list-style-type:circle">For example 2001:0000:0000:0000:0000:be45:ac48:51cd → 2001::be45:ac48:51cd</li></ul></li></ul><figure id="138480cb-e95b-47a3-b315-979a1abfd15c" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled.png"><img style="width:1239px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled.png"/></a></figure><h3 id="fd30dadf-567d-4769-9b21-c06faae02e0d" class="">IPv6 Assignment (Global Unicast Addresses)</h3><p id="b0744fa3-9c15-464a-a74e-e84a01d93548" class="">Typically enterprises have a <strong>/48 network</strong> assigned to them, but usually an IPv6 address has an prefix of /64 → There are <strong>16 bits for subnets </strong>and<strong> 64 bits for hosts</strong>.</p><figure id="51a48192-5d36-4487-9ede-d33c6ea5fde0" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%201.png"><img style="width:1211px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%201.png"/></a></figure><h2 id="db6676d0-14be-419b-8e59-5c48794dcd3a" class="">Basic IPv6 Configuration</h2><h3 id="571ff70c-b109-4c2d-afc4-1a5a9d8cff92" class="">Enable IPv6 on a router</h3><pre id="37dec109-f903-47bc-8cba-8921bc114780" class="code"><code>configure terminal
+ipv6 unicast-routing</code></pre><h3 id="5f7d7b93-78e8-4cbf-b617-fdbdefd60bab" class="">Assign an IPv6 address to an interface</h3><pre id="105b6842-8486-4403-82ce-3c331f7d5785" class="code"><code>configure terminal
+interface g0/0
+ipv6 address {ipv6-address}/{prefix}</code></pre><h3 id="42e0fb8d-d5e2-4a6b-b393-80808e39f7da" class="">Show IPv6 interfaces</h3><pre id="d2f1f259-15f5-4705-a4e5-83d39a488cb1" class="code"><code>show ipv6 interface brief</code></pre><h1 id="12497266-d8da-4af1-bbb1-86c384d3c522" class="">Modified EUI-64</h1><p id="69c13a9c-568d-4928-b41f-ec96bc1b85ac" class="">Also known as Extended Unique Identifier, it is a method of converting the MAC Address of the interface into a 64-bit unique identifier.</p><p id="c0d90d83-3983-4e72-81df-ebec19608fd8" class="">This will become the host portion of the /64 IPv6 address.</p><ol type="1" id="e87a5851-70e2-4883-9031-5f30ecdd50c7" class="numbered-list" start="1"><li>Divide the MAC Address in half<ol type="a" id="d34d1c6a-9d9e-45a6-b3ae-08edeeb39715" class="numbered-list" start="1"><li>For Example: 1234 5678 90AB → 1234 56 | 78 90AB</li></ol></li></ol><ol type="1" id="a533700e-ca00-49c9-ac6d-ea2d16360cd0" class="numbered-list" start="2"><li>Insert FFFE<ol type="a" id="b1414e08-5b5e-4290-933f-b1fb84d8dcd0" class="numbered-list" start="1"><li>1234 56FF FE78 90AB</li></ol></li></ol><ol type="1" id="054deef1-f042-4189-a21c-2e1f08cef16a" class="numbered-list" start="3"><li>Invert the 7th bit<ol type="a" id="3ff4a09c-e208-48a7-ae74-1b802a7084c5" class="numbered-list" start="1"><li>1<strong>2</strong>34 56FF FE78 90AB → 1034 56FF FE78 90AB</li></ol></li></ol><h3 id="3eda0b9d-93cc-4b11-9160-06e708d03eae" class="">Configure an IPv6 Address using EUI-64</h3><pre id="3ba86561-0414-4190-a7d9-cba08d15316e" class="code"><code>configure terminal
+interface g0/0
+ipv6 address 2001:0db8:0000:0001/64 eui-64  //It will create an Host IP based on the MAC Address
+no shutdown</code></pre><figure id="f8d9222f-fcda-47bb-89a6-7343fe2f5009" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%202.png"><img style="width:1206px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%202.png"/></a></figure><h1 id="c25d6811-e890-40a8-8464-2e65b9840db9" class="">Types of IPv6 Addresses</h1><h2 id="4c2d1196-74a4-4522-a792-903075d9677b" class="">Global Unicast </h2><p id="8e3f0e9a-577e-4551-9781-49bce079d309" class="">These type of addresses are globally unique identified. They are a public address that needs to be register, it identifies a network in the whole world.</p><p id="b3231357-9c2b-478c-9f54-904e55ea1274" class="">They are in the range of 2000:0000:0000:0000:0000:0000:0000:0000 - 3FFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF  (2000::/3).<mark class="highlight-yellow_background"> Therefore, it starts with </mark><strong><mark class="highlight-yellow_background">2 </mark></strong><mark class="highlight-yellow_background">or</mark><strong><mark class="highlight-yellow_background"> 3</mark></strong><mark class="highlight-yellow_background">.</mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9e2baba0-15c2-4258-8b52-a40a94aa8d20"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IMPORTANT: This was updated, so any non-reserved range of IPv6 addresses are can be Global Unicast Addresses.</div></figure><p id="138eb14b-e6a4-4174-ba7a-d8889fabfc55" class="">Usually in a given IP Address by your ISP there will be the 48-bit Global Routing Prefix” followed by the “subnet identifier” and then “interface identifier”</p><figure id="4b710168-135a-474c-a93c-dd9219532c6b" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%203.png"><img style="width:1197px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%203.png"/></a></figure><h2 id="18c867dc-2573-402c-9313-754c17d9b86a" class="">Unique Local</h2><p id="46a17c83-db76-4496-a1e6-6fc29aa17c3e" class="">These addresses don`t need to be registered. They are not used in the internet, only internally, so if you send it to you ISP, the packet will be dropped.</p><p id="f167b603-1725-4d99-a484-c5ca6ac99a30" class=""><mark class="highlight-yellow_background">It is all the address that start with </mark><strong><mark class="highlight-yellow_background">FD</mark></strong><mark class="highlight-yellow_background"> (FD00::/8)</mark> </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bca597a5-edf3-4717-a4c8-82e1a34ce692"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">It used to be FC00::/7</div></figure><p id="7f995245-0455-4a1b-a759-34e5c89bcd80" class="">Besides from the Unique local identifier, there is a 40-bit <strong>Global ID</strong>, and again the<strong> subnet identifier</strong> and the <strong>interface identifier</strong></p><figure id="ebcf010a-b3dc-4d56-83fe-7439695b11db" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%204.png"><img style="width:1198px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%204.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5c698dd6-7324-426a-831e-5688d451cda0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The 40-bit Global ID is randomly generated in case a company merges with another, so there is a fewer chance of duplicate subnets</div></figure><h2 id="ceb88326-f47b-4853-8885-39153361aec5" class="">Link Local</h2><p id="563e4772-2042-4687-825c-fd29c400555c" class="">It is an address that the host portion is GENERATED based on the interface MAC Address (EUI-64). It is therefore, the address associated with the interface.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="20ca2085-68c4-4f17-995a-a28a1acd3607"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Because of this, the host portion will be the same for the address that used EUI-64.</div></figure><p id="8cd0ea3a-e855-49b1-aabf-d480787fb6cc" class="">It is <strong>ONLY USED</strong> inside the subnet. Therefore, you <strong>CAN`T</strong> use it as the destination IP address of a packet, it will be dropped.</p><p id="e27a1d3c-a6ba-453e-a9a8-6d89a06c48d5" class="">It is mainly used for:</p><ul id="541af550-87cd-45c9-abb0-222dd3e1fe75" class="bulleted-list"><li style="list-style-type:disc">Routing Protocols peerings (OSPFv3 uses it to form adjancies)</li></ul><ul id="aaf1ba18-9938-4cb1-94c3-fd2808f7dbad" class="bulleted-list"><li style="list-style-type:disc">Next-hop IP Addresses for static routes</li></ul><ul id="edc3108a-63d4-48b3-9649-24a9620fce70" class="bulleted-list"><li style="list-style-type:disc">NDP (Substitute of ARP in IPv6)</li></ul><p id="3cd4a7bc-6fe4-4bd3-b059-231555fe6728" class=""><mark class="highlight-yellow_background">It is identified by </mark><mark class="highlight-yellow_background"><strong>FE80</strong></mark><mark class="highlight-yellow_background">::/10</mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1b666985-6055-4fb4-8462-cc9231534ccf"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IMPORTANT: The standard says that the rest 54 bits be set to 0, so you wont see a FE9, FEA or B.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d5ebcd91-debb-4729-90e5-a53cacf40241"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> These will be generated whenever you configure an IPv6 address on the interface or if you issue the <strong>ipv6 enable</strong> <em>command </em>on the interface.</div></figure><h2 id="ee884898-c8cc-45bf-9cb5-f0fe4e295af0" class="">Multicast</h2><p id="a8414ba8-6a60-4904-a16f-82432ff625e4" class="">It is an address of one-to-many. It is a packet to all the devices that joined that <em>multicast group</em>.</p><p id="fb717be5-caa4-4e5a-bf93-fbf1861bee33" class=""><mark class="highlight-yellow_background">It is identified by </mark><mark class="highlight-yellow_background"><strong>FF</strong></mark><mark class="highlight-yellow_background">00::/8</mark></p><table id="5abe4e73-b265-48e7-957c-0a287e7281ae" class="simple-table"><thead class="simple-table-header"><tr id="d1674d2e-725d-49bb-a09a-2743b63d8fe1"><th id="bC|h" class="simple-table-header-color simple-table-header">Purpose</th><th id="Zsc]" class="simple-table-header-color simple-table-header" style="width:216.47500610351562px">Multicast IPv6 address</th><th id="u@ql" class="simple-table-header-color simple-table-header">Multicast IPv4 Equivalent</th></tr></thead><tbody><tr id="52323617-ab8d-4da9-b095-34cd59edac06"><td id="bC|h" class="">All nodes/hosts (”IPv6 Broadcast”)</td><td id="Zsc]" class="" style="width:216.47500610351562px">FF02::1</td><td id="u@ql" class="">224.0.0.1</td></tr><tr id="79e0e001-ffcc-4a5d-9aab-5f39046816ef"><td id="bC|h" class="">All routers</td><td id="Zsc]" class="" style="width:216.47500610351562px">FF02::2</td><td id="u@ql" class="">224.0.0.2</td></tr><tr id="9ee5025a-7430-4320-9f98-06a66ff59833"><td id="bC|h" class="">All OSPF routers</td><td id="Zsc]" class="" style="width:216.47500610351562px">FF02::5</td><td id="u@ql" class="">224.0.0.5</td></tr><tr id="2584c2ab-c6e9-431c-b998-7e4ec4a3ef3f"><td id="bC|h" class="">All OSPF DR/DBR</td><td id="Zsc]" class="" style="width:216.47500610351562px">FF02::6</td><td id="u@ql" class="">224.0.0.6</td></tr><tr id="cc6d5a72-8c29-4d7e-b6de-65ebdceb747e"><td id="bC|h" class="">All RIP routers</td><td id="Zsc]" class="" style="width:216.47500610351562px">FF02::9</td><td id="u@ql" class="">224.0.0.9</td></tr><tr id="0ff76141-fb5c-4feb-994c-6f41c346c0e5"><td id="bC|h" class="">All EIGRP routers</td><td id="Zsc]" class="" style="width:216.47500610351562px">FF02::A</td><td id="u@ql" class="">224.0.0.10</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9678229e-052f-4611-a426-1add894296ca"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT: </strong>There is no Broadcast address for IPv6!</div></figure><p id="a31d090a-df52-4d23-927a-d79d23c042a3" class="">The Multicast addresses are by itself divided in<strong> scopes</strong>, which say how much a packet can travel, some of them are:</p><ul id="d288816f-9780-4fc5-a918-d2e7d9098ae1" class="bulleted-list"><li style="list-style-type:disc"><strong>Interface-Local / Node-Local(FF01)</strong><ul id="b1d82700-6141-44cb-abe9-e969ed0a2cb8" class="bulleted-list"><li style="list-style-type:circle">These addresses are used inside the actual device. They never leave the device.</li></ul></li></ul><ul id="ced85163-9cbd-4071-95d0-229cd7b6f438" class="bulleted-list"><li style="list-style-type:disc"><strong>Link-Local (FF02)</strong><ul id="9dcdc2ca-8dde-4b01-a6d5-33d07a6b0459" class="bulleted-list"><li style="list-style-type:circle">Don`t mess it up with the <strong>Link Local Addresses</strong>, these are multicast addresses that can go only up to the boundaries of the subnet just like a link local address, but multicast instead of unicast.</li></ul><ul id="22eaf48b-7528-4461-8930-20847e1a4e42" class="bulleted-list"><li style="list-style-type:circle">They can only be forwarded inside a subnet. Routers will not route these addresses.</li></ul></li></ul><ul id="1b7589e2-d2c5-464c-8251-e461396868a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Site-Local (FF05)</strong><ul id="7798a2e3-3146-4989-bfb0-7a29fb5024c3" class="bulleted-list"><li style="list-style-type:circle">These packets only stay inside a single geographical location.</li></ul><ul id="fe39af1a-091b-4965-99f9-f1bc4d9f2797" class="bulleted-list"><li style="list-style-type:circle">You might wonder: “How can it be confined to a geographical location?”. The answer is, it will be defined by the Network Engineer</li></ul></li></ul><ul id="cb1102fc-775f-4986-b61f-7827474debd6" class="bulleted-list"><li style="list-style-type:disc"><strong>Organization-Local (FF08)</strong><ul id="b96710a1-2576-4ba2-8ac5-b5229d9b92ed" class="bulleted-list"><li style="list-style-type:circle">These packets stay inside a Organization network.</li></ul><ul id="8c9cc792-939f-4b96-9510-e72b8415d26c" class="bulleted-list"><li style="list-style-type:circle">Defined by the Network Engineer</li></ul></li></ul><ul id="9d7fe9d0-7337-46f4-9b31-4d4648c1b4a1" class="bulleted-list"><li style="list-style-type:disc"><strong>Global (FF0E)</strong><ul id="9d680be2-63d7-4bd3-a129-5ddb4bb4910d" class="bulleted-list"><li style="list-style-type:circle">“These packets can reach any packet in the world.” No Boundaries.</li></ul></li></ul><figure id="ae31a731-159a-4e0d-bc89-1cd746dbee51" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%205.png"><img style="width:1219px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%205.png"/></a></figure><h2 id="288f8dc9-149d-4834-9e32-61849fe0be5b" class="">Anycast</h2><p id="54b271d1-11b2-4014-93e2-365ad63ab402" class="">It is a new feature introduced in IPv6. It is a one to one-of-many, you could also say one-to-multiple but only one is going to receive that packet. </p><p id="04f5dc96-cb1e-42ab-893b-ce3a9870a75b" class="">You might wonder, <strong>what is the difference from Multicast?</strong> The answer is that only one will receive the packet, not many.</p><p id="3eb5e791-f800-4da0-89ed-34e1599c70c9" class="">You could also think, then <strong>what is the difference from Unicast?</strong> Both will be sent to only one device, but the difference lies in the fact that anycast can be configured as a shared IP address while Unicast is unique.</p><p id="974deaf3-cefb-4f54-9c4b-212dc60514fc" class="">So how does it select the device that will receive that packet, it will be the one with the <strong>lowest routing metric</strong></p><p id="fea5887a-e60e-4e2b-be78-895a9c478407" class="">It also has no range, so you can use a Global Unicast or a Unique Local address as a anycast address, you just have to add the <strong>anycast </strong><em>statement </em>in the end of the <strong>ipv6 address</strong> <em>command</em>.</p><pre id="ebc11d1d-5c0e-4d18-b4d1-c5773c4e557e" class="code"><code>configure terminal
+interface g0/0 
+ipv6 address FD89:0001:5345:243D:4324:5434:BBDD:0221/128 anycast</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e654c675-6e7f-43b5-b80d-f627a9076d87"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE: </strong>It usually refers to a single IP as stated by the /128 mask</div></figure><figure id="5fd5b490-61fa-45b9-9abf-90d08657b82b" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%206.png"><img style="width:151px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%206.png"/></a></figure><h1 id="e7c3bcc8-50d9-48bf-a619-57be9d0a1210" class="">Special IP Addresses</h1><ul id="137edd6d-075b-4bd0-b516-1b2ec582d9ff" class="bulleted-list"><li style="list-style-type:disc">:: → The unspecified IPv6 address<ul id="4008593b-3671-4e2e-96ba-57d799f63502" class="bulleted-list"><li style="list-style-type:circle">Can be used when the device doesn`t know its IPv6 address</li></ul><ul id="86df85ea-0f29-47a1-8ef8-a58cefa8db4f" class="bulleted-list"><li style="list-style-type:circle">is used to define the default route → ::/0</li></ul><ul id="819e802c-8c39-45c9-a9d3-832520bd924c" class="bulleted-list"><li style="list-style-type:circle">IPv4 equivalent: 0.0.0.0</li></ul></li></ul><ul id="0f3dc65c-b474-47b5-aa87-c0d970613f45" class="bulleted-list"><li style="list-style-type:disc">::1 → Loopback Address<ul id="b06cd93d-6bd8-4cb1-8cd0-8a3835c670de" class="bulleted-list"><li style="list-style-type:circle">It is used to test the network stack in the device itself.</li></ul><ul id="e71395e8-7964-47ac-973f-e50b3619844a" class="bulleted-list"><li style="list-style-type:circle">IPv4 equivalent: 127.0.0.0 - 127.255.255.255</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="20ce45cb-140c-42a7-904c-85f3022b82d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE:</strong> the loopback address is represent by a single address instead of a whole /8 range</div></figure><h1 id="0d5c38df-0353-4055-b75b-710baca94af2" class="">IPv6 Header</h1><figure id="c0ab6858-6881-45d2-90ef-3c6e714aa013" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%207.png"><img style="width:1192px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%207.png"/></a></figure><h2 id="ed203d78-c55c-4336-8884-b27042c07b47" class="">Version</h2><p id="25bb5111-070f-4eca-8f6a-5997a7a6c076" class="">Length: 4 Bits</p><p id="7436c220-9738-489d-90e9-d38fcb575b0d" class="">Specifies the version of the IP Protocol being used, it will always be 6 in Binary (0b0110)</p><h2 id="4237182f-9096-4358-9f95-7bc6f5ec6a55" class="">Traffic Class</h2><p id="3b09aff6-fefd-4bd9-939a-865b9b1d1d29" class="">Length: 8 Bits</p><p id="459ea526-9937-4cb3-92a1-1c2ab7c2a646" class="">Used for QoS (Quality of Service)</p><h2 id="3454b0b3-d013-4821-be32-e71108441aaf" class="">Flow Label</h2><p id="209918ea-153d-4dda-908f-1139a7e45868" class="">Length: 20 Bits</p><p id="8cd0c2bd-a0b7-4a1d-8010-74897e3ec1c8" class="">Used to identify specific traffic flows between a specific source and destination</p><h2 id="3a88d859-81d7-4f8e-994c-3d0e3550e540" class="">Payload Length</h2><p id="b61a2b56-1e0f-40a5-b054-193b79f35072" class="">Length: 16 Bits</p><p id="96cc856a-4a21-479b-a051-1c0195d92a8b" class="">It is used to indicate the size of the L4PDU.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0cbe4d16-7e4d-4605-8316-88f622a0a8ac"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: There is no Header Length as in the IPv4 Header, since the IPv6 is fixed in 40 bytes.</div></figure><h2 id="172cd054-7626-4dd5-8f82-4461a1368bd5" class="">Next Header</h2><p id="327b5766-f1f0-46f8-9665-6b7c429cb198" class="">Length: 8 Bits</p><p id="cbbc519a-cb33-4ba9-b14d-17662379aef5" class="">Indicates the type of the L4 PDU header: TCP or UDP.</p><h2 id="a188d2d4-5328-4159-9edd-215abcbe908c" class="">Hop Limit</h2><p id="6015ca41-dd46-49ba-af81-49c7ca6d1737" class="">Length: 8 Bits</p><p id="eb171384-ce10-45e0-8273-57001ba9fb35" class="">Tells how much the packet has been forwarded. Each time it passes by a router, the value is decremented by 1. If it reaches 0, the router will drop the packet.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="86fb96e5-f314-4db2-863c-432444270bda"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: It is the same as the TTL (Time-to-Live) of IPv4</div></figure><h2 id="cd392d54-6e6e-4fd8-89b8-1c664b925c73" class="">Source and Destination IP Addresses</h2><p id="873c896f-d34d-4147-961f-0ab39556972e" class="">Length: 128 Bits each</p><p id="153b511e-d1f5-4f67-86c2-db91d6c9dd32" class="">IPv6 Addresses</p><h1 id="99fce2b8-2b27-43ed-971c-d5ad7927dc55" class="">NDP</h1><p id="3ae4b742-5e4b-4a28-bfd9-3b520f7dea64" class="">NDP (Neighbor Discovery Protocol) is the IPv6 version of ARP. It uses ICMPv6 and the Solicited-Node Multicast Address to associate a device`s MAC Address with its IPv6 Address</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3f60a954-9ad5-44ec-8379-b6c03b0c2862"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IPv6 doesn`t use Broadcast like IPv4 does. In fact, there is no Broadcast in IPv6.</div></figure><p id="f138cef3-d16d-44c5-abb8-d1a96106a239" class="">There are four types of NDP messages:</p><ul id="a7eb395c-2cfe-4bc2-8d61-e84b3ed23463" class="bulleted-list"><li style="list-style-type:disc">Router Solicitation (RS) = ICMPv6 Type 133<ul id="c1ab970e-3447-4d51-8b6b-c73ad58032f7" class="bulleted-list"><li style="list-style-type:circle">These messages are sent every time an interface is enabled/host is connected.</li></ul><ul id="e34a1a69-4844-4ed9-aec1-90f90ed7533b" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Sent to Multicast Address ff02::2 (all routers)</mark></li></ul><ul id="5d5e320a-6f6e-473a-91a5-25f629af70a6" class="bulleted-list"><li style="list-style-type:circle">Asks all the routers in that subnet, to identify themselves.</li></ul></li></ul><ul id="5a46d017-8412-4df5-b98f-72dd8fae5e66" class="bulleted-list"><li style="list-style-type:disc">Router Advertisement (RA) = ICMPv6 Type 134<ul id="d59a0074-6d6a-4987-8ed8-d138b4ab42d3" class="bulleted-list"><li style="list-style-type:circle">These messages are a response to the RS or they can be sent periodically.</li></ul><ul id="3f602824-646a-4c93-a348-5aaa25165ec3" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Sent to Multicast Address ff02::1 (all nodes)</mark></li></ul><ul id="4868c714-ea13-4075-85e1-786233963668" class="bulleted-list"><li style="list-style-type:circle">Routers announce their presence. Also more information is provide, like the prefix of the subnet for SLAAC.</li></ul></li></ul><ul id="f4ecae6f-207f-44d4-a227-025985d062ea" class="bulleted-list"><li style="list-style-type:disc">Neighbor Solicitation (NS) = ICMPv6 Type 135</li></ul><ul id="12fdf12c-c154-4aa8-9932-5f1b259d2078" class="bulleted-list"><li style="list-style-type:disc">Neighbor Advertisement (NA) = ICMPv6 Type 136</li></ul><p id="7646eb3e-32a4-4122-892e-bc9ed8bac816" class="">NDP Also has another feature → DAD (Duplicate Address Detection)</p><h3 id="3b050099-14b1-4f64-ac72-2ec3b463c75c" class="">Solicited-Node Multicast Address</h3><figure id="706beac5-b46a-482f-834e-0ed55355d016" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%208.png"><img style="width:1212px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%208.png"/></a></figure><h3 id="e1fb026c-ab09-4550-b5ab-791725969b56" class="">How Usual NDP works</h3><ol type="1" id="eacf0da8-8c0e-4fed-8c54-ea1d5a296132" class="numbered-list" start="1"><li>Host 1 calculates the Host 2`s Solicited-Node Multicast Address by the unicast address entered in the ping command.</li></ol><ol type="1" id="ab8ef043-88fe-45c2-a38f-2af288ed4e3b" class="numbered-list" start="2"><li>Host 1 sends a Neighbor Solicitation message via ICMPv6 with the destination IPv6 address as the Host 2`s Solicited-Note Multicast Address and the Destination MAC Address as the Multicast MAC Address based on Host 2 Solicited-Node Multicast Address.</li></ol><ol type="1" id="13186eb7-3032-412c-bcad-0ce4bd50c0e2" class="numbered-list" start="3"><li>Host 2 replies with a Neighbor Advertisement with its IPv6 address in the source and the destination IPv6 address as Host 1 (Learned via the source IPv6 address on the NS), and also the source MAC Address as its MAC Address and the destination MAC Address as Host 1 (Also learned via the NS).</li></ol><p id="48367db5-ab00-43f1-9b1e-f7ccb1257aaa" class="">For example:<div class="indented"><p id="9ad26179-de4b-4f47-9c0e-57375b77b6da" class="">Host 1: 2001:db8::1       Host 2: 2001:dn8::bb:abc2</p><p id="70a72219-16d6-4a79-9e96-6b1a331f1823" class="">NS:</p><table id="013c3741-55bd-48bf-bd2c-c26475ef11a4" class="simple-table"><thead class="simple-table-header"><tr id="f5f1d4f8-e9a4-4f31-91a2-e323f20c33a8"><th id="@ruH" class="simple-table-header-color simple-table-header" style="width:168px">Source IPv6</th><th id="E`Pd" class="simple-table-header-color simple-table-header" style="width:168px">Destination IPv6</th><th id="}FfM" class="simple-table-header-color simple-table-header" style="width:168px">Source MAC</th><th id="WdPr" class="simple-table-header-color simple-table-header" style="width:168px">Destination MAC</th></tr></thead><tbody><tr id="b473bb2d-e65b-4cc3-baa0-ae89cd636008"><td id="@ruH" class="" style="width:168px">2001:db8::1</td><td id="E`Pd" class="" style="width:168px">ff02::1:ffbb:abc2</td><td id="}FfM" class="" style="width:168px">Host 1 MAC</td><td id="WdPr" class="" style="width:168px">IPv6mcast_ff: bb.ab.c2</td></tr></tbody></table></div></p><h2 id="66caca57-57f5-427d-a034-c9a1ce818fdb" class="">See NDP Table </h2><p id="2ec5eedf-630b-4ff1-ba58-9950758b6adb" class="">It is the equivalent to the ARP table.</p><pre id="f66c393d-e221-4883-810a-cfbd10d06ee4" class="code"><code>show ipv6 neighbor</code></pre><h2 id="2743adf9-32f5-4e50-9fd0-18ae0235985d" class="">SLAAC</h2><p id="882fa3aa-72fb-468e-b13a-d98648127e73" class=""><strong>SLAAC (Stateless Address Auto-Configuration)</strong> is a way of automatically configure an IPv6 address on a host using that subnet`s router interface to learn the prefix and default-gateway using NDP, then they generate an IPv6 using EUI-64 or randomly generate the interface identifier.</p><pre id="214de2fd-4348-4044-9d2f-6018e404d63b" class="code"><code>ipv6 address autoconfig</code></pre><h2 id="53a70910-2f90-4b7c-bfe3-52ecd184a012" class="">DAD</h2><p id="d546cf2e-0d69-48e8-878c-9aad7fdf0adb" class="">It allows the device to know if there is another device in the local link using the same IPv6 Address as it.</p><p id="ec962749-1a5c-45a7-9b02-e62700ddb58c" class="">It is used whenever a <strong>no shutdown</strong> command is issued or an ipv6 address is entered. </p><p id="37b4bcd3-edfe-42c8-adb3-62979bb7e672" class="">It uses the NS/NA messages. By sending an NS with its own IPv6 address, if it gets a reply, it will know it has a duplicate address.</p><h1 id="8ef2abad-ecd9-411c-8937-705f38f8d9f9" class="">IPv6 Static Routing</h1><p id="9725a112-d966-4e9b-9c27-83c31c530ee0" class="">It works the same as IPv4 routing. The router will generate a separate routing table for each IP version.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ffce4908-7f75-4b8d-bf10-c0238e9729c3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">REMEMBER: Routers will not forward packets with<strong> link</strong> <strong>local addresses</strong> or <strong>multicast addresses with a link-local scope</strong>, therefore, it won`t add them to the routing table.</div></figure><pre id="3095398e-e974-4ad5-82df-9fd1ced138fb" class="code"><code>configure terminal
+ipv6 route {destination}/{prefix length} {next-hop | outgoing-interface [next-hop]} [ad]</code></pre><p id="08ddbb4e-e662-4fef-95a9-0d6075d878be" class="">Remembering, there are 3 types of Static Routes:</p><ul id="e5b0aae9-d7a4-4415-948a-cfb105bd36ee" class="bulleted-list"><li style="list-style-type:disc"><strong>Directly attached</strong><ul id="6c2ff21c-6ff1-4c51-abe6-51f09a2f34bb" class="bulleted-list"><li style="list-style-type:circle">When you only specify the outgoing interface</li></ul><ul id="77250b56-f575-4cff-bd9e-dab8e76e5237" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red_background"><strong>Doesn`t work with IPv6 via Ethernet!</strong></mark></li></ul></li></ul><ul id="49308852-7f56-46b2-aa30-82de1bc75e68" class="bulleted-list"><li style="list-style-type:disc"><strong>Recursive</strong><ul id="6449d380-5c8f-4c23-8a79-639931ef3228" class="bulleted-list"><li style="list-style-type:circle">When you only specify the next-hop address</li></ul></li></ul><ul id="05826418-b769-452b-9af6-1f8076ac39bd" class="bulleted-list"><li style="list-style-type:disc"><strong>Fully specified</strong><ul id="947e9eba-78d1-42cb-b21c-10993bdfc49b" class="bulleted-list"><li style="list-style-type:circle">When you specify both the outgoing interface and the next-hop address</li></ul><ul id="27cd1b42-68c0-4f9f-8a4f-1a921c7516d0" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Used for Link-Local address as next-hop</mark></li></ul></li></ul><h3 id="3dc1def1-1548-48b5-b14d-a1ed30ac7d71" class="">Default Route</h3><pre id="7f291894-82ca-4e8e-84b3-b71f7cbd0516" class="code"><code>configure terminal
+ipv6 route ::/0 {next-hop | outgoing-interface [next-hop]} [ad]</code></pre><h1 id="8e24186f-d5b2-4d14-8638-a11b9c25a70e" class="">Extra</h1><figure id="2e9c7a07-0dfb-419a-915b-03bd9900c046" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%209.png"><img style="width:646px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%209.png"/></a></figure><figure id="e9998285-0b90-4644-a7b2-4f1029c7c481" class="image"><a href="IPv6%208967c29988a64256a4c572c72868093d/Untitled%2010.png"><img style="width:1219px" src="IPv6%208967c29988a64256a4c572c72868093d/Untitled%2010.png"/></a></figure><p id="042313b9-b010-47e9-8396-b0049275412c" class="">
+</p></div></article></body></html>

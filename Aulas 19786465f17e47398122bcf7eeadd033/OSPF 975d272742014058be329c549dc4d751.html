@@ -1,0 +1,697 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>OSPF</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="975d2727-4201-4058-be32-9c549dc4d751" class="page sans"><header><h1 class="page-title">OSPF</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="01ebcdd7-a00c-46a8-9f07-1fba573bd39f" class="">It was created by a Dutch scientist called Edsger Dijkstra.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2eb1e9f0-979c-4470-8441-9d16efca5309"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Because of this OSPF uses the Shortest Path First algorithm, or also called Dijkstra`s algorithm</div></figure><p id="1cca0df2-c5c2-4c94-8ac7-f3fd4c9537ce" class="">There are three versions of OSPF:</p><ul id="4810f976-4de3-4807-9e1d-1b195a8c3e5d" class="bulleted-list"><li style="list-style-type:disc">OSPFv1</li></ul><ul id="60ef04be-8c96-4f42-9f09-362992b87b6f" class="bulleted-list"><li style="list-style-type:disc">OSPFv2 - Which is widely used for IPv4</li></ul><ul id="fefcd3d0-8b19-4997-b3fa-017a3b14f0fe" class="bulleted-list"><li style="list-style-type:disc">OSPFv3 - Which can be used for IPv4, but is mainly used for IPv6</li></ul><p id="d93c8d81-0f53-425c-875f-c6043b5dfec5" class="">Each router will create what is called a LSA (Link State Advertisement), which will be flooded to all its neighbors. Those other routers will store those LSAs containing information about the connected interface of the first router in their LSDB (Link State Data Base). This way the routers can create a “connectivity map” of the whole network and make individual decisions based on it.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e8a9ee41-2f95-4832-b59a-5788fbf36a75"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> All the routers have the same LSDB in the end.</div></figure><p id="59ea6367-79f3-4597-ad1a-9e9bd2d4ad7c" class="">Each LSA have a aging timer of 30 minutes</p><p id="27774ccf-0e65-412b-9e5d-e95b52192f2d" class="">Basically in OSPF the is three steps:</p><ul id="64cbd352-5697-4d30-92d7-da9aa9e60b75" class="bulleted-list"><li style="list-style-type:disc"><strong>Become neighbors</strong> with other routers connected to the same segment</li></ul><ul id="39ad8fce-a420-44c0-89d6-7146914e844c" class="bulleted-list"><li style="list-style-type:disc"><strong>Exchange LSAs</strong> with neighbor routers</li></ul><ul id="b473a576-5997-4c07-bb6c-a9a98d876b0e" class="bulleted-list"><li style="list-style-type:disc"><strong>Each router calculate the best route </strong>to each destination based on the Dijkstra algorithm and add it to their routing table</li></ul><h1 id="1ec08621-d45e-49c8-be6a-a47da95ea1b3" class="">OSPF Areas</h1><p id="b6f9ddca-3102-4476-a3a2-9ffd21e034ad" class="">OSPF can be divided in areas (segments) to divide up the network. There is barely no benefit to divide it on a small network, however, in a large network with hundreds of routers and more than a thousand subnets a single area of OSPF can have some negative effects:</p><ul id="965047b8-2d51-44bb-bbae-83762e3c2034" class="bulleted-list"><li style="list-style-type:disc">Routers can take longer to calculate routes</li></ul><ul id="67a156e3-5789-4dde-af79-c3de3037fe55" class="bulleted-list"><li style="list-style-type:disc">It usually requires more processing power</li></ul><ul id="eea63ed2-a33a-47e4-a9e8-87d20d29aa43" class="bulleted-list"><li style="list-style-type:disc">Every small change on the network will cause all the routers to run SPF algorithm again</li></ul><ul id="aac80dd6-e2e8-4063-9703-40d0f41206cf" class="bulleted-list"><li style="list-style-type:disc">A huge LSDB will take a great space of the memory</li></ul><p id="27fd09c0-446e-4929-acfb-7b5ac2a37f27" class="">
+</p><ul id="22505c77-99ff-4a87-b330-73f6da05a75d" class="block-color-gray_background bulleted-list"><li style="list-style-type:disc">The <strong>area</strong> is a set of routers and links that share the same LSDB.</li></ul><ul id="b8a904af-efc1-4375-984e-5bc62933f09d" class="bulleted-list"><li style="list-style-type:disc">The <strong>backbone area (area 0)</strong> is an area that all areas must connect to.</li></ul><ul id="e8756aa3-e73c-4763-a09f-35c2d31f6c45" class="bulleted-list"><li style="list-style-type:disc">Routers with all the interfaces in an area are called<strong> internal routers</strong>.</li></ul><ul id="cee789fd-bda3-4237-9da3-322ea89377e0" class="bulleted-list"><li style="list-style-type:disc">Routers with interfaces in more than one area are called <strong>ABRs (Area Border Router)</strong>.<ul id="bcf66e5d-3a2e-416a-8eb1-904fe1c32e99" class="bulleted-list"><li style="list-style-type:circle">Usually is recommended that an ABR be connected to up to 2 areas, to avoiding overburdening them.</li></ul></li></ul><ul id="d40ac4f8-55fd-47f8-b796-91a2884ae6f8" class="bulleted-list"><li style="list-style-type:disc">Routers connected to the backbone area are called <strong>backbone routers</strong>.<ul id="0f51bf09-5083-4b69-b1a5-7776a7690fdc" class="bulleted-list"><li style="list-style-type:circle">A router can be called more than one thing.</li></ul></li></ul><ul id="825b139e-b392-4451-b3dc-1ddc0f43dc7f" class="bulleted-list"><li style="list-style-type:disc">A route to a destination in the same OSPF area is called a <strong>intra-area route</strong>.</li></ul><ul id="0991a15a-66dc-43b6-b199-146a21ec9002" class="bulleted-list"><li style="list-style-type:disc">A <strong>interarea route</strong> is a route to a destination in a different OSPF area.</li></ul><h3 id="4886027d-bb9b-4bf7-b05c-cece394b1200" class="">Requirements</h3><ul id="c6fc5a15-57b5-4a73-b9e8-75ae94525080" class="bulleted-list"><li style="list-style-type:disc">All OSPF areas must be contiguous. It means that an area cannot be split up and exist separately with the same number. For example, the following is wrong:</li></ul><figure id="d1eb8b0e-4f39-419b-bdd4-d443adf5ed62" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled.png"><img style="width:1887px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled.png"/></a></figure><ul id="234d18a8-33ae-49f0-823a-079e4dba431d" class="bulleted-list"><li style="list-style-type:disc">All OSPF areas, as said before, must have at least one ABR connected to the backbone are (area 0)</li></ul><ul id="ffb64d49-115b-460e-bf02-604bb8b48039" class="bulleted-list"><li style="list-style-type:disc">OSPF interfaces must be in the same area to become OSPF neighbors</li></ul><ul id="a5fffeae-c96c-41d7-9912-6ec975a2fab4" class="bulleted-list"><li style="list-style-type:disc">An <strong>Autonomous System Boundary Router (ASBR)</strong> is a router that connects the OSPF network to an external network. This is due to the<strong> default-information originate</strong> command, usually when connected to the internet.</li></ul><h2 id="de5aa000-bc14-4418-bca9-93def3094739" class="">Configure OSPF</h2><p id="790e676a-a121-4148-92ba-b462b8103547" class="">First create the OSPF instance</p><pre id="4d3a792b-f3c3-4ed6-b60a-fdad541c0430" class="code"><code>configure terminal
+router ospf {value}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="087067df-ce41-4770-887b-a2f35c024461"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">This <em>value </em>can be anything, and differently from EIGRP, it does not have to be the same in the routers in the same are. It is locally significant.</div></figure><p id="e9f375a8-df09-4261-9df8-7e7f923917eb" class="">Then specify the interfaces to active OSPF, those interfaces will both:</p><ul id="ca073dc7-b2ca-4862-a46b-db10047e8b0f" class="bulleted-list"><li style="list-style-type:disc">Send OSPF messages</li></ul><ul id="7994a0e1-ed2b-4059-914d-0d513d453fbc" class="bulleted-list"><li style="list-style-type:disc">Be advertised </li></ul><pre id="f3b27617-906d-4873-b97e-14175459811a" class="code"><code>network {subnet-id} {wildcard}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e5ae1b1a-7e78-4abb-87a2-5d7a38340a11"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>REMEMBER:</strong> Wildcards are the inverse of the Subnet Masks</div></figure><h3 id="d65c472f-3098-4398-a8f3-9a4b8495ecc4" class="">Disable OSPF messages in a given interface</h3><p id="4d04603f-d729-4e5e-a271-4b7af666bb81" class="">By disabling the OSPF messages, it will still be advertised to the active neighbors, while not sending OSPF hello messages on that given interface. Usually this interface is connected to a subnet that has no other router.</p><pre id="08b99ba1-7175-4020-aba1-5d984057e875" class="code"><code>passive-interface {interface}</code></pre><h3 id="0db1cf67-a617-4ef5-953b-15df106b82bc" class="">Disable OSPF messages on ALL interfaces</h3><pre id="b45aeba4-7b14-4fa0-9cfc-9f5fff956d83" class="code"><code>passive-interface default</code></pre><p id="3d10df9c-0a51-4107-8734-e03f60c51bd6" class="">Then you can <strong>no passive-interface</strong> <em>interface </em>on each interface to enable OSPF messages on that given interface. Basically, it is the other way around.</p><h3 id="3079ee85-de41-442e-8445-a7e30dc88782" class="">Advertise the default route</h3><pre id="31b10fe1-03eb-42fe-88f8-90d1accab9ff" class="code"><code>default-information originate</code></pre><h3 id="806a4430-1c36-4837-9f1a-68b70b6e6ce8" class="">Change Router ID</h3><pre id="e27550c4-c4cc-47aa-b45e-74a3dd07ff22" class="code"><code>router-id {ip address like value}</code></pre><h3 id="8e198852-3c0b-4285-ad66-b4f07d99dd95" class="">Change the ECMP Maximum routes</h3><pre id="9e45f729-e19f-4ffd-a62b-6e8c61013457" class="code"><code>maximum-path {number routes}</code></pre><h3 id="f5a92ea4-b687-4234-b6d1-3035c5f95067" class="">Directly active OSPF in an interface</h3><pre id="feb89e57-55dc-43b0-aa97-2016c52661bf" class="code"><code>configure terminal
+interface g0/0
+ip ospf {process-id} area {area-number}</code></pre><figure id="113e62e3-6e3d-4d9a-ab18-b747e010f902" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%201.png"><img style="width:638px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%201.png"/></a></figure><h2 id="a23b21e8-ea23-44c1-8b50-e254a06c43ab" class="">Show Commands</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">View LSDB</summary><div class="indented"><pre id="da8b8518-c8dc-4d92-a67f-76c13c759587" class="code"><code>show ip ospf database</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">View OSPF Neighbors</summary><div class="indented"><pre id="8365368c-5070-4d91-a271-3c7cd8b30dd8" class="code"><code>show ip ospf neighbor</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">View OSPF Interfaces</summary><div class="indented"><pre id="e91fb8b4-1c8a-4077-bfd6-fa11d2f0890a" class="code"><code>show ip ospf interface [interface]</code></pre><pre id="69b2ca4d-edf7-4d49-9745-7ab301e9d258" class="code"><code>show ip ospf interface brief</code></pre></div></details><h2 id="1fbf2781-4beb-4dbc-9074-12249a0a931d" class="">Cost</h2><p id="9fecfb2a-1fdc-485b-b6d0-8663776effec" class="">OSPF`s metric is called <strong>cost</strong>. It is calculated based on the bandwidth (speed) of the interface.</p><h3 id="9c41c547-1960-4bd4-bf09-6906f61b0c24" class="">How do you calculate the cost of an individual interface?</h3><p id="faecb106-8822-4cdc-8765-2605c93872a9" class="">It is done by dividing the reference bandwidth for the interface`s bandwidth. And, the reference bandwidth is 100 mbps by default.</p><p id="9a897653-8745-482a-bb61-47b330a64b23" class="">For example, for a interface with speed of 10 Mbps we have: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><mn>100</mn><mi mathvariant="normal">/</mi><mn>10</mn><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">Cost = 100/10 = 10 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">os</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100/10</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">10</span></span></span></span></span><span>﻿</span></span></p><p id="7dcdfd91-6b58-4eaa-9a55-2a6e2cbce98a" class="">For a interface with a bandwidth of 100 Mbps we have: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><mn>100</mn><mi mathvariant="normal">/</mi><mn>100</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Cost = 100/100 = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">os</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100/100</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span></p><p id="c78390c4-df2f-422d-ba59-ee2735086e3f" class="">For a Gigabit interface with a bandwidth of 1000 Mbps we have: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><mn>100</mn><mi mathvariant="normal">/</mi><mn>1000</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">Cost = 100/1000 = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">os</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100/1000</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span></p><p id="8544d106-52a0-4ab8-a700-8cc6dff3eb35" class="">And so on…</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e4972bbe-24ab-488b-8156-3e5132398e9a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> In OSPF, any value lower than 1 will be converted to 1.</div></figure><pre id="f377c91c-131f-4db3-9762-53885b7de2bb" class="code"><code>//This command allows for the reference bandwidth to be greater, so faster interfaces 
+//can have lower costs compared to slower interfaces.
+router ospf {value}
+auto-cost reference-bandwidth {value-in-megabits-per-second}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b93244ed-a6e1-4a41-a0a5-ac1a9001137a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE:</strong> This value should be configured for all the routers using OSPF.</div></figure><h3 id="6a629e0c-a2d4-4a3d-8cea-4f8ff6e0f58c" class="">How do you calculate the Total Cost?</h3><p id="766330f6-a4eb-45ba-8ccf-27e62e074f22" class="">The Total Cost is calculated by summing the cost of each outgoing/exit interface in the route for a destination</p><figure id="ae3bbb5b-0524-4e62-83ad-9036810198af" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%202.png"><img style="width:593px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%202.png"/></a></figure><p id="9b41ec34-31ac-4b59-b204-e0dbb9178084" class="">For example, the route from R1 to the subnet “192.168.4.0/24”, with a reference bandwidth of 100000 Mbps, is: </p><figure id="b5630159-4297-430f-80a1-817560ff6f39" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>100</mn><mo stretchy="false">(</mo><mi>R</mi><mn>1</mn><mi mathvariant="normal">‘</mi><mi>G</mi><mn>0</mn><mi mathvariant="normal">/</mi><mn>0</mn><mo stretchy="false">)</mo><mo>+</mo><mn>100</mn><mo stretchy="false">(</mo><mi>R</mi><mn>2</mn><mi mathvariant="normal">‘</mi><mi>G</mi><mn>1</mn><mi mathvariant="normal">/</mi><mn>0</mn><mo stretchy="false">)</mo><mo>+</mo><mn>100</mn><mo stretchy="false">(</mo><mi>R</mi><mn>4</mn><mi mathvariant="normal">‘</mi><mi>G</mi><mn>1</mn><mi mathvariant="normal">/</mi><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>300</mn></mrow><annotation encoding="application/x-tex">100 (R1`G0/0)+100(R2`G1/0)+100(R4`G1/0) = 300</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">1‘</span><span class="mord mathnormal">G</span><span class="mord">0/0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">2‘</span><span class="mord mathnormal">G</span><span class="mord">1/0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">4‘</span><span class="mord mathnormal">G</span><span class="mord">1/0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">300</span></span></span></span></span></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="41e7ab85-3859-45b1-86a4-1ebb7e9ecde8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IMPORTANT: Loopback interfaces have a cost of 1.</div></figure><p id="4bcc6dd5-529e-4e47-a91b-cf4c45ab76a6" class="">Another example, the cost to reach 2.2.2.2 (Loopback interface on R2) from R1, would be:</p><figure id="e55319c6-a0f6-43ee-a603-6f162d21da3d" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>100</mn><mo stretchy="false">(</mo><mi>R</mi><mn>1</mn><mi mathvariant="normal">‘</mi><mi>G</mi><mn>0</mn><mi mathvariant="normal">/</mi><mn>0</mn><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo stretchy="false">(</mo><mi>R</mi><mn>2</mn><mi mathvariant="normal">‘</mi><mi>L</mi><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mn>101</mn></mrow><annotation encoding="application/x-tex">100(R1`G0/0)+1(R2`L0) = 101</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">100</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">1‘</span><span class="mord mathnormal">G</span><span class="mord">0/0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord">2‘</span><span class="mord mathnormal">L</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">101</span></span></span></span></span></div></figure><h3 id="4936e7c4-f064-4910-add0-8006605569e7" class="">You can change a single interface cost</h3><p id="7b9b24d2-b930-4f55-b18e-1e59147a90c4" class="">To do so, you must use the following options:</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #1 - OSPF Cost</summary><div class="indented"><pre id="f0a4ef3a-5198-4bb9-b56d-07870885823b" class="code"><code>configure terminal
+interface g0/0 //Enter interface configuration mode
+ip ospf cost {value}</code></pre><p id="d63b00bb-6be3-4f97-a496-003a4d89a49a" class="">This setting will override the auto-calculation done by <strong>reference-bandwidth</strong>/<strong>interface-bandwidth</strong></p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #2 - Change the interface`s bandwidth</summary><div class="indented"><p id="b6bc946b-a1ac-4090-ad11-1c8f70f402d9" class="">By doing so it will alter the value of interface-bandwidth used in the OSPF auto-calculation of cost. HOWEVER, it will also change the value of other protocols calculations, so it is <strong>NOT RECOMMENDED</strong>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e6547ba9-1fae-4ad7-8154-be84124529bb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>NOTE:</strong> Although the bandwidth often matches the value of speed, they are different terms, so altering the bandwidth will not change the operating speed of that given interface.</div></figure><pre id="e1677add-980e-45e1-9edb-756acc0f768a" class="code"><code>configure terminal
+interface g0/0
+bandwidth {value-in-Kb} //Often use &quot;?&quot; to check the unit of the value being entered</code></pre></div></details><h3 id="922f705e-2823-4503-9983-fd96077bdd56" class="">How to check the OSPF Cost in all interfaces</h3><pre id="4cb0ddc8-ea77-4645-8f1d-f7ec48bad0de" class="code"><code>show ip ospf interface brief</code></pre><h2 id="5c0e645b-8282-4d8d-9bb8-b19cb6903e3a" class="">OSPF Neighbors</h2><ul id="e70b6029-38de-4a5a-a8ac-ad3bc3400b4b" class="bulleted-list"><li style="list-style-type:disc">Once OSPF is activated in an interface, it sends a OSPF <strong>Hello </strong>message at regular intervals (determined by the <strong>hello timer</strong>). These are used to introduce the router to potential OSPF Neighbors.</li></ul><ul id="756170bc-4749-468b-8a2a-0d7be8f8cbc8" class="bulleted-list"><li style="list-style-type:disc">The default hello timer is <strong>10 second</strong>s on an Ethernet connection</li></ul><ul id="06f908dc-9f01-4fa8-ba51-844881316656" class="bulleted-list"><li style="list-style-type:disc">The OSPF hello messages are multicast to <strong>224.0.0.5</strong></li></ul><ul id="f8b715de-aa93-4af1-9bd9-3adc61d7edb2" class="bulleted-list"><li style="list-style-type:disc">OSPF messages are encapsulated in an IP Header with the protocol number of <strong>89</strong>.</li></ul><h3 id="9938b9ea-af04-41dc-9b8b-5d7024657b8f" class="">Steps in Becoming Neighbors (Neighbor States)</h3><ol type="1" id="09102822-076a-457c-a7cd-69066df6ad7c" class="numbered-list" start="1"><li><strong>Down</strong><ol type="a" id="093671d6-0789-48a9-862b-13014dd4423b" class="numbered-list" start="1"><li>First router sends a OSPF Hello message with the multicast address of 224.0.0.5, containing the following fields (at least):<ol type="i" id="d7d0f205-cd82-498b-997b-8869839b90b8" class="numbered-list" start="1"><li>Router ID: Their own Router`s ID as explained before</li></ol><ol type="i" id="e225ce98-65ae-4a0d-88c8-1b01858ba311" class="numbered-list" start="2"><li>Neighbor RID with the value of 0.0.0.0, because it doesn`t have that neighbor yet on the neighbors table</li></ol></li></ol></li></ol><ol type="1" id="27a3b6dd-4364-4fcf-95b6-b56b86b4ef2d" class="numbered-list" start="2"><li><strong>Init</strong><ol type="a" id="c1559172-56a3-4ca0-bc5e-066f9ead4964" class="numbered-list" start="1"><li>Hello Packet received in R2, but its own Router ID is not specified in the Hello message.</li></ol><ol type="a" id="2d4a06fc-3938-483c-bc79-4905384d8195" class="numbered-list" start="2"><li>R2 adds the sender`s RID in its OSPF Neighbors table</li></ol><ol type="a" id="272ad103-ec93-43f5-a731-822df7b4831d" class="numbered-list" start="3"><li>R2 will then send a Hello Message with its Router ID in the <strong>RID</strong> field and the original sender Router ID in the <strong>Neighbor RID</strong> field</li></ol></li></ol><ol type="1" id="68d351a4-e1a9-48b4-bc87-825f23fde32a" class="numbered-list" start="3"><li><strong>2-Way</strong><ol type="a" id="9a6ad20c-e642-463b-8156-34195277ad3f" class="numbered-list" start="1"><li>Hello Packet received with it`s own Router ID on the Neighbor RID field. This happens with R1 and R2, both entering this state.</li></ol><ol type="a" id="5143000f-41ef-4c12-be12-e29fb8f8b00d" class="numbered-list" start="2"><li>R1 adds the R2 to its OSPF Neighbor table</li></ol><ol type="a" id="63a568fb-0c3f-485d-96ad-87242518601e" class="numbered-list" start="3"><li>Conditions have been met to be OSPF Neighbors</li></ol><ol type="a" id="fec18124-cd8f-4433-8b04-1396a367f1d6" class="numbered-list" start="4"><li>A DR (Designated Router) and a BDR (Backup Designated Router) may be selected at this point</li></ol></li></ol><ol type="1" id="0f158f7d-8c69-419f-b75f-a171d5008e83" class="numbered-list" start="4"><li><strong>ExStart</strong><ol type="a" id="5b50df0d-4dde-4d75-94d2-c13dff0b924b" class="numbered-list" start="1"><li>Decides, by DBD (Database Description) packets exchange, which one will be the <strong>Master</strong>, which will start the exchange of LSAs, and which one will be the <strong>Slave</strong></li></ol><ol type="a" id="6bd9d4ae-a937-44f7-8f92-03b9c8a71321" class="numbered-list" start="2"><li>The <strong>Master </strong>is the one with the higher RID, and obviously, the Slave is the one with the <strong>lower </strong>RID.</li></ol></li></ol><ol type="1" id="3beb6b0b-74c2-4413-a69f-f16dfb592388" class="numbered-list" start="5"><li><strong>Exchange</strong><ol type="a" id="1b3e2006-915a-4702-b780-be64e90eb4ae" class="numbered-list" start="1"><li>Routers then exchange what LSAs they have, being the <strong>Master </strong>the first one to send it, not in details, via DBDs to each other. Basically they say what they have in their LSDB without telling the full details.</li></ol><ol type="a" id="521733a5-d3b0-4ef7-b304-4ffb2cdfae31" class="numbered-list" start="2"><li>Routers in this phase will compare the LSAs in those DBDs with what they have in their LSDB, and see LSAs it doesn`t have so can ask later in the next phase.</li></ol></li></ol><ol type="1" id="3fce6434-8a0c-49b4-a1cf-9bcffada4a09" class="numbered-list" start="6"><li><strong>Loading</strong><ol type="a" id="5590c1b7-bb10-4a9b-a78a-be0150342f0a" class="numbered-list" start="1"><li>After knowing what they neighbors have that they don`t, R2 (from his perspective for better understanding) asks for the LSAs via <strong>LSR</strong> (Link State Request).</li></ol><ol type="a" id="6ab02f8a-c0e8-4304-aa0c-533875d807ab" class="numbered-list" start="2"><li>R1 then receives that <strong>LSR</strong>, making it send a <strong>LSU </strong>(Link State Update) containing the LSAs requested by their R2, its neighbor.</li></ol><ol type="a" id="318be94a-0da8-4074-82b6-122aa9aedfbc" class="numbered-list" start="3"><li>Finally, after receiving that <strong>LSU</strong>, the R2 send back an <strong>LSAck </strong>(Link State Acknowledgment) notifying R1 that it received successfully the LSU.</li></ol></li></ol><ol type="1" id="d4d5a834-3190-443c-9a2a-aa3667da7d3c" class="numbered-list" start="7"><li><strong>Full</strong><ol type="a" id="66cc324c-7fdf-4593-92ff-b58b19d5de90" class="numbered-list" start="1"><li>In this state, both routers have formed Adjacency and both have identical LSDBs</li></ol><ol type="a" id="79cf75ec-6e97-46a1-88ea-56c2da6024da" class="numbered-list" start="2"><li>Each one will continue to send OSPF Hello messages every 10 seconds (by default) to maintain their relationship</li></ol><ol type="a" id="02d27c1a-8eef-44ad-97d5-3a25719a7acf" class="numbered-list" start="3"><li>The Dead Timer is the amount of time an interface can still not receive a OSPF Hello message from its neighbor before removing it from its OSPF Neighbors list.</li></ol><ol type="a" id="edca8aea-b59a-4dcb-b9c9-35c8f5680937" class="numbered-list" start="4"><li>They continue to send LSAs to each other after every change in the network.</li></ol></li></ol><figure id="f12ca3b0-c338-4cc4-b92c-9e69fc0e6020" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%203.png"><img style="width:1207px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%203.png"/></a></figure><figure id="24493667-f768-4ee9-b56e-48e750a11363" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%204.png"><img style="width:1147px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%204.png"/></a></figure><h2 id="62ed6d1a-b6c8-4323-b0ee-2a8261b7d462" class="">OSPF Network Types</h2><p id="8d11b879-c111-4650-b3d4-b0972c057924" class="">It refers to the type of connection between OSPF Neighbors, and they can be:</p><ul id="174e5f24-75ba-4a9a-a69e-b3021546c111" class="bulleted-list"><li style="list-style-type:disc">Broadcast<ul id="54fea1c7-8566-46df-a36c-38b7d698ce79" class="bulleted-list"><li style="list-style-type:circle">Enabled by default on <strong>Ethernet </strong>and <strong>FDDI </strong>(Fiber Distributed Data Interfaces) interfaces.</li></ul><ul id="3f5e5032-92c9-41c9-ae48-f6254e3c65b7" class="bulleted-list"><li style="list-style-type:circle">Routers dynamically discover neighbors by sending/receiving OSPF Hello messages with the multicast address of 224.0.0.5.</li></ul><ul id="54342e8f-535e-484b-9081-8ae9e290f42f" class="bulleted-list"><li style="list-style-type:circle">A <strong>DR </strong>and a <strong>BDR </strong>must be elected on each subnet. (If there is a subnet with only one router, that router will be de DR). Also, by exclusion, a router that is neither a DR or a BDR, is called a <strong>DROther</strong>.</li></ul></li></ul><ul id="bfe13677-dfd5-4684-9a75-13e5ab04a4bd" class="bulleted-list"><li style="list-style-type:disc">Point-to-Point<ul id="12da90a6-55c0-42bc-8d20-88cdb566d6a0" class="bulleted-list"><li style="list-style-type:circle">Enabled by default on <strong>PPP </strong>(Point-to-Point Protocol) and <strong>HDLC </strong>(High-Level Data Link Control) interfaces.<ul id="7ffc2625-1f4b-4ed4-842c-7f370a4d200f" class="bulleted-list"><li style="list-style-type:square">These Layer 2 Protocols are used in serial connections<ul id="141917e1-6477-49a3-8d40-aa9dafcc77c0" class="bulleted-list"><li style="list-style-type:disc">The default encapsulation on a serial connection is HDLC, or Cisco`s version: cHDLC<ul id="71071953-e06e-4b5e-9e21-e753b06dfac7" class="bulleted-list"><li style="list-style-type:circle">To change to PPP, do <strong>encapsulation ppp</strong> on <em>interface configuration mode</em> on each side.</li></ul></li></ul><ul id="2fcae79f-3527-4197-b84d-d276040bbbc1" class="bulleted-list"><li style="list-style-type:disc">In a serial connection, one side is the DCE (Data Communication Equipment) and the other is the DTE (Data Terminal Equipment), with the DCE dictating the clock rate (speed) of the connection with the <strong>clock rate</strong> <em>value</em> command.<ul id="06a0162c-c73b-481b-84ea-2f178934f3f5" class="bulleted-list"><li style="list-style-type:circle">To know which is the DCE and which is the DTE do <strong>show controllers</strong> <em>interface-id</em></li></ul></li></ul></li></ul><ul id="11094278-d7d1-47fe-ac55-d43b7b2fa3a0" class="bulleted-list"><li style="list-style-type:square">As the name implies, it is a connect between only one point to another (1:1), so no DR and BDR have to be selected, since there is no need to reduce the amount of LSAs being flooded, it can have a DROther.</li></ul></li></ul></li></ul><ul id="72c4b641-a024-4f8f-8eb8-74d618603c70" class="bulleted-list"><li style="list-style-type:disc">Non-Broadcast<ul id="649d5b1c-ab0e-4efa-8943-31ece756a35a" class="bulleted-list"><li style="list-style-type:circle">Enabled by default on <strong>Frame Relay</strong> and <strong>X.25</strong> interfaces.</li></ul></li></ul><h2 id="d29eba86-5cfb-4df6-855b-5532d683d190" class="">DR, BDR and DROther</h2><ul id="6c363bd7-b5fd-4b15-9b41-96f2c06cbbb9" class="bulleted-list"><li style="list-style-type:disc">In the broadcast type, routers will only form a full adjacency with the DR and BDR. Therefore, DROthers will not exchange LSAs between each other, only with the DR and BDR.<ul id="df39766a-dbd5-4d8b-b9ba-8d39a8bba25a" class="bulleted-list"><li style="list-style-type:circle">All routers will still have the same LSDB, but less LSAs will be flooded in the network.</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="605c7c31-94e3-44df-ac26-a2899515bff2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Routers will exchange messages with the DR and BDR via multicast address 224.0.0.6</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0caaf4f7-ae62-4023-8214-1dc9f245e09e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> When the DR fails, even with there is another router with a highest Router ID, only the already elected BDR will become the DR, and the router with the highest Router ID will become the BDR</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8bdd7b7a-9cde-4a1b-a29c-19663f8a4fa8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT:</strong> As said before, DROther routers will only have up to a 2-Way Neighbor relationship state with another DROther, since they will not exchange LSAs between each other.</div></figure><figure id="2b0eb41e-3a23-437c-9b84-85b2a221fc09" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%205.png"><img style="width:1130px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%205.png"/></a></figure><h3 id="3d62d55f-1421-49bd-8301-8be191836b77" class="">Election of DR and BDR</h3><p id="672988ea-259b-488b-94e1-110ef8ec3993" class="">In order of priority:</p><ol type="1" id="20217524-035f-4f42-832b-fe0faefa6c8d" class="numbered-list" start="1"><li>Highest <strong>OSPF interface priority</strong></li></ol><ol type="1" id="d667fb77-1eef-4013-ab57-b47292c8260c" class="numbered-list" start="2"><li>Highest Router ID</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="11fcbebe-a8f4-4bd6-83ef-a7ec94206c13"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">IMPORTANT: All OSPF interfaces have a priority of <strong>1</strong> by default.</div></figure><p id="efcd8dfb-889c-4f50-b066-e67ead0dd738" class="">“First place” becomes the Designated Router (DR) and the “second place” becomes the Backup Designated Router.</p><h3 id="52e6bdde-c0dc-4649-905a-0ccb93938a92" class="">Change an interface OSPF Priority</h3><pre id="05b6c9f6-982e-4a1f-a81c-bb7347fa58a5" class="code"><code>configure terminal
+interface g0/0
+ip ospf priority {0-255}</code></pre><h3 id="64b40bb3-b95f-4e22-9b30-fc28b9b3a660" class="">Change the Network Type of an interface</h3><pre id="090a3ff5-c605-4514-8404-38b5d0f5e422" class="code"><code>configure terminal
+interface g0/0
+ip ospf network {brodcast/non-broadcast/point-to-point/point-to-multipoint}</code></pre><figure id="ed777b8b-2ea1-4d52-942c-d6e2220fa56f" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%206.png"><img style="width:1170px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%206.png"/></a></figure><h3 id="fae7aa48-167e-42fd-9b28-3645d94ffe4d" class="">Change the Hello and Dead Timers</h3><pre id="51b86219-fab7-419e-b99d-7a613e7f0b53" class="code"><code>configure terminal
+interface g0/0
+ip ospf hello-interval {time-in-seconds}
+ip ospf dead-interval {time-in-seconds}</code></pre><h3 id="a991a45a-2f88-4f53-a19c-e21218a60c98" class="">Authentication setting</h3><p id="0c622afa-7fdf-44e5-aa37-cc1f48a86ffe" class="">You can specify a password for routers to become neighbors</p><pre id="e54514f0-21a0-4efd-8eb9-4f8f0768b132" class="code"><code>configure terminal
+interface g0/0
+ip ospf authentication-key {password}   //Specifies the OSPF password
+ip ospf authentication                  //Enables OSPF Authentication</code></pre><h2 id="59296de4-9a11-46a7-ae2b-37fd711aa1f2" class="">OSPF Neighbor Requirements</h2><ul id="f7ba1e76-1c41-4bd3-ab3e-9cc31bc638b6" class="bulleted-list"><li style="list-style-type:disc">Area numbers must match</li></ul><ul id="1f0eddb3-92c4-4b01-ba2e-09d731307115" class="bulleted-list"><li style="list-style-type:disc">interfaces must be in the same subnet</li></ul><ul id="6109a3ab-ff33-4ae3-967b-a75cf6029589" class="bulleted-list"><li style="list-style-type:disc">It most not be shutdown</li></ul><ul id="4cba33d0-984d-4208-a79c-5d6094f49817" class="bulleted-list"><li style="list-style-type:disc">OSPF Router IDs must be unique</li></ul><ul id="814e8da9-a230-442a-a36a-207f899c4906" class="bulleted-list"><li style="list-style-type:disc">Hello and Dead timers must be the same</li></ul><ul id="9c22c4a8-4184-4976-b05a-73d3e1311762" class="bulleted-list"><li style="list-style-type:disc">Authentication settings must match</li></ul><ul id="be3d2cda-39e2-4cf5-b014-b0c58596106c" class="bulleted-list"><li style="list-style-type:disc">IP MTU settings must match</li></ul><ul id="2506e449-71d8-462c-9591-bb4b889b8304" class="bulleted-list"><li style="list-style-type:disc">OSPF Network Type must match</li></ul><h3 id="c1d14a73-2ff1-43c6-8a6a-20ffd3be74c4" class="">Types of LSAs</h3><ul id="72fabc10-9548-40ad-80ec-2dae1ed6bdbb" class="bulleted-list"><li style="list-style-type:disc"><strong>Type 1 (Router LSA)</strong><ul id="0cd439bc-3af8-4c60-b7aa-d0b57302a377" class="bulleted-list"><li style="list-style-type:circle">Every router generates this type of LSA</li></ul><ul id="f2791d42-e769-4cf9-81b8-360e24d78a9a" class="bulleted-list"><li style="list-style-type:circle">Contains: RID, interfaces, IP address/mask, current interface state (status)</li></ul></li></ul><ul id="f75297d2-bad0-442a-82db-1323e2ad8f13" class="bulleted-list"><li style="list-style-type:disc"><strong>Type 2 (Network LSA)</strong><ul id="101e9851-5cab-417a-8df7-260daff7250c" class="bulleted-list"><li style="list-style-type:circle">It is generated by the DR, and lists all the routers connected to that “multi-access” network (i.e. <strong>broadcast </strong>network type)</li></ul><ul id="5b79b23f-9044-463a-ac76-a055123157a0" class="bulleted-list"><li style="list-style-type:circle">Contains: DR and BDR IP addresses, subnet ID, mask</li></ul></li></ul><ul id="79ca3cdb-7448-4e27-abd0-6c17497eeed0" class="bulleted-list"><li style="list-style-type:disc"><strong>Type 3 (Summary LSA)</strong><ul id="1d1a1d4d-c479-44d1-9d1d-ad2b1fb898a0" class="bulleted-list"><li style="list-style-type:circle">It is generated by the ABR, and lists all the subnet IDs and their masks outside that given OSPF area.</li></ul><ul id="5e77e92b-575b-4775-94ff-a88d5e2a5b66" class="bulleted-list"><li style="list-style-type:circle">Contains: Subnet ID, mask, RID of ABR that advertises the LSA</li></ul></li></ul><ul id="38717110-5eda-4d24-aa62-61decc06ac5a" class="bulleted-list"><li style="list-style-type:disc"><strong>Type 5 (AS-External LSA)</strong><ul id="7e5036d2-c088-4386-a889-9b45d7bf482e" class="bulleted-list"><li style="list-style-type:circle">It is generated by the ASBR (Autonomous System Boundary Router) to describe routes to destinations outside of the AS (OSPF Domain)</li></ul><figure id="39a982af-198b-48f1-842a-0cae2b8ccef2" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%207.png"><img style="width:577px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%207.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="442fe12f-93e4-4b6c-a157-3b1cc831e223"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: In this case there is no Type 2 LSA between R1 and R4 because it is a serial connection, so there is no DR.</div></figure><h1 id="3f3006b5-1bbb-4fce-a4a9-aeaad21f5f99" class="">Troubleshooting</h1><figure id="c169c8e3-64ae-4a42-beec-99212540d4c3" class="image"><a href="OSPF%20975d272742014058be329c549dc4d751/Untitled%208.png"><img style="width:686px" src="OSPF%20975d272742014058be329c549dc4d751/Untitled%208.png"/></a></figure></li></ul></div></article></body></html>

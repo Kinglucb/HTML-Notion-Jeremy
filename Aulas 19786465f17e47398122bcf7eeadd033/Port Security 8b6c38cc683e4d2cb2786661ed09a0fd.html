@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Port Security</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8b6c38cc-683e-4d2c-b278-6661ed09a0fd" class="page sans"><header><h1 class="page-title">Port Security</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="e118471d-3e40-45cb-ac66-ef3f44b693ac" class="">It is a feature in Cisco Switches that allows a switch to take an action if the <strong>Source MAC Address</strong> of a frame is <strong>not in the Secure MAC Address Table of that</strong> <strong>interface</strong> when Port Security is enabled.</p><p id="2c92e97d-bfb8-487c-882c-f0c9c43d12f6" class="">By default, when port-security is enabled, it has:<div class="indented"><ul id="d426adb9-e6cf-4483-b670-d78de2a6129c" class="bulleted-list"><li style="list-style-type:disc">Maximum of 1 MAC Address on that interface</li></ul><ul id="37b7f2f2-cca0-4672-bae0-057836642003" class="bulleted-list"><li style="list-style-type:disc">Violation Mode as <strong>Shutdown</strong></li></ul><ul id="85d43119-da58-439f-a9a8-8eb2b17b1195" class="bulleted-list"><li style="list-style-type:disc">Aging time set to <strong>0</strong></li></ul><ul id="4a08bfb7-ca20-46ac-8c75-e46f41d04213" class="bulleted-list"><li style="list-style-type:disc">Aging type set to <strong>Absolute</strong></li></ul><ul id="652bdccc-a2b7-46b8-9f63-8efa341f6e0d" class="bulleted-list"><li style="list-style-type:disc">Violation count set to <strong>0</strong></li></ul></div></p><p id="a49f2990-e384-44a3-9785-7930a63d0d4f" class="">The MAC Addresses can be learned dynamically or manually set. There are different treatments between the two types (Static and Dynamic) <strong>BY DEFAULT</strong>. Some of them are:<div class="indented"><ul id="f46e233d-e845-496f-9560-c60aa642aa5d" class="bulleted-list"><li style="list-style-type:disc">Dynamically learned addresses are cleared after a shutdown</li></ul><ul id="f0da378d-0d75-4224-872d-17b6b939349b" class="bulleted-list"><li style="list-style-type:disc">Dynamically learned addresses are cleared after aging time (if set)</li></ul></div></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="323b1a27-90c0-4d19-8b38-62f620c18629"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: Port Security can be avoided with MAC Address spoofing!</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e7b40ada-40aa-4ef1-8a76-a4958520cb85"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT</strong>: Static MAC Addresses can also age and be removed automatically, but not by default. Also, there are what is called Sticky MAC Addresses, that are Dynamically learned MAC Addresses that turned into Sticky MAC Addresses, also needs a configuration by default.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="68c7afcc-9f2f-4ccb-be97-61dd743ec2df"><div style="font-size:1.5em"><span class="icon">🚨</span></div><div style="width:100%"><strong>IMPORTANT:</strong> To enable Port Security on an interface, it must be either static access or trunk. Therefore, no dynamic auto or dynamic desirable.</div></figure><h1 id="3f039085-ea46-4b2c-b628-e1097690406b" class="">Violation Modes</h1><p id="901941f5-d4ae-4da7-a253-9d7ad04152e7" class="">There are three violation modes that can be set, so the switch will take different actions when it receives an unauthorized frame.</p><h3 id="74772933-c6a7-4690-afa0-d4edf1e764da" class="">Shutdown (default)</h3><p id="939eb65d-ad9c-4b08-94bc-8cb8a89fb39b" class="">This is set by default after enabling the feature, it has the following characteristics:</p><ul id="7bb80e5f-9990-439c-96a7-2a2f49006c75" class="bulleted-list"><li style="list-style-type:disc">If an unauthorized frame is received, it puts the interface into <strong>err-disabled</strong>.</li></ul><ul id="11575bad-3271-4f9f-9122-8e115c184882" class="bulleted-list"><li style="list-style-type:disc">A Syslog and/or SNMP trap message is sent for the disabled interface.</li></ul><ul id="35428429-526c-41dd-9eed-45b40e608e34" class="bulleted-list"><li style="list-style-type:disc">Violation Count is set to <strong>1</strong>.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="52b012d9-2b3b-4e07-af44-1af0e5d3ab30"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>IMPORTANT</strong>: Shutting down the interface will make it flush the Dynamic learned MAC addresses, <strong>unless they are sticky ones</strong>.</div></figure><h3 id="bc92ebd6-4496-4eec-b65a-e8301b453407" class="">Restrict</h3><ul id="06d75982-1fb3-4062-9d8c-9e7aae857bbc" class="bulleted-list"><li style="list-style-type:disc">DOESN`T Shuts down the interface.</li></ul><ul id="8d50bb3d-9264-44d9-bfed-acee13ff1158" class="bulleted-list"><li style="list-style-type:disc">Discards any unauthorized frames (remains up).</li></ul><ul id="6e471c2e-bdce-4922-b2e6-83008a2afeef" class="bulleted-list"><li style="list-style-type:disc">Generate a Syslog and/or SNMP trap message for each unauthorized frame.</li></ul><ul id="a223656e-57d6-4d42-9787-89348304ce70" class="bulleted-list"><li style="list-style-type:disc">Increases the Violation Count by <strong>1 every unauthorized frame</strong>.</li></ul><h3 id="bd52934c-981e-43c8-8868-8fe843e2fff1" class="">Protect</h3><ul id="24231a0d-8624-494e-874b-b26ea03b3d06" class="bulleted-list"><li style="list-style-type:disc">DOESN`T Shuts down the interface.</li></ul><ul id="dde2fe59-6cb2-42b7-a204-91d913def2ee" class="bulleted-list"><li style="list-style-type:disc">Discards any unauthorized frame (remains up)</li></ul><ul id="9c795628-c688-449f-b8e3-0dfbd844e128" class="bulleted-list"><li style="list-style-type:disc">DOESN`T generate any Syslog and/or SNMP trap message</li></ul><ul id="dea8924d-241f-4b4c-b545-ec2a2e54a1da" class="bulleted-list"><li style="list-style-type:disc"><strong>DOESN`T increase the Violation Count</strong>.</li></ul><h2 id="76f51ec1-15aa-455f-b295-c9fda43930cc" class="">How to re-enabled a err-disabled interface?</h2><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #1 - Manually</summary><div class="indented"><ol type="1" id="b9328908-7554-4243-92f5-3ff895301cfc" class="numbered-list" start="1"><li>Unplug the unauthorized device</li></ol><ol type="1" id="0abd6a84-b9fc-453c-9648-aaeb3fad850b" class="numbered-list" start="2"><li>Issue <strong>shutdown</strong> and <strong>no shutdown</strong> in the CLI</li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">Option #2 - err-disable recovery</summary><div class="indented"><p id="930aa144-58a4-4a4f-aad8-94667b69b35e" class="">This is a useful feature that doesn`t apply only to Port-Security, it applies to all events that trigger<strong> err-disable</strong>, and can be configured per such.</p><pre id="51bcfb4e-d286-4b32-9ad0-5f372cd3e828" class="code"><code>configure terminal
+err-disable recovery psecurity-violation
+err-disable recovery interval {time} //Optional, sets the time it takes to re-enable the interface</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d1778e50-3963-43bd-80d8-cb1b1b95aa52"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">NOTE: The default Timer is 300 seconds (5 minutes) to re-enable the interface.</div></figure></div></details><h1 id="5c5a7ece-3594-4e3f-bf90-9afdcab6f9f4" class="">Configure</h1><h3 id="9acf0501-2b87-4bb5-b540-c733b95eca8c" class="">Enable/Disable Port Security</h3><pre id="7d2c2a39-c093-4cc8-b3d2-1eaf2a6ee09b" class="code"><code>configure terminal
+[no] switchport port-security</code></pre><h2 id="09689400-c96d-47b8-bcab-962dde04a2fe" class="">Set a Static Secure MAC Address</h2><p id="b6ab108c-0291-43b4-8143-d4ccff139371" class="">It manually specifies a secured MAC address. <strong>By default</strong>, they will:<div class="indented"><ul id="b13954e8-2684-4829-ac3a-2118672a5821" class="bulleted-list"><li style="list-style-type:disc">NOT be cleared after shutdown</li></ul><ul id="07282f0b-a1a7-4abc-9b01-26979995075c" class="bulleted-list"><li style="list-style-type:disc">NOT Age</li></ul></div></p><pre id="472d3181-88e0-41df-8b54-dc82b25c0516" class="code"><code>interface g0/0  //EXAMPLE
+switchport port-security mac-address {mac}</code></pre><h3 id="9371c820-ac0f-4a8f-af53-bb9515f73544" class="">Make an Static MAC Address age</h3><p id="b5f22e4c-9d87-4eef-8675-a918c7331d7c" class="">This make aging timer apply also to Static addresses</p><pre id="05abfe0e-36d1-4290-9bb4-98750568eea5" class="code"><code>interface g0/0
+switchport port-security aging static</code></pre><h2 id="4e6a7692-84ee-49da-80a4-c0ac2278509a" class="">Set Aging Time</h2><p id="54ae296d-66f9-43c3-94ff-9ce8b3bab2ec" class="">This feature makes a Secure Dynamically learned MAC Address or a Secure Static MAC Address (IF CONFIGURED) be removed after a given time in <strong>minutes.</strong></p><pre id="f2b52f79-d319-4119-9bfc-6dd45ca210ae" class="code"><code>interface g0/0
+switchport port-security aging time {minutes}</code></pre><h3 id="51ce6a39-56ee-4bbc-b521-a9bac14cb49f" class="">Set Aging Time</h3><p id="916d4dd1-ef3f-4b27-ab28-5b2e0d050b22" class="">There are two types of Aging Time:<div class="indented"><ul id="e1657ef0-1357-4541-9611-a1c9c19e3c99" class="bulleted-list"><li style="list-style-type:disc"><strong>Absolute:</strong> The timer will not reset and will count uninterruptedly until it reaches 0, like a normal Timer.</li></ul><ul id="c5b031a6-ec57-4707-a083-07c8850cf173" class="bulleted-list"><li style="list-style-type:disc"><strong>Inactivity:</strong> Every time the switch receives an authorized frame on that interface, it will reset the timer to its configured value.</li></ul></div></p><pre id="cb9c5351-c8c9-47d0-9378-ed5a41ae6470" class="code"><code>interface g0/0
+switchport port-security aging type {Absolute | Inactivity}
+</code></pre><h2 id="73cc98e9-ee1e-4a67-aeb4-85c79bb34312" class="">Sticky MAC Addresses</h2><p id="7cc8e630-df1e-4ca8-9105-9b14d8e6dfd0" class="">This features allow Dynamically learned MAC addresses to be registered in the running-config. Therefore they will <strong>NOT be removed</strong>, even with a reload, shutdown or aging (yes, even static addresses can age, but this one not).</p><pre id="e9d6cd87-15c8-48d4-8523-3557d3da030b" class="code"><code>interface g0/0
+switchport port-security mac-address sticky</code></pre><h1 id="1a34c279-069e-4de9-b021-ac499dbe8238" class="">Clear a Secured MAC Address (Privileged EXEC)</h1><p id="d2eb2aee-7f4a-46f4-8125-870cd77d3863" class="">
+</p><pre id="ecaf6f98-71c4-4b8e-8e0f-e70ac8cc4c54" class="code"><code>clear port-security dynamic [mac-address {mac} | interface {interface-id}]</code></pre><h1 id="5ffd4aec-471f-4049-8333-9c3ae3e6f732" class="">Show Commands</h1><h3 id="38fe91bd-120c-48a8-87cd-24eeab164f84" class="">List all available interfaces with Port Security enabled</h3><pre id="7060c297-e54b-4fb3-ab1d-5e89165f50d3" class="code"><code>show port-security</code></pre><h3 id="1c1062c0-f39f-45e3-bf00-931ecf9cbe27" class="">Interface</h3><pre id="f5603dfb-40f8-4444-876f-75ada9680e89" class="code"><code>show port-security interface {interface-id}</code></pre><h3 id="44a3c968-3a19-4d0e-942e-2ad663d6df35" class="">List all Secure MAC Addresses</h3><pre id="b7d81550-500b-412e-8fa1-c97548b996b3" class="code"><code>show mac address-table secure</code></pre></div></article></body></html>

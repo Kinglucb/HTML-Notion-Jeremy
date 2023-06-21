@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Subnetting</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="956817a6-d402-4f65-b50c-78968046c05e" class="page sans"><header><h1 class="page-title">Subnetting</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><p id="e784e0dc-db61-4ff3-ae4b-9cb8252d78f3" class="">CIDR (Classless Inter-Domain Routing)</p><p id="8a796bf6-df7f-4264-89af-27e861980a04" class="">IANA (Internet Addressing Numbers Authority) assigns ip address to companys according to their size</p><h1 id="a6ddd570-c8d4-423e-907d-a8f98fdd46a4" class="">CIDR and FLSM (Fixed-Length Subnet Masks)</h1><p id="6ede1452-9a4d-4070-bb64-30b4826ebbd1" class="">Introduced in 1993 by the IETF (Internet Engineering Task Force) in order to reduce the waste of ipv4 addresses.</p><h3 id="eda0337f-780b-4633-be27-a2d82a7fc26b" class="">How to calculate usable adresses?</h3><figure id="e37158e7-28f3-4b71-a3a9-482be484d776" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>2</mn><mo>=</mo><mi>a</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>e</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">2^n-2 = adresses</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7977219999999999em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mord mathnormal">resses</span></span></span></span></span></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ecdad5c6-1247-4f3c-b473-1a23562a7e54"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">n is the number of host bits</div></figure><h3 id="215fc0f9-c447-4ad3-9a2b-a4014f1cfd00" class="">Subnets from class C</h3><table id="53ef0e27-5216-4353-a70e-cc6c017d4864" class="simple-table"><thead class="simple-table-header"><tr id="8e212e4d-a418-4c4c-9bf0-903d67d02be5"><th id="&gt;?C&gt;" class="simple-table-header-color simple-table-header">Mask</th><th id="SL[x" class="simple-table-header-color simple-table-header">CIDR Notation</th><th id="{EW;" class="simple-table-header-color simple-table-header">Host Bits</th><th id="v\]f" class="simple-table-header-color simple-table-header">Usable Addresses</th></tr></thead><tbody><tr id="47206e29-3e83-4cf1-99e6-05f523b07575"><td id="&gt;?C&gt;" class="">255.255.255.128</td><td id="SL[x" class="">/25</td><td id="{EW;" class="">7</td><td id="v\]f" class="">126</td></tr><tr id="ddcde845-e247-499f-840a-2c8f862cf93b"><td id="&gt;?C&gt;" class="">255.255.255.192</td><td id="SL[x" class="">/26</td><td id="{EW;" class="">6</td><td id="v\]f" class="">62</td></tr><tr id="babbc162-964d-4d42-833c-eb5cd4419903"><td id="&gt;?C&gt;" class="">255.255.255.224</td><td id="SL[x" class="">/27</td><td id="{EW;" class="">5</td><td id="v\]f" class="">30</td></tr><tr id="be596a20-0ade-489a-b19f-93dd0986da70"><td id="&gt;?C&gt;" class="">255.255.255.240</td><td id="SL[x" class="">/28</td><td id="{EW;" class="">4</td><td id="v\]f" class="">14</td></tr><tr id="6631145b-5428-4402-82d1-770abce1595d"><td id="&gt;?C&gt;" class="">255.255.255.248</td><td id="SL[x" class="">/29</td><td id="{EW;" class="">3</td><td id="v\]f" class="">6</td></tr><tr id="3742a534-1c0f-4590-8118-c6d288c3f333"><td id="&gt;?C&gt;" class="">255.255.255.252</td><td id="SL[x" class="">/30</td><td id="{EW;" class="">2</td><td id="v\]f" class="">2</td></tr><tr id="4d9e56a7-4940-4003-82e3-a01cba3d8701"><td id="&gt;?C&gt;" class="">255.255.255.254</td><td id="SL[x" class="">/31</td><td id="{EW;" class="">1</td><td id="v\]f" class="">0(2)*</td></tr><tr id="45d61430-4973-46ff-9bb8-e4d59ebcf108"><td id="&gt;?C&gt;" class="">255.255.255.255</td><td id="SL[x" class="">/32</td><td id="{EW;" class="">0</td><td id="v\]f" class="">0(1)**</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fb2aebc3-87a8-4d96-b35a-557f31d011bc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>* If we disregard the reserved addresses we can say that we have 2 addresses, making it perfect for Point-to-Point connections. </strong></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="38faadf9-a4ef-4fa2-9ada-2396f53459b4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>**Similarly as the /31 mask, we can think of the /32 as a single address, making it perfect for solutions targeting only one address. For example, a static route to a single pc (host). </strong></div></figure><h3 id="7e143094-e0da-45fe-a125-6346c76eb352" class="">How to calculate how many subnets are in a mask?</h3><figure id="c4d46d8a-fcd6-473c-8480-a3cbe2ba918c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mn>2</mn><mi>y</mi></msup><mo>=</mo><mi>s</mi><mi>u</mi><mi>b</mi><mi>n</mi><mi>e</mi><mi>t</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">2^y=subnets</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714392em;"><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">bn</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">s</span></span></span></span></span></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3224de64-72f3-45a4-87fb-b954a8059eca"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">y is the number of borrowed bits from the network portion</div></figure><h3 id="fd6cd5cf-48a2-425c-a235-43e91bce6fcb" class="">Subnets from class C</h3><table id="24bdaba1-f31e-417c-b9db-dad3f951cc0c" class="simple-table"><thead class="simple-table-header"><tr id="42094318-5a7b-4db4-94bf-b43e250ef8d4"><th id="CxGL" class="simple-table-header-color simple-table-header">CIDR Notation</th><th id="^@u&gt;" class="simple-table-header-color simple-table-header">N° subnets</th><th id="KpTD" class="simple-table-header-color simple-table-header">N° Addresses</th></tr></thead><tbody><tr id="3ddd4a4f-332d-46ee-93e5-6cbc136f09a3"><td id="CxGL" class="">/25</td><td id="^@u&gt;" class="">2</td><td id="KpTD" class="">126</td></tr><tr id="107e232b-042c-4e1e-8b5a-eea6c0581aa1"><td id="CxGL" class="">/26</td><td id="^@u&gt;" class="">4</td><td id="KpTD" class="">62</td></tr><tr id="b7947f92-212c-4f15-b5e3-dc2965f85fa0"><td id="CxGL" class="">/27</td><td id="^@u&gt;" class="">8</td><td id="KpTD" class="">30</td></tr><tr id="8bb1363b-0dc2-4cd0-ad33-85ed0268b6fc"><td id="CxGL" class="">/28</td><td id="^@u&gt;" class="">16</td><td id="KpTD" class="">14</td></tr><tr id="0ca1975f-22e5-40cf-b7d4-6d4c083aa957"><td id="CxGL" class="">/29</td><td id="^@u&gt;" class="">32</td><td id="KpTD" class="">6</td></tr><tr id="c83a66c3-eb2f-47d1-b86e-31fcf8a9e51c"><td id="CxGL" class="">/30</td><td id="^@u&gt;" class="">64</td><td id="KpTD" class="">2</td></tr><tr id="4d5d4b0f-6a2d-40ee-bb6f-31267dba3a99"><td id="CxGL" class="">/31</td><td id="^@u&gt;" class="">128</td><td id="KpTD" class="">0(2)</td></tr><tr id="c9d1c21f-45e7-4359-ab87-e7c148e19fd1"><td id="CxGL" class="">/32</td><td id="^@u&gt;" class="">256</td><td id="KpTD" class="">0(1)</td></tr></tbody></table><h3 id="7474bc8f-8372-40a9-80d1-11f0cde8b065" class="">How to know the network address of a subnet from an IP Address?</h3><ol type="1" id="b2d762c6-715e-47e0-a7f0-d8652fbdf7d5" class="numbered-list" start="1"><li>Convert the number to binary<ol type="a" id="2be494d3-dd40-45e8-9058-cc3fadda98bc" class="numbered-list" start="1"><li>172.25.217.192</li></ol><ol type="a" id="bf737c37-cc6a-4f38-bffd-c3fcc98dbea5" class="numbered-list" start="2"><li>X.X.11011001.1100000</li></ol></li></ol><ol type="1" id="4985a4f2-e5b7-4c4f-a7b6-1f1ab9f277f9" class="numbered-list" start="2"><li>Separate the Borrowed Network Portion from Host Portion<ol type="a" id="87448829-6683-44f2-aa7c-8b0b31aa5fc8" class="numbered-list" start="1"><li>X.X.11011|001.11000000</li></ol></li></ol><ol type="1" id="79d292f3-b3b2-40d0-b289-d43715f17556" class="numbered-list" start="3"><li>Turn the Host Portion to 0<ol type="a" id="fe1e0a22-b664-432a-a3db-b65c777e3920" class="numbered-list" start="1"><li>X.X.11011|000.00000000</li></ol></li></ol><ol type="1" id="9a968e83-e511-4a67-b324-55276cf643f4" class="numbered-list" start="4"><li>Convert from binary to decimal<ol type="a" id="8c609ae6-b159-4f13-8ef0-2db71f9dd8b1" class="numbered-list" start="1"><li>X.X.216.0</li></ol></li></ol><ol type="1" id="b2e92faa-9d2d-46c7-9b5c-eeb91ef1d48a" class="numbered-list" start="5"><li><strong>Answer</strong><ol type="a" id="57bed7c5-43d9-4241-b6ff-5d8f66e10bde" class="numbered-list" start="1"><li>X.X.216.0/21</li></ol></li></ol><h3 id="79ab17ce-b12b-487b-9bf4-9617dfad0aa4" class="">How to know the broadcast address of a subnet from an IP Address?</h3><ol type="1" id="1f318a92-5ac8-4922-ab43-68bfb6890c75" class="numbered-list" start="1"><li>Convert the number to binary<ol type="a" id="a3f53a08-c1e3-4d81-960e-786a312a0132" class="numbered-list" start="1"><li>172.25.217.192</li></ol><ol type="a" id="2456e1cf-4720-4fbc-a6ba-9d7fc95bf560" class="numbered-list" start="2"><li>X.X.11011001.1100000</li></ol></li></ol><ol type="1" id="2613e07a-b1e0-40c8-8223-912557ca312e" class="numbered-list" start="2"><li>Separate the Borrowed Network Portion from Host Portion<ol type="a" id="3c50d625-b93c-4410-a877-b2d9da031ce4" class="numbered-list" start="1"><li>X.X.11011|001.11000000</li></ol></li></ol><ol type="1" id="4d376a0b-29c8-4c12-a7f7-a21641a0d1af" class="numbered-list" start="3"><li>Turn the Host Portion to 1<ol type="a" id="154a752a-b6f2-48bd-90d9-481ee2c7a731" class="numbered-list" start="1"><li>X.X.11011|111.11111111</li></ol></li></ol><ol type="1" id="04388aba-be74-496d-89bd-d6b625029b85" class="numbered-list" start="4"><li>Convert from binary to decimal<ol type="a" id="3dbc6782-801f-4db4-96d5-ffbb5ce3005f" class="numbered-list" start="1"><li>X.X.223.255</li></ol></li></ol><ol type="1" id="b9399575-274f-45fd-bb40-413324c764ce" class="numbered-list" start="5"><li><strong>Answer</strong><ol type="a" id="6ed9ae9f-a573-40d7-a67a-007d850506f1" class="numbered-list" start="1"><li>X.X.223.255/21</li></ol></li></ol><h2 id="1f1eb99a-e93a-4a52-9546-f5ae8597ab57" class="">VLSM (Variable-Length Subnet Masks)</h2><p id="55e1679a-5539-40fe-98f0-3a0d88f85c7f" class="">It is more efficient, since it allow different prefix-lengths</p><ol type="1" id="ab6d9876-eaed-407e-8027-a110369eb874" class="numbered-list" start="1"><li>Assign the first subnet to the largest one starting from the address space</li></ol><ol type="1" id="eea2903f-aad4-45b2-9698-feedd139a7cd" class="numbered-list" start="2"><li>Address the second biggest subnet</li></ol><ol type="1" id="22dd0940-c2aa-457e-8a74-6614db2b4f0d" class="numbered-list" start="3"><li>Repeat</li></ol><figure id="2cf56aaf-c215-4e7d-85f9-4205849b3f57" class="image"><a href="Subnetting%20956817a6d4024f65b50c78968046c05e/Untitled.png"><img style="width:1316px" src="Subnetting%20956817a6d4024f65b50c78968046c05e/Untitled.png"/></a></figure><h1 id="469759de-8e93-4a38-a888-6947d6ac2ce6" class="">Practice</h1><p id="513d8bfd-8b59-4b5d-86ab-b2d4bbb8e804" class=""><a href="http://www.subnettingquestions.com">www.subnettingquestions.com</a></p><p id="d6acb960-0881-4a6b-acff-936a6b8b24b7" class=""><a href="http://www.subnetting.org">www.subnetting.org</a></p><p id="b0e71e06-3843-488c-8f60-8f7a3be1e71a" class=""><a href="http://www.subnettingpractice.com">www.subnettingpractice.com</a></p></div></article></body></html>

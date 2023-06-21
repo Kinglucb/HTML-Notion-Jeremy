@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>IPv4 Header</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fcaa4aa5-53f4-4aaa-adff-d7c262809802" class="page sans"><header><h1 class="page-title">IPv4 Header</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M3.85742 14.4561H12.1357C13.6123 14.4561 14.3779 13.6904 14.3779 12.2344V3.91504C14.3779 2.45215 13.6123 1.69336 12.1357 1.69336H3.85742C2.38086 1.69336 1.61523 2.45215 1.61523 3.91504V12.2344C1.61523 13.6973 2.38086 14.4561 3.85742 14.4561ZM3.93945 13.1162C3.30371 13.1162 2.95508 12.7812 2.95508 12.1182V4.02441C2.95508 3.36133 3.30371 3.0332 3.93945 3.0332H12.0537C12.6826 3.0332 13.0381 3.36133 13.0381 4.02441V12.1182C13.0381 12.7812 12.6826 13.1162 12.0537 13.1162H3.93945ZM7.26855 11.3115C7.51465 11.3115 7.72656 11.1885 7.87012 10.9697L10.9258 6.19141C11.0146 6.04785 11.0967 5.88379 11.0967 5.72656C11.0967 5.3916 10.7959 5.16602 10.4746 5.16602C10.2695 5.16602 10.085 5.27539 9.94141 5.50781L7.24121 9.8418L5.96973 8.22168C5.80566 8.00977 5.6416 7.93457 5.43652 7.93457C5.10156 7.93457 4.8418 8.20117 4.8418 8.54297C4.8418 8.70703 4.90332 8.85742 5.01953 9.00098L6.63281 10.9697C6.81738 11.209 7.01562 11.3115 7.26855 11.3115Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr></tbody></table></header><div class="page-body"><figure id="98a472f0-85c8-44da-a853-28c4fb59d728" class="image"><a href="IPv4%20Header%20fcaa4aa553f44aaaadffd7c262809802/Untitled.png"><img style="width:1517px" src="IPv4%20Header%20fcaa4aa553f44aaaadffd7c262809802/Untitled.png"/></a></figure><ul id="e5abe7fa-5303-475c-aa26-ebb37f66ab9a" class="bulleted-list"><li style="list-style-type:disc">Version (4 Bits)<ul id="370ab651-b432-4a99-8ad0-2064fc7f4443" class="bulleted-list"><li style="list-style-type:circle">Identifies the version of the IP Protocol<ul id="61af7ab7-43fa-40c5-8393-9fc37d515d2a" class="bulleted-list"><li style="list-style-type:square">IPv4 = 0100 (4)</li></ul><ul id="8604595f-8fb5-46de-8dec-2214ef48ecad" class="bulleted-list"><li style="list-style-type:square">IPv6 = 0110 (6)</li></ul></li></ul></li></ul><ul id="ee34341d-54a8-4ffa-a69b-3d29ca770621" class="bulleted-list"><li style="list-style-type:disc">IHL = Internet Header Length (4 Bits)<ul id="6d9d57c7-963a-4c9f-bab3-ed2007b578aa" class="bulleted-list"><li style="list-style-type:circle">Tells the total size of the header since it could have bits in the Options’s field.</li></ul><ul id="f4e3ecd1-0a44-442f-a564-d9b5b3b4efbf" class="bulleted-list"><li style="list-style-type:circle">The value represents itself multiplied by a 4-byte increment. Example: If the value 5 is represented here, it says that the header has a total size of 20 BYTES<ul id="bd279468-5ca0-4ff0-a37c-1154a52457a6" class="bulleted-list"><li style="list-style-type:square">Minimum value = 5 (20 Bytes)</li></ul><ul id="c8dba987-7441-4104-9ff5-b72c8458c6d4" class="bulleted-list"><li style="list-style-type:square">Maximum value = 15 (60 Bytes)</li></ul></li></ul></li></ul><ul id="0f26fbb9-cdd1-4264-a457-987501b4234c" class="bulleted-list"><li style="list-style-type:disc">DSCP = Differentiated Services Code Point (6 Bits)<ul id="e7335629-bf67-478d-abae-a3798137a396" class="bulleted-list"><li style="list-style-type:circle">Used for QoS</li></ul><ul id="a058f319-b759-4f3e-a6f7-6d8c29512beb" class="bulleted-list"><li style="list-style-type:circle">Its value tell the priority of the packet</li></ul></li></ul><ul id="b724667a-f8cc-4c18-a722-e72085b63477" class="bulleted-list"><li style="list-style-type:disc">ECN = Explicit Congestion Notification (2 Bits)<ul id="c6743f40-5890-4bb2-98e0-e87b2e728bb9" class="bulleted-list"><li style="list-style-type:circle">Node-to-Node communication that tells the congestion of the network without dropping packets</li></ul><ul id="e891ec35-b514-4466-a159-9282ea6d03df" class="bulleted-list"><li style="list-style-type:circle">Endhosts and the network infrastructure must support it</li></ul></li></ul><ul id="f4fd9fbf-2f5a-4f69-95e0-7f9f71f8be57" class="bulleted-list"><li style="list-style-type:disc">Total Length (16 Bits)<ul id="739eaed6-052b-4559-8206-86bbb417f766" class="bulleted-list"><li style="list-style-type:circle">Tells the length of L3 Header + L4 Segment<ul id="9cc070e4-27ac-438b-a763-a8e173027073" class="bulleted-list"><li style="list-style-type:square">Minimum Size is 20 (L3 Header without encapsulated data)</li></ul><ul id="19f84e07-08d5-4f7b-8755-3cc5aaf61dd3" class="bulleted-list"><li style="list-style-type:square">Maximum Size is 65,535</li></ul></li></ul></li></ul><ul id="dca3731f-8150-4751-b975-cbd42e981ecf" class="bulleted-list"><li style="list-style-type:disc">Identification (16 Bits)<ul id="367217ef-9eda-45d4-be19-702b0d983fa7" class="bulleted-list"><li style="list-style-type:circle">Identifies if a packet is fragmented.</li></ul><ul id="9b96bc02-542d-4c88-beb3-80b6810441ee" class="bulleted-list"><li style="list-style-type:circle">If a packet has been fragmented, due to the fact of being larger than the MTU (Maximum Transmission Unit), the fragments will have the same identification value in order for them to be reassembled in the receiving host</li></ul></li></ul><ul id="61b75313-e235-4268-963e-390064d2abcb" class="bulleted-list"><li style="list-style-type:disc">Flag (3 Bits)<ul id="e5901ff7-ae21-41e0-b78a-cf46cc33083a" class="bulleted-list"><li style="list-style-type:circle">Used to control/identify the fragments</li></ul><ul id="287850d4-81f9-4707-ae71-9322c223420d" class="bulleted-list"><li style="list-style-type:circle">Bits:<ul id="16f6f7eb-9fa0-430a-b663-45b64e4e9842" class="bulleted-list"><li style="list-style-type:square">Bit 0: Reserved, always set to zero</li></ul><ul id="973f45fb-28bc-42c2-814c-5e3e62fd78d5" class="bulleted-list"><li style="list-style-type:square">Bit 1: Don’t Fragment, if is 1 the packet should not be fragmented</li></ul><ul id="27db6208-4e17-4300-b0d0-d004605ecfc2" class="bulleted-list"><li style="list-style-type:square">Bit 2: More Fragments, if is 1 it signals there is more fragments to come, and 0 if it is the last fragment</li></ul><ul id="4db2912b-6590-4e9d-bad7-b4fdaf72b7cd" class="bulleted-list"><li style="list-style-type:square">A unfragmented packet will have the More Fragments bit set to 0</li></ul></li></ul><figure id="0c9c9496-c76e-411b-9370-251cf07b4f03" class="image"><a href="IPv4%20Header%20fcaa4aa553f44aaaadffd7c262809802/Untitled%201.png"><img style="width:198px" src="IPv4%20Header%20fcaa4aa553f44aaaadffd7c262809802/Untitled%201.png"/></a></figure></li></ul><ul id="1a01092e-9bd9-4e30-90ab-15951f478e24" class="bulleted-list"><li style="list-style-type:disc">Fragment Offset (13 Bits)<ul id="d4b766c8-35fa-49b8-abec-11fa024394bc" class="bulleted-list"><li style="list-style-type:circle">Used to tell the position of the fragment in the unfragmented packet.</li></ul><ul id="a4eb9434-e0ee-4d1e-8ebc-72269d139375" class="bulleted-list"><li style="list-style-type:circle">This gives a way to reassemble a packet even if the fragments arrive out of order.</li></ul></li></ul><ul id="a371bdb7-34ab-4a4a-9a4d-0062fb445f88" class="bulleted-list"><li style="list-style-type:disc">Time To Live (8 Bits)<ul id="3176592c-0e5b-4599-b078-6d9e42c6a685" class="bulleted-list"><li style="list-style-type:circle">Indicates the quantities of router hops.<ul id="22684347-1442-4f40-8c30-67b73b2178eb" class="bulleted-list"><li style="list-style-type:square">Usually the TTL is 64, and is decreased by 1 by each time it arrives in a router</li></ul></li></ul><ul id="3251916e-ea7c-4340-a780-0593c32602ed" class="bulleted-list"><li style="list-style-type:circle">Prevents Looping</li></ul></li></ul><ul id="8c25034c-f669-4266-9453-eea2e28f48eb" class="bulleted-list"><li style="list-style-type:disc">Protocol (8 Bits)<ul id="b1e0d71c-e2a5-42a5-b80c-a6add7b939f1" class="bulleted-list"><li style="list-style-type:circle">Tells the L4PDU Protocol used:<ul id="216f6c15-1d89-45c9-a741-3a70201ccab4" class="bulleted-list"><li style="list-style-type:square">TCP: 6</li></ul><ul id="ec509c80-2f9e-4428-822c-6d1aa96c8c6a" class="bulleted-list"><li style="list-style-type:square">UDP: 17</li></ul><ul id="78c676f9-771d-4293-8c86-204740f97997" class="bulleted-list"><li style="list-style-type:square">ICMP: 1</li></ul><ul id="cee69b24-96bb-44e9-9e59-2a84d36256b3" class="bulleted-list"><li style="list-style-type:square">OSPF: 89 (Dynamic Routing Protocol)</li></ul></li></ul></li></ul><ul id="46bf12cd-26f8-4248-a99d-c07e17d05cc2" class="bulleted-list"><li style="list-style-type:disc">Header Checksum (16 Bits)<ul id="56a82fbd-8a76-49cb-855e-506845283202" class="bulleted-list"><li style="list-style-type:circle">It is used to detect errors in the IPv4 Header, not the encapsulated data, that is done by the checksum on Layer 4</li></ul><ul id="62357a73-3652-42bb-af63-92046c05b705" class="bulleted-list"><li style="list-style-type:circle">If the newly calculated Checksum from the header doesn’t match the value on this field, the packet is dropped.</li></ul></li></ul><ul id="42e114de-c7c6-4db0-83f2-863ea65e9a6c" class="bulleted-list"><li style="list-style-type:disc">Source IP Address (32 Bits)<ul id="2e4f10ee-2f46-45ba-b5ec-ed522493fcd6" class="bulleted-list"><li style="list-style-type:circle">Lists the IP address of the host that sent the packet</li></ul></li></ul><ul id="2877f121-34c3-4c15-9b21-72fe24d19edb" class="bulleted-list"><li style="list-style-type:disc">Destination IP Address (32 Bits)<ul id="e87f6f74-9fae-46df-be47-ae6a23b97867" class="bulleted-list"><li style="list-style-type:circle">Tells the IP address of the intended receiver of the packet</li></ul></li></ul><ul id="a18060ed-5520-4c1e-8faf-e32ebb2102be" class="bulleted-list"><li style="list-style-type:disc">Options (0-320 Bits)<ul id="04fff79f-ea5c-48fa-b86a-4c84d3d4c90a" class="bulleted-list"><li style="list-style-type:circle">Rarely used, it is used when the IHL has a value greater than 5</li></ul></li></ul></div></article></body></html>
